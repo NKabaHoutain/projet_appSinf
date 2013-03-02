@@ -2,23 +2,46 @@ package quarto.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
+import java.util.Stack;
 
 
-public class Board {
+
+
+public class Board extends Observable{
 	
 	private List<Pion> pions;
 	private Pion[][] board;
+	private Stack <Move> historicMove;
 	
 	
-	public Board()
-	{
+	public Board() {
 		createPions();
 		board = new Pion [4][4];
 	}
+	
+	/**
+	 * Pre : historicMove est non vide
+	 * @return	le dernier move
+	 */
+	public Move Undo() {
+		return historicMove.pop();
+	}
+	
+	public void SelectPion(Pion pion) {
+		for(Pion p : pions) {
+			p.setSelected(p==pions);
+		}
+	}
+	
+	
+	
 
+	public List<Pion> getPions() {
+		return pions;
+	}
 
-	private void createPions()
-	{
+	private void createPions() {
 		pions =  new ArrayList<Pion>();
 		
 		for (int i=0; i<2; i++)
