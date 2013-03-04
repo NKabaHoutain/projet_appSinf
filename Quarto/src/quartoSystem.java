@@ -1,21 +1,17 @@
-import javax.swing.JFrame;
 
-import quarto.model.Board;
-import quarto.view.gameView.BoardGameItem;
+import quarto.controller.Controller;
+import quarto.model.Game;
+import quarto.model.Player;
 
 
 
 public class quartoSystem {
 
-	
-	
 	public static void main(String[] args)
 	{
-		Board board = new Board();
+		Controller controller = new Controller();
 		
-		BoardGameItem b = new BoardGameItem(board);
-		
-		b.start();
+		controller.startGame();
 	}
 
 }

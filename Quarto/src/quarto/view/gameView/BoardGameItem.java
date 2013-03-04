@@ -11,13 +11,14 @@ import java.util.Observer;
 import javax.swing.*;
 
 import quarto.model.Board;
+import quarto.model.Case;
 import quarto.model.Pion;
 public class BoardGameItem extends JPanel {
 
 	/**
 	 * A chaque case du jeu est attachée un bouton graphique CaseItem
 	 */
-	private final CaseItem[][] bc = new CaseItem [4][4];
+	private final LinkedHashMap<Case, CaseItem> bc= new LinkedHashMap<Case, CaseItem>();
 	/**
 	 * A chaque pièce disponible du jeu est attachée un bouton PionItem
 	 */
@@ -38,7 +39,7 @@ public class BoardGameItem extends JPanel {
 		for(int i=0;i<4;i++)
 			for(int j=0;j<4;j++) {
 				CaseItem b=new CaseItem(board.getCase(i,j));
-				bc[i][j] = b;
+				bc.put(board.getCase(i,j),b);
 				b.setPreferredSize(new Dimension(120, 120));
 			}
 		for(Pion p: board.getAvailablePions()) {
@@ -48,21 +49,23 @@ public class BoardGameItem extends JPanel {
 		}
 	}
 	
-	/**
-	 * Provoque l'affichage du plateau de jeu.
-	 * Une frame est crée dans laquelle le plateau est affiché.
-	 * La mise en page place les boutons correspondant au plateau en grille
-	 */
-	public void start() {
+	public void addListener(PlayerItem player) {
+		for(CaseItem c : bc.values()) {
+			c.addActionListener(player);			
+		}
+		
+		for(PionItem p : bp.values()) {
+			p.addActionListener(player);
+		}
+	}
+	
+	public void startDisplay(){
 		JFrame frame=new JFrame();
 		setLayout(new BorderLayout());
 		JPanel grille=new JPanel();
 		grille.setLayout(new GridLayout(4,4));
-		for(int i=0; i<4; i++) {
-			for(int j=0; j<4; j++){
-				grille.add(bc[i][j]);
-			}
-		}
+		for(CaseItem b : bc.values())
+			grille.add(b);
 		add(grille,BorderLayout.CENTER);
 		JPanel liste=new JPanel();
 		liste.setLayout(new GridLayout(2,8));
