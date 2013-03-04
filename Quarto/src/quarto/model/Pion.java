@@ -1,5 +1,8 @@
 package quarto.model;
 
+import java.awt.Color;
+import java.awt.Graphics;
+
 import quarto.constante.Constante;
 
 public class Pion {
@@ -23,6 +26,22 @@ public class Pion {
 	
 	public String getUrlIMage() {
 		return Constante.PATHFILE + this.toString().replace(" ", ".") + ".jpg";
+	}
+	
+	public boolean isBlack() {
+		return caract[PionField.PION_COLOR] != PionField.BLANC;
+	}
+	
+	public boolean isSmall() {
+		return caract[PionField.PION_SIZE] != PionField.GRAND;
+	}
+	
+	public boolean isCercle() {
+		return caract[PionField.PION_SHAPE] != PionField.CARRE;
+	}
+	
+	public boolean isHollow() {
+		return caract[PionField.PION_BODY] != PionField.PLEIN;
 	}
 	
 	
@@ -50,4 +69,6 @@ public class Pion {
 				" " + PionField.getShortName(caract[PionField.PION_COLOR],PionField.PION_COLOR) +
 				" " + PionField.getShortName(caract[PionField.PION_SHAPE],PionField.PION_SHAPE);
 	}
+	
+	
 }

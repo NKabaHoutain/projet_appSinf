@@ -1,4 +1,7 @@
+import javax.swing.JFrame;
+
 import quarto.model.Board;
+import quarto.view.gameView.BoardGameItem;
 
 
 
@@ -10,7 +13,9 @@ public class quartoSystem {
 	{
 		Board board = new Board();
 		
-		System.out.println(board.getPions().get(4).getUrlIMage());
+		BoardGameItem b = new BoardGameItem(board);
+		
+		b.start();
 	}
 
 }

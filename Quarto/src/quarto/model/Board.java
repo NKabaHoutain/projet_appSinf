@@ -2,22 +2,23 @@ package quarto.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
 import java.util.Stack;
 
+import quarto.view.gameView.BoardGameItem;
 
 
-
-public class Board extends Observable{
+public class Board {
 	
 	private List<Pion> pions;
-	private Pion[][] board;
+	private Case[][] cases;
 	private Stack <Move> historicMove;
+	private BoardGameItem boardView;
 	
 	
 	public Board() {
 		createPions();
-		board = new Pion [4][4];
+		createCase();
+		boardView = new BoardGameItem(this);
 	}
 	
 	/**
@@ -34,6 +35,10 @@ public class Board extends Observable{
 		}
 	}
 	
+	public Case getCase(int i, int j) {
+		return cases[i][j];
+	}
+
 	
 	
 
@@ -57,5 +62,23 @@ public class Board extends Observable{
 				}
 			}
 		}
+	}
+	
+	private void createCase() {
+		cases = new Case [4][4];
+		for(int i=0; i<4; i++) {
+			for(int j=0; j<4; j++) {
+				cases[i][j] = new Case();
+			}
+		}
+	}
+
+	public List<Pion> getAvailablePions() {
+		List<Pion> result = new ArrayList<Pion>();
+		for(Pion p :pions) {
+			if(p.isAvailable()) result.add(p);
+		}
+		
+		return result;
 	}
 }
