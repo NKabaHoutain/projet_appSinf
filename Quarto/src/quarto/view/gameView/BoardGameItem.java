@@ -36,12 +36,14 @@ public class BoardGameItem extends JPanel {
 	public BoardGameItem(Board board) {
 		super();
 		
-		for(int i=0;i<4;i++)
+		for(int i=0;i<4;i++) {
 			for(int j=0;j<4;j++) {
 				CaseItem b=new CaseItem(board.getCase(i,j));
 				bc.put(board.getCase(i,j),b);
 				b.setPreferredSize(new Dimension(120, 120));
-			}
+			}	
+		}
+		
 		for(Pion p: board.getAvailablePions()) {
 			PionItem b=new PionItem(p);
 			bp.put(p, b);

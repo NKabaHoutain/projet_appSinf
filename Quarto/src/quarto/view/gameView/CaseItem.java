@@ -17,6 +17,7 @@ public class CaseItem extends JButton{
 		super();
 		c=caase;
 		gagnante=false;
+		
 	}
 	
 	public void paintComponent(Graphics g) {

@@ -15,36 +15,46 @@ public class Player {
 	}
 	
 	public Pion choicePion() {
-		while(pionChoice == null) {
-			try {
-				lock.wait();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
+		synchronized(lock) {
+			pionChoice=null;
+			while(pionChoice == null) {
+				try {
+					lock.wait();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 		return pionChoice;
 	}
 	
 	public Case choiceCase() {
-		while(caseChoice == null) {
-			try {
-				lock.wait();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
+		synchronized(lock) {
+			caseChoice=null;
+			while(caseChoice == null) {
+				try {
+					lock.wait();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 			}
 		}
-		
+
 		return caseChoice;
 	}
 	
 	public void setPionChoice(Pion p) {
-		pionChoice = p;
-		lock.notify();
+		synchronized(lock) {
+			pionChoice = p;
+			lock.notify();
+		}
 	}
 	
 	public void setCaseChoice(Case c) {
-		caseChoice = c;
-		lock.notify();
+		synchronized(lock) {
+			caseChoice = c;
+			lock.notify();
+		}
 	}
 
 	public String getNom() {

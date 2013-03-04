@@ -12,13 +12,11 @@ public class Board {
 	private List<Pion> pions;
 	private Case[][] cases;
 	private Stack <Move> historicMove;
-	private BoardGameItem boardView;
 	
 	
 	public Board() {
 		createPions();
 		createCase();
-		boardView = new BoardGameItem(this);
 	}
 	
 	/**
