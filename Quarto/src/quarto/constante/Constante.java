@@ -9,4 +9,5 @@ public class Constante {
 	
 	public static final String PATHFILE = "USER\\NICO\\";
 	
+	
 }
