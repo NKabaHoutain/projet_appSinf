@@ -6,6 +6,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.LinkedHashMap;
+import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.*;
@@ -13,7 +14,7 @@ import javax.swing.*;
 import quarto.model.Board;
 import quarto.model.Case;
 import quarto.model.Pion;
-public class BoardGameItem extends JPanel {
+public class BoardGameItem extends JPanel implements Observer {
 
 	/**
 	 * A chaque case du jeu est attachée un bouton graphique CaseItem
@@ -41,6 +42,8 @@ public class BoardGameItem extends JPanel {
 				CaseItem b=new CaseItem(board.getCase(i,j));
 				bc.put(board.getCase(i,j),b);
 				b.setPreferredSize(new Dimension(120, 120));
+				board.getCase(i, j).addObserver(b);
+				
 			}	
 		}
 		
@@ -80,6 +83,12 @@ public class BoardGameItem extends JPanel {
 		frame.setVisible(true);
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+
+	@Override
+	public void update(Observable arg0, Object arg1) {
+		// TODO Auto-generated method stub
+		
 	}
 
 

@@ -8,10 +8,13 @@ public class Player {
 	private Pion pionChoice;
 	private Case caseChoice;
 	
+	private boolean inGame;
+	
 	public Player(String s) {
 		nom = s;
 		pionChoice = null;
 		caseChoice = null;
+		inGame = false;
 	}
 	
 	public Pion choicePion() {
@@ -59,6 +62,14 @@ public class Player {
 
 	public String getNom() {
 		return nom;
+	}
+
+	public boolean isInGame() {
+		return inGame;
+	}
+
+	public void setInGame(boolean inGame) {
+		this.inGame = inGame;
 	}
 	
 	

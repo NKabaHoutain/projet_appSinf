@@ -2,13 +2,15 @@ package quarto.view.gameView;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import quarto.model.Case;
 
-public class CaseItem extends JButton{
+public class CaseItem extends JButton implements Observer{
 	
 	private final Case c;
 	private boolean gagnante;
@@ -38,6 +40,13 @@ public class CaseItem extends JButton{
 	
 	public Case getCase() {
 		return c;
+	}
+	
+
+	@Override
+	public void update(Observable o, Object arg) {
+		System.out.println("lll");
+		
 	}
 
 }

@@ -7,23 +7,24 @@ import quarto.view.gameView.PlayerItem;
 public class Game {
 	
 	private Board board;
-	private BoardGameItem boardGameItem;
 	private Player playerOne;
 	private Player playerTwo;
+	private BoardGameItem boardGameItem;
 	
 	
 	public Game() {
 		
 		board = new Board();
 		boardGameItem = new BoardGameItem(board);
+		board.addObserver(boardGameItem);
 		
 		boardGameItem.startDisplay();
 		
 	}
 	
 	public void addPlayer(Controller controller, Player p1, Player p2){
-		PlayerItem j1 = new PlayerItem(p1.getNom(), controller);
-		PlayerItem j2 = new PlayerItem(p2.getNom(), controller);
+		PlayerItem j1 = new PlayerItem(p1, controller);
+		PlayerItem j2 = new PlayerItem(p2, controller);
 		
 		boardGameItem.addListener(j1);
 		boardGameItem.addListener(j2);
@@ -31,23 +32,34 @@ public class Game {
 		playerOne = p1;
 		playerTwo = p2;
 		
-		j1.setInGame(true);
 	}
 	
 	public void beginGame() {
 
-		System.out.println(playerOne.choicePion());
+		playerOne.setInGame(true);
+		Pion p = (playerOne.choicePion());
+		board.selectPion(p);
+		changeGamer();
+		Case c = (playerTwo.choiceCase());
+		
+		board.move(c);
 		
 	}
+	
+	private void changeGamer()
+	{
+		playerOne.setInGame(!playerOne.isInGame());
+		playerTwo.setInGame(!playerTwo.isInGame());
+	}
 	public void givePion(Pion p, String player) {
-		getPlayer(player).setPionChoice(p);
+		selectPlayer(player).setPionChoice(p);
 	}
 	
 	public void giveCase(Case c, String player) {
-		getPlayer(player).setCaseChoice(c);
+		selectPlayer(player).setCaseChoice(c);
 	}
 	
-	public Player getPlayer(String nom) {
+	public Player selectPlayer(String nom) {
 		if(playerOne.getNom().equals(nom)) {
 			return playerOne;
 		}
