@@ -14,8 +14,8 @@ public class quartoSystem {
 	public static void main(String[] args) throws IOException
 	{
 		//Controller controller = new Controller();
-		//MenuItem menu = new MenuItem();
-		GameModeView game = new GameModeView();
+		MenuItem menu = new MenuItem();
+		//GameModeView game = new GameModeView();
 		
 		//controller.startGame();
 		
