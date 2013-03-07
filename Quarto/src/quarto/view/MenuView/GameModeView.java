@@ -5,8 +5,9 @@ import java.awt.GridLayout;
 
 import javax.swing.*;
 
-public class GameModeView {
-	JFrame frame;
+import quarto.view.GUI;
+
+public class GameModeView extends JPanel{
 	JPanel panelButton;
 	JPanel panelTitle;
 	JLabel title;
@@ -20,7 +21,6 @@ public class GameModeView {
 	Dimension space = new Dimension(0,5);
 	
 	public GameModeView() {
-		frame = new JFrame("Quarto-Mode de Jeu");
 		panelButton = new JPanel();
 		panelTitle = new JPanel();
 		title = new JLabel("Mode de Jeu");
@@ -28,8 +28,8 @@ public class GameModeView {
 		tournament = new JButton("Tournoi");
 		back = new JButton("Retour");
 		
-		frame.setPreferredSize(new Dimension(600,600));
-		frame.setLayout(new GridLayout(2,1));
+		this.setPreferredSize(new Dimension(600,600));
+		this.setLayout(new GridLayout(2,1));
 		
 		panelTitle.setLayout(new BoxLayout(panelTitle,BoxLayout.Y_AXIS));
 		panelTitle.setPreferredSize(new Dimension(400,50));
@@ -41,13 +41,13 @@ public class GameModeView {
 		panelButton.setLayout(new BoxLayout(panelButton,BoxLayout.Y_AXIS));
 		panelButton.setPreferredSize(new Dimension(500,550));
 		
-		adjustSize(classic,minSize,maxSize,preferredSize);
+		GUI.adjustSize(classic,minSize,maxSize,preferredSize);
 		classic.setAlignmentX(Component.CENTER_ALIGNMENT);
 		classic.setAlignmentY(Component.CENTER_ALIGNMENT);
 		panelButton.add(classic);
 		panelButton.add(Box.createRigidArea(space));
 		
-		adjustSize(tournament,minSize,maxSize,preferredSize);
+		GUI.adjustSize(tournament,minSize,maxSize,preferredSize);
 		tournament.setAlignmentX(Component.CENTER_ALIGNMENT);
 		tournament.setAlignmentY(Component.CENTER_ALIGNMENT);
 		panelButton.add(tournament);
@@ -60,18 +60,8 @@ public class GameModeView {
 		panelButton.add(Box.createVerticalStrut(15));
 		
 
-		frame.getContentPane().add(panelTitle,Component.CENTER_ALIGNMENT);
-		frame.getContentPane().add(panelButton,Component.CENTER_ALIGNMENT);
-		frame.setVisible(true);
-		frame.pack();
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-	}
-	
-	void adjustSize(Component c, Dimension min, Dimension max, Dimension pref) {
-		c.setMinimumSize(min);
-		c.setMaximumSize(max);
-		c.setPreferredSize(pref);
-	}
-	
+		this.add(panelTitle,Component.CENTER_ALIGNMENT);
+		this.add(panelButton,Component.CENTER_ALIGNMENT);
+		this.setVisible(true);
+	}	
 }

@@ -57,41 +57,65 @@ public class Board extends Observable{
 	/* OPERATION D'UNE PARTIE
 	 ************************ 
 	 */
-	public void move(Case c) {
-		System.out.println(c);
+	/**
+	 * 
+	 * @param c
+	 */
+	public boolean move(Case c) {
 		Pion p = getSelectedPion();
-		pions.remove(p);
 		c.addPion(p);
+		p.setSelected(false);
+		
+		change("case");
+		
+		return win(c);
 	}
 	
 	/**
-	 *
+	 * 
+	 * @param pion
 	 */
 	public void selectPion(Pion pion) {
 		for(Pion p : pions) {
 			p.setSelected(p==pion);
 		}
+		
+		change("pion");
 	}
 	
-	/**
-	 * Pre : historicMove est non vide
-	 * @return	le dernier move
+	private boolean win(Case c) {
+		
+		return testLine(c.getX());
+	}
+	
+	private boolean testLine(int x) {
+		return false;
+	}
+	
+	
+	public void change(String s) {
+		setChanged();
+		this.notifyObservers(s);
+		clearChanged();
+	}
+	
+	
+	/* OPERATION D'INFORMATION
+	 ************************* 
 	 */
-	public Move Undo() {
-		return historicMove.pop();
-	}
-	
-	
-	
+	/**
+	 * 
+	 * @param i
+	 * @param j
+	 * @return
+	 */
 	public Case getCase(int i, int j) {
 		return cases[i][j];
 	}
-
-	public List<Pion> getPions() {
-		return pions;
-	}
-
-	
+	/**
+	 * 
+	 * @return
+	 */
 	public List<Pion> getAvailablePions() {
 		List<Pion> result = new ArrayList<Pion>();
 		for(Pion p :pions) {
@@ -100,8 +124,11 @@ public class Board extends Observable{
 		
 		return result;
 	}
-	
-	public Pion getSelectedPion() {
+	/**
+	 * 
+	 * @return
+	 */
+	private Pion getSelectedPion() {
 		for(Pion p :pions) {
 			if(p.isSelected()) return p;
 		}

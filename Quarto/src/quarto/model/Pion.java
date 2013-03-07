@@ -1,13 +1,12 @@
 package quarto.model;
 
-import java.awt.Color;
-import java.awt.Graphics;
+import java.util.Observable;
 
 import quarto.constante.Constante;
 
-public class Pion {
+public class Pion extends Observable{
 	
-	private boolean[] caract = new boolean[4];
+	private final boolean[] caract = new boolean[4];
 	private boolean selected;
 	private boolean available;
 	
@@ -24,6 +23,12 @@ public class Pion {
 		available = true;
 	}
 	
+	
+	public boolean[] getCaract() {
+		return caract;
+	}
+
+
 	public String getUrlIMage() {
 		return Constante.PATHFILE + this.toString().replace(" ", ".") + ".jpg";
 	}
@@ -44,23 +49,31 @@ public class Pion {
 		return caract[PionField.PION_BODY] != PionField.PLEIN;
 	}
 	
-	
-		
 	public boolean isSelected() {
 		return selected;
 	}
 
 	public void setSelected(boolean selected) {
 		this.selected = selected;
+		
+		change();
 	}
 
 	public boolean isAvailable() {
 		return available;
 	}
 	
-
+	public void change() {
+		setChanged();
+		this.notifyObservers();
+		clearChanged();
+	}
+	
 	public void setAvailable(boolean available) {
 		this.available = available;
+		setChanged();
+		this.notifyObservers();
+		clearChanged();
 	}
 
 	public String toString() {

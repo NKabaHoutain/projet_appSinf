@@ -2,13 +2,15 @@ package quarto.view.gameView;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import quarto.model.Pion;
 
-public class PionItem extends JButton{
+public class PionItem extends JButton implements Observer{
 	
 	Pion pion;
 	
@@ -41,18 +43,29 @@ public class PionItem extends JButton{
 	
 	@Override
 	public void paintComponent(Graphics g) {
-		g.setColor(Color.LIGHT_GRAY);
-		g.fillRect(0, 0, getWidth(), getHeight());
-		if(pion.isSelected()){
-			g.setColor(Color.RED);
-			g.drawOval(1,1, getWidth()-2, getHeight()-2);
+		if(pion.isAvailable()) {
+			g.setColor(Color.LIGHT_GRAY);
+			g.fillRect(0, 0, getWidth(), getHeight());
+			if(pion.isSelected()){
+				g.setColor(Color.RED);
+				g.drawOval(1,1, getWidth()-2, getHeight()-2);
+			}
+			if(pion!=null)
+				drawPiece(pion, g, getWidth(), getHeight(),Color.LIGHT_GRAY);
 		}
-		if(pion!=null)
-			drawPiece(pion, g, getWidth(), getHeight(),Color.LIGHT_GRAY);
+		else {
+			this.setVisible(false);
+		}
 	}
 	
 	public Pion getPion() {
 		return pion;
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		repaint();
+		
 	}
 	
 	

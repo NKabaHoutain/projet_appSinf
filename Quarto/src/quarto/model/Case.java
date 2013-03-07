@@ -1,7 +1,6 @@
 package quarto.model;
 
 import java.util.Observable;
-import java.util.Observer;
 
 public class Case extends Observable{
 	private Pion pion;
@@ -32,8 +31,18 @@ public class Case extends Observable{
 	
 	public void addPion(Pion p) {
 		pion = p;
-		System.out.println("Case : " + p);
-		notifyObservers();
+		p.setAvailable(false);
+		change();
+	}
+	
+	public void change() {
+		setChanged();
+		this.notifyObservers();
+		clearChanged();
+	}
+	
+	public boolean isPion() {
+		return pion != null;
 	}
 	
 	
