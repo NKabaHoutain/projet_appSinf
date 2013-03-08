@@ -35,7 +35,7 @@ public class BoardSideItem extends JPanel implements Observer{
 		this.setPreferredSize(new Dimension(120,600));
 
 		
-	
+		undo.setEnabled(false);
 
 
 		initButton(end, gui);
