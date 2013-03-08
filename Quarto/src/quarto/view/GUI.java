@@ -1,6 +1,7 @@
 package quarto.view;
 
 import java.awt.Component;
+
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,9 +16,12 @@ import quarto.model.Board;
 import quarto.view.constante.ViewConstante;
 import quarto.view.gameView.BoardGameItem;
 import quarto.view.gameView.CaseItem;
+import quarto.view.gameView.GameItem;
 import quarto.view.menuView.GameModeView;
 import quarto.view.menuView.GameTypeView;
 import quarto.view.menuView.MenuItem;
+import quarto.view.gameView.BoardSideItem;
+
 
 public class GUI implements ActionListener{
 	
@@ -34,9 +38,11 @@ public class GUI implements ActionListener{
 	}
 		
 	public void startGame(Board board) {
-		BoardGameItem bg = new BoardGameItem(board, controller);
+		//BoardGameItem bg = new BoardGameItem(board, controller);
+		GameItem game = new GameItem(board,controller,this);
+		BoardGameItem bg = game.getBoardGameItem();
 		board.addObserver(bg);
-		replace(bg , "Quarto - Game");
+		replace(game , "Quarto - Game");
 	}
 	
 	public void startGameMode() {
