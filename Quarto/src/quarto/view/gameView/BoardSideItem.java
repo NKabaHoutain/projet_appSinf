@@ -13,7 +13,8 @@ public class BoardSideItem extends JPanel {
 	JButton restart;
 	JButton undo;
 	JButton fullScreen;
-	
+	JTextField msg;
+	JButton selectPion;
 
 	
 	
@@ -23,21 +24,29 @@ public class BoardSideItem extends JPanel {
 		restart = new JButton(ViewConstante.BUTTON_RESTART);
 		undo = new JButton(ViewConstante.BUTTON_UNDO);
 		fullScreen =  new JButton(ViewConstante.BUTTON_FULLSCREEN);
+		msg = new JTextField(ViewConstante.TEXTFIELD_MESSAGE);
+		selectPion = new JButton(ViewConstante.BUTTON_SELECT_PION);
+		
 		
 		this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
 		this.setPreferredSize(new Dimension(120,600));
-		
-		GUI.initElement(end);
+		/*GUI.initElement(end);
 		GUI.initElement(rules);
 		GUI.initElement(restart);
 		GUI.initElement(undo);
 		GUI.initElement(fullScreen);
+		GUI.initElement(sel0ectPion);
+		GUI.initElement(msg);*/
 		
-		GUI.adjustSize(end, ViewConstante.BOARDSIDE);
-		GUI.adjustSize(rules, ViewConstante.BOARDSIDE);
-		GUI.adjustSize(restart, ViewConstante.BOARDSIDE);
-		GUI.adjustSize(undo, ViewConstante.BOARDSIDE);
-		GUI.adjustSize(fullScreen, ViewConstante.BOARDSIDE);
+		initButton(end, gui);
+		initButton(rules, gui);
+		initButton(restart, gui);
+		initButton(undo, gui);
+		initButton(fullScreen, gui);
+		initButton(selectPion,gui);
+		msg.setPreferredSize(new Dimension(110,70));
+		msg.setEditable(false);
+		selectPion.setPreferredSize(new Dimension(110,40));
 		
 		this.add(Box.createVerticalStrut(15));
 		this.add(rules);
@@ -49,9 +58,18 @@ public class BoardSideItem extends JPanel {
 		this.add(end);
 		this.add(Box.createRigidArea(ViewConstante.space[ViewConstante.BOARDSIDE]));
 		this.add(restart);
+		this.add(Box.createRigidArea(ViewConstante.space[ViewConstante.BOARDSIDE]));
+		this.add(msg);
+		this.add(Box.createRigidArea(ViewConstante.space[ViewConstante.BOARDSIDE]));
+		this.add(selectPion);
 		this.add(Box.createVerticalStrut(15));
 		this.setVisible(true);
 		
+	}
+	private void initButton(JButton c, GUI gui) {
+		GUI.adjustSize(c ,ViewConstante.BOARDSIDE);
+		c.addActionListener(gui);
+		GUI.initElement(c);		
 	}
 
 }
