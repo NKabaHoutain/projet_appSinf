@@ -24,13 +24,13 @@ public class ViewConstante {
 	public final static int BOARDSIDE = 1;
 	
 	
-	public final static String URL_LOGO = "C:\\Users\\Nicolas\\Pictures\\divers\\logo_quarto.jpg";
+	public final static String URL_LOGO = "/home/nhoutain/Eclipse/Workspace/logo_quarto.jpg";
 
 	
-	public final static String BUTTON_STARTMENU = "Démarrer une partie";
-	public final static String BUTTON_REGLE = "Régles";
+	public final static String BUTTON_STARTMENU = "Dï¿½marrer une partie";
+	public final static String BUTTON_REGLE = "Rï¿½gles";
 	public final static String BUTTON_OPTION = "Options";
-	public final static String BUTTON_DETAIL = "Détails";
+	public final static String BUTTON_DETAIL = "Dï¿½tails";
 	public final static String BUTTON_VSPLAYER = "Vs J2";
 	public final static String BUTTON_VSIA = "Vs IA";
 	public final static String BUTTON_RETOUR = "Retour";
@@ -39,5 +39,5 @@ public class ViewConstante {
 	public final static String BUTTON_END_OF_GAME = "Fin partie";
 	public final static String BUTTON_RESTART = "Recommencer";
 	public final static String BUTTON_UNDO = "Undo";
-	public final static String BUTTON_FULLSCREEN = "Plein écran";
+	public final static String BUTTON_FULLSCREEN = "Plein ï¿½cran";
 }

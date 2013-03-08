@@ -52,4 +52,8 @@ public class Controller implements ActionListener{
 		
 	}
 
+	public void undo() {
+		game.getBoard().undo();
+	}
+
 }

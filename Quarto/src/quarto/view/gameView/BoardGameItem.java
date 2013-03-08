@@ -102,8 +102,10 @@ public class BoardGameItem extends JPanel implements Observer{
 		
 	}
 	@Override
-	public void update(Observable arg0, Object arg1) {		
-		enableCase(!((String)arg1).equals("case"));
-		//enablePion(((String)arg1).equals("case"));
+	public void update(Observable arg0, Object arg1) {	
+		if (arg1 instanceof String) {
+			enableCase(!((String)arg1).equals("case"));
+			//enablePion(((String)arg1).equals("case"));
+		}
 	}
 }

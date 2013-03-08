@@ -46,6 +46,7 @@ public class CaseItem extends JButton implements Observer{
 	@Override
 	public void update(Observable o, Object arg) {
 		this.setEnabled(false);	
+		repaint();
 	}
 	
 	public boolean isPion() {

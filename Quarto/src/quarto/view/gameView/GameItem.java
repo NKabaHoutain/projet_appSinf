@@ -19,10 +19,13 @@ public class GameItem extends JPanel {
 		
 		boardGame = new BoardGameItem(board,controller);
 		boardSide = new BoardSideItem(gui);
+		board.addObserver(boardGame);
+		board.addObserver(boardSide);
 		this.setLayout(new BorderLayout());
 		this.add(boardGame,BorderLayout.WEST);
 		this.add(boardSide,BorderLayout.EAST);
 		this.setVisible(true);
+		
 		
 	}
 	

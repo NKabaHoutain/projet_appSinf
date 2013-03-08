@@ -10,7 +10,7 @@ public class Board extends Observable{
 	
 	private List<Pion> pions;
 	private Case[][] cases;
-	private Stack <Move> historicMove;
+	private Stack <Case> historicMove;
 	
 	/* INITIALISATION
 	 ****************
@@ -21,6 +21,7 @@ public class Board extends Observable{
 	public Board() {
 		createPions();
 		createCase();
+		historicMove = new Stack<Case>();
 	}
 	/**
 	 * Crée les pions de la board
@@ -67,7 +68,10 @@ public class Board extends Observable{
 		
 		p.setSelected(false);
 		
+		historicMove.push(c);
 		change("case");
+		
+		
 		
 		return winGame(c);
 	}
@@ -127,10 +131,24 @@ public class Board extends Observable{
 			}
 		}
 	}
+	
+	public void undo() {
+		Case c = historicMove.pop();
+		Pion p = c.getPion();
+		c.deletePion();
+		
+		p.setAvailable(true);
+		p.change();
+		c.change();
+		change("case");
+	}
 
 	public void change(String s) {
 		setChanged();
+		this.notifyObservers(this);
+		setChanged();
 		this.notifyObservers(s);
+		
 		clearChanged();
 	}
 	
@@ -168,5 +186,9 @@ public class Board extends Observable{
 			if(p.isSelected()) return p;
 		}
 		return null;
+	}
+	
+	public boolean isHistoric() {
+		return !historicMove.isEmpty();
 	}
 }

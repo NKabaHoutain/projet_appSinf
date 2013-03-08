@@ -40,8 +40,7 @@ public class GUI implements ActionListener{
 	public void startGame(Board board) {
 		//BoardGameItem bg = new BoardGameItem(board, controller);
 		GameItem game = new GameItem(board,controller,this);
-		BoardGameItem bg = game.getBoardGameItem();
-		board.addObserver(bg);
+		
 		replace(game , "Quarto - Game");
 	}
 	
@@ -104,6 +103,9 @@ public class GUI implements ActionListener{
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
+			}
+			else if(((JButton) s).getText().equals(ViewConstante.BUTTON_UNDO) ) {
+				controller.undo();
 			}
 		}
 		

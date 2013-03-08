@@ -1,22 +1,22 @@
 package quarto.view.gameView;
 import java.awt.Dimension;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.*;
 
+import quarto.model.Board;
 import quarto.view.GUI;
 import quarto.view.constante.ViewConstante;
 
-public class BoardSideItem extends JPanel {
+public class BoardSideItem extends JPanel implements Observer{
 	
 	JButton end;
 	JButton rules;
 	JButton restart;
-	JButton undo;
+	JButton undo ;
 	JButton fullScreen;
-	
 
-	
-	
 	public BoardSideItem(GUI gui){
 		end = new JButton(ViewConstante.BUTTON_END_OF_GAME);
 		rules = new JButton(ViewConstante.BUTTON_REGLE);
@@ -27,17 +27,13 @@ public class BoardSideItem extends JPanel {
 		this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
 		this.setPreferredSize(new Dimension(120,600));
 		
-		GUI.initElement(end);
-		GUI.initElement(rules);
-		GUI.initElement(restart);
-		GUI.initElement(undo);
-		GUI.initElement(fullScreen);
+		initButton(end, gui);
+		initButton(rules, gui);
+		initButton(restart, gui);
+		initButton(undo, gui);
+		undo.setEnabled(false);
+		initButton(fullScreen, gui);
 		
-		GUI.adjustSize(end, ViewConstante.BOARDSIDE);
-		GUI.adjustSize(rules, ViewConstante.BOARDSIDE);
-		GUI.adjustSize(restart, ViewConstante.BOARDSIDE);
-		GUI.adjustSize(undo, ViewConstante.BOARDSIDE);
-		GUI.adjustSize(fullScreen, ViewConstante.BOARDSIDE);
 		
 		this.add(Box.createVerticalStrut(15));
 		this.add(rules);
@@ -51,6 +47,20 @@ public class BoardSideItem extends JPanel {
 		this.add(restart);
 		this.add(Box.createVerticalStrut(15));
 		this.setVisible(true);
+		
+	}
+	
+	private void initButton(JButton c, GUI gui) {
+		GUI.adjustSize(c ,ViewConstante.BOARDSIDE);
+		c.addActionListener(gui);
+		GUI.initElement(c);		
+	}
+
+	@Override
+	public void update(Observable ob, Object arg) {
+		if (arg instanceof Board) {
+			undo.setEnabled(((Board) arg).isHistoric());
+		}
 		
 	}
 

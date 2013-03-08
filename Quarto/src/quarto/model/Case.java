@@ -44,6 +44,10 @@ public class Case extends Observable{
 	public boolean isPion() {
 		return pion != null;
 	}
+
+	public void deletePion() {
+		pion = null;
+	}
 	
 	
 }

@@ -43,19 +43,14 @@ public class PionItem extends JButton implements Observer{
 	
 	@Override
 	public void paintComponent(Graphics g) {
-		if(pion.isAvailable()) {
-			g.setColor(Color.LIGHT_GRAY);
-			g.fillRect(0, 0, getWidth(), getHeight());
-			if(pion.isSelected()){
-				g.setColor(Color.RED);
-				g.drawOval(1,1, getWidth()-2, getHeight()-2);
-			}
-			if(pion!=null)
-				drawPiece(pion, g, getWidth(), getHeight(),Color.LIGHT_GRAY);
+		g.setColor(Color.LIGHT_GRAY);
+		g.fillRect(0, 0, getWidth(), getHeight());
+		if(pion.isSelected()){
+			g.setColor(Color.RED);
+			g.drawOval(1,1, getWidth()-2, getHeight()-2);
 		}
-		else {
-			this.setVisible(false);
-		}
+		if(pion!=null)
+			drawPiece(pion, g, getWidth(), getHeight(),Color.LIGHT_GRAY);
 	}
 	
 	public Pion getPion() {
@@ -64,8 +59,7 @@ public class PionItem extends JButton implements Observer{
 
 	@Override
 	public void update(Observable o, Object arg) {
-		repaint();
-		
+		this.setVisible(pion.isAvailable());
 	}
 	
 	
