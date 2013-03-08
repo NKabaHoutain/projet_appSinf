@@ -64,11 +64,12 @@ public class Board extends Observable{
 	public boolean move(Case c) {
 		Pion p = getSelectedPion();
 		c.addPion(p);
+		
 		p.setSelected(false);
 		
 		change("case");
 		
-		return win(c);
+		return winGame(c);
 	}
 	
 	/**
@@ -83,16 +84,50 @@ public class Board extends Observable{
 		change("pion");
 	}
 	
-	private boolean win(Case c) {
-		
-		return testLine(c.getX());
+	private boolean winGame(Case c) {
+		return winGameBis(c, CaseField.WINTAB);
 	}
 	
-	private boolean testLine(int x) {
+	private boolean winGameBis(Case c, int[] constante) {
+		for (int i=0; i<4; i++) {
+			if((Filled(c, constante[i]) && win(c, constante[i]))) {
+				return true;
+			}
+		}
 		return false;
 	}
 	
+	private boolean Filled(Case c, int constante) {
+		boolean res = true;
+		for(int i=0; i<4; i++) {
+			res = res && cases[CaseField.getRow(c, i, constante)][CaseField.getLine(c, i, constante)].isPion();
+		}
+		return res;
+	}
 	
+	private boolean win(Case c, int constante) {
+		for(int i=0; i<3; i++) {
+			if(winBis(c, i, cases[CaseField.getRow(c, i, constante)][CaseField.getLine(c, i, constante)].getPion().getCaract(i), 1, constante)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	private boolean winBis(Case c, int i, boolean carac, int next, int constante) {
+		if(next>3) {
+			return true;
+		}
+		else {
+			if(cases[CaseField.getRow(c, next, constante)][CaseField.getLine(c, next, constante)].getPion().getCaract(i) == carac ) {
+				return winBis(c, i, carac, next+1, constante);
+			}
+			else {
+				return false;
+			}
+		}
+	}
+
 	public void change(String s) {
 		setChanged();
 		this.notifyObservers(s);

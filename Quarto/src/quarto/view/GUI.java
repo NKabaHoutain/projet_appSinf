@@ -96,7 +96,6 @@ public class GUI implements ActionListener{
 				try {
 					startMenu();
 				} catch (IOException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}

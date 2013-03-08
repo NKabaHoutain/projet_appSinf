@@ -24,10 +24,9 @@ public class Pion extends Observable{
 	}
 	
 	
-	public boolean[] getCaract() {
-		return caract;
+	public boolean getCaract(int i) {
+		return caract[i];
 	}
-
 
 	public String getUrlIMage() {
 		return Constante.PATHFILE + this.toString().replace(" ", ".") + ".jpg";

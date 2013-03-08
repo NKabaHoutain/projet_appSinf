@@ -81,6 +81,7 @@ public class BoardGameItem extends JPanel implements Observer{
 		add(list,BorderLayout.SOUTH);
 		for(PionItem b : pions)
 			list.add(b);
+		
 		add(message,BorderLayout.NORTH);
 		
 		enableCase(false);
@@ -103,6 +104,6 @@ public class BoardGameItem extends JPanel implements Observer{
 	@Override
 	public void update(Observable arg0, Object arg1) {		
 		enableCase(!((String)arg1).equals("case"));
-		enablePion(((String)arg1).equals("case"));
+		//enablePion(((String)arg1).equals("case"));
 	}
 }
