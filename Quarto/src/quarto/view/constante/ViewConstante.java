@@ -39,5 +39,8 @@ public class ViewConstante {
 	public final static String BUTTON_END_OF_GAME = "Fin partie";
 	public final static String BUTTON_RESTART = "Recommencer";
 	public final static String BUTTON_UNDO = "Undo";
+
 	public final static String BUTTON_FULLSCREEN = "Plein �cran";
+	public final static String BUTTON_SELECT_PION = "Select";
+	public final static String TEXTFIELD_MESSAGE = "J1 choississez \n un pion";
 }
