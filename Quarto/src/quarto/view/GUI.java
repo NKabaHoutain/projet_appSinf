@@ -29,6 +29,14 @@ public class GUI implements ActionListener{
 	private JFrame mainFrame = new JFrame("Quarto");
 	private Component c;
 	
+	/* CONSTRUCTEUR
+	 ************** 
+	 */
+	/**
+	 * Constructeur
+	 * @param controller
+	 * @throws IOException
+	 */
 	public GUI(Controller controller) throws IOException {
 		this.controller = controller;
 		c = new MenuItem(this);
@@ -36,11 +44,12 @@ public class GUI implements ActionListener{
 		
 		endOfFrame();
 	}
-		
+	
+	/* DEMARRAGE DES INTERFACES
+	 ************************** 
+	 */
 	public void startGame(Board board) {
-		//BoardGameItem bg = new BoardGameItem(board, controller);
-		GameItem game = new GameItem(board,controller,this);
-		
+		GameItem game = new GameItem(board,controller,this); 
 		replace(game , "Quarto - Game");
 	}
 	
@@ -71,6 +80,8 @@ public class GUI implements ActionListener{
 		mainFrame.pack();
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
+	
+	
 	
 	public static void adjustSize(Component c, int constante) {
 		c.setMinimumSize(ViewConstante.minSize[constante]);
@@ -106,6 +117,9 @@ public class GUI implements ActionListener{
 			}
 			else if(((JButton) s).getText().equals(ViewConstante.BUTTON_UNDO) ) {
 				controller.undo();
+			}
+			else if(((JButton) s).getText().equals(ViewConstante.BUTTON_SELECT_PION)) {
+				controller.pionSelected();
 			}
 		}
 		

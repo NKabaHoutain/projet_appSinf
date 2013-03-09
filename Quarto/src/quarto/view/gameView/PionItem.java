@@ -60,6 +60,7 @@ public class PionItem extends JButton implements Observer{
 	@Override
 	public void update(Observable o, Object arg) {
 		this.setVisible(pion.isAvailable());
+		repaint();
 	}
 	
 	

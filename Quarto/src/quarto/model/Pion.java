@@ -54,7 +54,6 @@ public class Pion extends Observable{
 
 	public void setSelected(boolean selected) {
 		this.selected = selected;
-		
 		change();
 	}
 

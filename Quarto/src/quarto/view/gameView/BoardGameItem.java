@@ -5,6 +5,7 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridLayout;
+import java.awt.PopupMenu;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -25,18 +26,9 @@ import quarto.view.GUI;
 
 public class BoardGameItem extends JPanel implements Observer{
 
-	/**
-	 * A chaque case du jeu est attachée un bouton graphique CaseItem
-	 */
+
 	private List<CaseItem> cases = new ArrayList<CaseItem>();
-	/**
-	 * A chaque pièce disponible du jeu est attachée un bouton PionItem
-	 */
 	private List<PionItem> pions= new ArrayList<PionItem>();
-	/**
-	 * Composant graphique pour afficher des messages aux utilisateurs
-	 */
-	private final JLabel message = new JLabel();
 	
 	private JPanel list = new JPanel();
 	private JPanel grille = new JPanel();
@@ -82,11 +74,10 @@ public class BoardGameItem extends JPanel implements Observer{
 		for(PionItem b : pions)
 			list.add(b);
 		
-		add(message,BorderLayout.NORTH);
-		
 		enableCase(false);
 		
 		this.setVisible(true);
+		
 	}
 	
 	private void enableCase(boolean b) {
@@ -103,9 +94,9 @@ public class BoardGameItem extends JPanel implements Observer{
 	}
 	@Override
 	public void update(Observable arg0, Object arg1) {	
-		if (arg1 instanceof String) {
-			enableCase(!((String)arg1).equals("case"));
-			//enablePion(((String)arg1).equals("case"));
+		if (arg1 instanceof Boolean) {
+			enableCase(!((Boolean)arg1));
+			enablePion(((Boolean)arg1));
 		}
 	}
 }

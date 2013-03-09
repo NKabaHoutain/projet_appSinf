@@ -19,10 +19,23 @@ public class Controller implements ActionListener{
 	private GUI gui;
 	private Game game;
 	
+	/* CONSTRUCTEUR
+	 ************** 
+	 */
+	/**
+	 * Constructeur de base
+	 * @throws IOException
+	 */
 	public Controller() throws IOException {
 		gui = new GUI(this);
 	}
 	
+	/* METHODE DE L'INTERFACE
+	 ************************ 
+	 */
+	/**
+	 * Démarre une partie
+	 */
 	public void startGame(){
 		
 		game = new Game(new Player("Nico"), new Player("Kaba"));
@@ -31,7 +44,19 @@ public class Controller implements ActionListener{
 		
 		
 	}
-
+	/**
+	 * Joue un coup en arrière dans la board
+	 */
+	public void undo() {
+		game.getBoard().undo();
+	}
+	
+	public void pionSelected() {
+		if(game.getBoard().getSelectedPion() != null) {
+			game.getBoard().pionSelected();
+		}
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object s = e.getSource();
@@ -52,8 +77,6 @@ public class Controller implements ActionListener{
 		
 	}
 
-	public void undo() {
-		game.getBoard().undo();
-	}
+	
 
 }

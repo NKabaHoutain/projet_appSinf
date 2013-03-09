@@ -80,7 +80,9 @@ public class BoardSideItem extends JPanel implements Observer{
 		if (arg instanceof Board) {
 			undo.setEnabled(((Board) arg).isHistoric());
 		}
-		
+		if (arg instanceof String) {
+			msg.setText(((String)arg));
+		}
 
 
 	}
