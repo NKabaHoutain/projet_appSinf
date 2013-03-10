@@ -81,7 +81,9 @@ public class GUI implements ActionListener{
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
-	
+	public JFrame getFrame() {
+		return mainFrame;
+	}
 	
 	public static void adjustSize(Component c, int constante) {
 		c.setMinimumSize(ViewConstante.minSize[constante]);
@@ -93,7 +95,10 @@ public class GUI implements ActionListener{
 		c.setAlignmentX(Component.CENTER_ALIGNMENT);
 		c.setAlignmentY(Component.CENTER_ALIGNMENT);
 	}
-
+	
+	/**
+	 * Gere les actions relatives uniquement à l'interface
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object s = e.getSource();

@@ -70,6 +70,7 @@ public class Board extends Observable{
 		
 		historicMove.push(c);
 		change(((Boolean) true));
+		change(this);
 		return winGame(c);
 	}
 	
@@ -83,12 +84,13 @@ public class Board extends Observable{
 		}
 	}
 	
-	public void pionSelected() {
+	public void pionSelected(String player) {
 		change(((Boolean)false));
-		change("lolololo");
+		change(this);
+		change("Joueur " + player + " joue");
 	}
 	
-	public void undo() {
+	public void undo(String player) {
 		Case c = historicMove.pop();
 		Pion p = c.getPion();
 		c.deletePion();
@@ -98,12 +100,10 @@ public class Board extends Observable{
 		p.change();
 		c.change();
 		selectPion(p);
-		pionSelected();
+		pionSelected(player);
 	}
 
 	public void change(Object s) {
-		setChanged();
-		this.notifyObservers(this);
 		setChanged();
 		this.notifyObservers(s);
 		

@@ -24,21 +24,19 @@ public class Game {
 	}
 	
 
-
-
-
-
-
-
-
-
-
-
-
 	private void changeGamer()
 	{
 		playerOne.setInGame(!playerOne.isInGame());
 		playerTwo.setInGame(!playerTwo.isInGame());
+	}
+	
+	private String nextPlayer() {
+		changeGamer();
+		
+		if(playerOne.isInGame()) {
+			return playerOne.getNom();
+		}
+		return playerTwo.getNom();
 	}
 	
 	public Player selectPlayer(String nom) {
@@ -50,12 +48,20 @@ public class Game {
 
 	public boolean move(Case c) {
 		return board.move(c);
-		
 	}
 
 	public void selectPion(Pion p) {
 		board.selectPion(p);
 		
+	}
+
+	public void pionSelected() {
+		board.pionSelected(nextPlayer());
+		
+	}
+
+	public void undo() {
+		board.undo(nextPlayer());	
 	}
 
 

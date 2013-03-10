@@ -2,6 +2,7 @@ package quarto.view.gameView;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridLayout;
@@ -92,6 +93,9 @@ public class BoardGameItem extends JPanel implements Observer{
 		}
 		
 	}
+	
+	
+	
 	@Override
 	public void update(Observable arg0, Object arg1) {	
 		if (arg1 instanceof Boolean) {

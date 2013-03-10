@@ -48,15 +48,18 @@ public class Controller implements ActionListener{
 	 * Joue un coup en arrière dans la board
 	 */
 	public void undo() {
-		game.getBoard().undo();
+		game.undo();
 	}
 	
 	public void pionSelected() {
 		if(game.getBoard().getSelectedPion() != null) {
-			game.getBoard().pionSelected();
+			game.pionSelected();
 		}
 	}
 	
+	/**
+	 * Gere les actions de l'interface relative au model
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object s = e.getSource();
@@ -74,7 +77,6 @@ public class Controller implements ActionListener{
 			if ( s instanceof PionItem) {
 				game.selectPion(((PionItem) s).getPion());
 			}
-		
 	}
 
 	
