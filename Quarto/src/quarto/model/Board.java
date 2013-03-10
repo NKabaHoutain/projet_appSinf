@@ -69,7 +69,7 @@ public class Board extends Observable{
 		p.setSelected(false);
 		
 		historicMove.push(c);
-		change(((Boolean) true));
+		change(BoardField.PION_ACTIF);
 		change(this);
 		return winGame(c);
 	}
@@ -85,7 +85,7 @@ public class Board extends Observable{
 	}
 	
 	public void pionSelected(String player) {
-		change(((Boolean)false));
+		change(BoardField.CASE_ACTIVE);
 		change(this);
 		change("Joueur " + player + " joue");
 	}
