@@ -20,6 +20,7 @@ import quarto.view.gameView.GameItem;
 import quarto.view.menuView.GameModeView;
 import quarto.view.menuView.GameTypeView;
 import quarto.view.menuView.MenuItem;
+import quarto.view.menuView.RulesView;
 import quarto.view.gameView.BoardSideItem;
 
 
@@ -63,6 +64,10 @@ public class GUI implements ActionListener{
 	
 	public void startGameType() {
 		replace(new GameTypeView(this), "Quarto - Type de partie");
+	}
+	
+	public void startRules() {
+		replace(new RulesView(this),"Quarto-Règle du jeu");
 	}
 	
 	private void replace(Component actuel, String newName) {
@@ -125,6 +130,10 @@ public class GUI implements ActionListener{
 			}
 			else if(((JButton) s).getText().equals(ViewConstante.BUTTON_SELECT_PION)) {
 				controller.pionSelected();
+			}
+			else if(((JButton)s).getText().equals(ViewConstante.BUTTON_REGLE) ) {
+				startRules();
+				
 			}
 		}
 		
