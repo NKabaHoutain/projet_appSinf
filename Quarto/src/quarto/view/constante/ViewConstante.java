@@ -6,7 +6,7 @@ public class ViewConstante {
 	
 	public final static Dimension preferredSize[] ={	new Dimension(350,50),
 														new Dimension(105,50),
-														new Dimension(50,20)
+														new Dimension(60,20)
 																					};
 	public final static Dimension minSize[] = 		{	new Dimension(350,50),
 														new Dimension(105,40),
@@ -62,6 +62,7 @@ public class ViewConstante {
 	public final static String BUTTON_END_OF_GAME = "Fin partie";
 	public final static String BUTTON_RESTART = "Recommencer";
 	public final static String BUTTON_UNDO = "Undo";
+	public final static String BUTTON_SAVE = "Sauver";
 
 	public final static String BUTTON_FULLSCREEN = "Plein �cran";
 	public final static String BUTTON_SELECT_PION = "Select";
