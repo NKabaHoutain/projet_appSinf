@@ -36,6 +36,7 @@ public class BoardSideItem extends JPanel implements Observer{
 
 		
 		undo.setEnabled(false);
+		selectPion.setEnabled(false);
 
 
 		initButton(end, gui);
@@ -79,12 +80,11 @@ public class BoardSideItem extends JPanel implements Observer{
 	public void update(Observable ob, Object arg) {
 		if (arg instanceof Board) {
 			undo.setEnabled(((Board) arg).isHistoric());
+			selectPion.setEnabled(((Board) arg).canSelectedPion());
 		}
 		if (arg instanceof String) {
 			msg.setText(((String)arg));
 		}
-
-
 	}
 
 }

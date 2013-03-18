@@ -82,7 +82,7 @@ public class GameItem extends JPanel implements Observer{
 			JPanel p = new JPanel();
 			p.add(l);
 			
-			replace(gui.getFrame(), p, 1000);
+			replace(gui.getFrame(), p, 500);
 		}
 	}
 

@@ -2,9 +2,12 @@ package quarto.view.gameView;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Shape;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -15,10 +18,14 @@ public class PionItem extends JButton implements Observer{
 	Pion pion;
 	
 	public PionItem (Pion pion) {
+		super();
 		this.pion = pion;
 	}
 
 	public static void drawPiece(Pion pion, Graphics g, int w, int h,Color fond) {
+		//g.drawImage(new ImageIcon(pion.getUrlImage()).getImage(), 0,0, null);
+		
+	
 		int s=((w<h)?w:h)/2;
 		
 		if(pion.isBlack())
@@ -43,14 +50,17 @@ public class PionItem extends JButton implements Observer{
 	
 	@Override
 	public void paintComponent(Graphics g) {
+		
 		g.setColor(Color.LIGHT_GRAY);
 		g.fillRect(0, 0, getWidth(), getHeight());
 		if(pion.isSelected()){
 			g.setColor(Color.RED);
-			g.drawOval(1,1, getWidth()-2, getHeight()-2);
+			g.fillRect(0, 0, getWidth(), getHeight());
+			//g.drawOval(1,1, getWidth()-2, getHeight()-2);
 		}
-		if(pion!=null)
-			drawPiece(pion, g, getWidth(), getHeight(),Color.LIGHT_GRAY);
+		
+		//if(pion != null)
+		drawPiece(pion, g, getWidth(), getHeight(),Color.LIGHT_GRAY);
 	}
 	
 	public Pion getPion() {

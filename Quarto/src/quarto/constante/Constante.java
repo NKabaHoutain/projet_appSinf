@@ -7,7 +7,10 @@ public class Constante {
 												"Niveau2",
 												"Niveau3"		};
 	
-	public static final String PATHFILE = "USER\\NICO\\";
+	public static final String PATHFILE = "/home/nhoutain/Dropbox/Q4 APPSINF projet/";
+	public static final String MUSIQUE = "Musiques";
+	
+	public static boolean PlayMusic = true;
 	
 	
 }

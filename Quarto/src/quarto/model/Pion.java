@@ -28,8 +28,8 @@ public class Pion extends Observable{
 		return caract[i];
 	}
 
-	public String getUrlIMage() {
-		return Constante.PATHFILE + this.toString().replace(" ", ".") + ".jpg";
+	public String getUrlImage() {
+		return Constante.PATHFILE + this.toString().replace(' ', '_') + ".jpg";
 	}
 	
 	public boolean isBlack() {

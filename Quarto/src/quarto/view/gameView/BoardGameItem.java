@@ -1,6 +1,7 @@
 package quarto.view.gameView;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -19,6 +20,7 @@ import java.util.Observer;
 
 import javax.swing.*;
 
+import quarto.constante.Constante;
 import quarto.controller.Controller;
 import quarto.model.Board;
 import quarto.model.Case;
@@ -58,6 +60,7 @@ public class BoardGameItem extends JPanel implements Observer{
 			PionItem b=new PionItem(p);
 			p.addObserver(b);
 			b.addActionListener(controller);
+			b.addMouseListener(controller);
 			pions.add(b);
 			b.setPreferredSize(new Dimension(60, 60));
 		}
@@ -93,8 +96,6 @@ public class BoardGameItem extends JPanel implements Observer{
 		}
 		
 	}
-	
-	
 	
 	@Override
 	public void update(Observable arg0, Object arg1) {	

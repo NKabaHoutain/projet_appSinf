@@ -12,6 +12,11 @@ public class Board extends Observable{
 	private Case[][] cases;
 	private Stack <Case> historicMove;
 	
+	private boolean canSelectedPion;
+	
+	private Case caseWin;
+	private int constante;
+	
 	/* INITIALISATION
 	 ****************
 	 */
@@ -22,6 +27,7 @@ public class Board extends Observable{
 		createPions();
 		createCase();
 		historicMove = new Stack<Case>();
+		canSelectedPion = true;
 	}
 	/**
 	 * Crée les pions de la board
@@ -63,6 +69,7 @@ public class Board extends Observable{
 	 * @param c
 	 */
 	public boolean move(Case c) {
+		canSelectedPion = true;
 		Pion p = getSelectedPion();
 		c.addPion(p);
 		
@@ -71,6 +78,8 @@ public class Board extends Observable{
 		historicMove.push(c);
 		change(BoardField.PION_ACTIF);
 		change(this);
+		
+		
 		return winGame(c);
 	}
 	
@@ -82,12 +91,15 @@ public class Board extends Observable{
 		for(Pion p : pions) {
 			p.setSelected(p==pion);
 		}
+		change(this);
 	}
 	
 	public void pionSelected(String player) {
+		canSelectedPion = false;
 		change(BoardField.CASE_ACTIVE);
 		change(this);
 		change("Joueur " + player + " joue");
+		
 	}
 	
 	public void undo(String player) {
@@ -146,8 +158,18 @@ public class Board extends Observable{
 		return null;
 	}
 	
+	public boolean canSelectedPion() {
+		return getSelectedPion() != null && canSelectedPion;
+	}
+	
 	public boolean isHistoric() {
 		return !historicMove.isEmpty();
+	}
+	
+	public void paintWinCase() {
+		for(int i=0; i<4; i++) {
+			cases[CaseField.getRow(caseWin, i, constante)][CaseField.getLine(caseWin, i, constante)].win();
+		}
 	}
 	
 	/* TEST DE VICTOIRE
@@ -171,8 +193,11 @@ public class Board extends Observable{
 	}
 	
 	private boolean win(Case c, int constante) {
-		for(int i=0; i<3; i++) {
+		for(int i=0; i<4; i++) {
 			if(winBis(c, i, cases[CaseField.getRow(c, i, constante)][CaseField.getLine(c, i, constante)].getPion().getCaract(i), 1, constante)) {
+				caseWin = c;
+				this.constante = constante;
+				paintWinCase();
 				return true;
 			}
 		}

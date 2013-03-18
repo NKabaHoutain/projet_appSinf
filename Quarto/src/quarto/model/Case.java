@@ -6,8 +6,10 @@ public class Case extends Observable{
 	private Pion pion;
 	private final int x;
 	private final int y;
+	private boolean win;
 	
 	public Case(int i, int j){
+		win = false;
 		pion= null;
 		x=i;
 		y=j;
@@ -49,5 +51,13 @@ public class Case extends Observable{
 		pion = null;
 	}
 	
+	public void win() {
+		win = true;
+		change();
+	}
+	
+	public boolean isWin() {
+		return win;
+	}
 	
 }
