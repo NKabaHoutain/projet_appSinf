@@ -1,15 +1,19 @@
 package quarto.view.menuView;
+import quarto.option.Option;
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
 import quarto.view.GUI;
 import quarto.view.constante.ViewConstante;
 
-public class OptionsView extends JPanel {
+public class OptionsView extends JPanel implements ActionListener{
 	
 	JPanel panelTitle;
 	JPanel centerPanel;
@@ -51,6 +55,10 @@ public class OptionsView extends JPanel {
 		undo = new JCheckBox();
 		back = new JButton(ViewConstante.BUTTON_RETOUR);
 		save = new JButton(ViewConstante.BUTTON_SAVE);
+		save.addActionListener(this);
+		
+		
+		
 		
 		title.setFont(titleFont);
 		panelTitle.add(Box.createVerticalStrut(100));
@@ -87,10 +95,25 @@ public class OptionsView extends JPanel {
 	}
 	private void initButton(JButton c, GUI gui) {
 		GUI.adjustSize(c, ViewConstante.BACK );
-
 		c.addActionListener(gui);
-		
 		GUI.initElement(c);
+	}
+	
+
+	private void initButton() {
+		undo.setSelected(Option.isUndo());
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		Object s = e.getSource();
+		
+		if(s instanceof JButton) {
+			if( ((JButton) s).getText().equals(ViewConstante.BUTTON_SAVE)) {
+				Option.setUndo(undo.isSelected());
+			}
+		}
+		
 	}
 
 }

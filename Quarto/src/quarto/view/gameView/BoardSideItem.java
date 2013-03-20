@@ -6,6 +6,7 @@ import java.util.Observer;
 import javax.swing.*;
 
 import quarto.model.Board;
+import quarto.option.Option;
 import quarto.view.GUI;
 import quarto.view.constante.ViewConstante;
 
@@ -75,11 +76,11 @@ public class BoardSideItem extends JPanel implements Observer{
 		c.addActionListener(gui);
 		GUI.initElement(c);		
 	}
-
+	
 	@Override
 	public void update(Observable ob, Object arg) {
 		if (arg instanceof Board) {
-			undo.setEnabled(((Board) arg).isHistoric());
+			undo.setEnabled(Option.isUndo() && ((Board) arg).isHistoric());
 			selectPion.setEnabled(((Board) arg).canSelectedPion());
 		}
 		if (arg instanceof String) {

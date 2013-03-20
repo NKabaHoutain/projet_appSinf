@@ -1,59 +1,49 @@
 package quarto.option;
 
 public class Option {
-	private int volumeMusic;
-	private int volumeEffects;
-	private boolean undo;
-	private int timeByTurn;
-	private boolean chrono;
-	private int gameLevel;
+	private static int volumeMusic;
+	private static int volumeEffects;
+	private static boolean undo;
+	private static int timeByTurn;
+	private static boolean chrono;
+	private static int gameLevel;
 	
-	public int getVolumeMusic() {
+	public static int getVolumeMusic() {
 		return volumeMusic;
 	}
-	
-	public void setVolumeMusic(int volumeMusic) {
-		this.volumeMusic = volumeMusic;
+	public static void setVolumeMusic(int volumeMusic) {
+		Option.volumeMusic = volumeMusic;
 	}
-	
-	public int getVolumeEffects() {
+	public static int getVolumeEffects() {
 		return volumeEffects;
 	}
-	
-	public void setVolumeEffects(int volumeEffects) {
-		this.volumeEffects = volumeEffects;
+	public static void setVolumeEffects(int volumeEffects) {
+		Option.volumeEffects = volumeEffects;
 	}
-	
-	public boolean isUndo() {
+	public static boolean isUndo() {
 		return undo;
 	}
-	
-	public void setUndo(boolean undo) {
-		this.undo = undo;
+	public static void setUndo(boolean undo) {
+		Option.undo = undo;
 	}
-	
-	public int getTimeByTurn() {
+	public static int getTimeByTurn() {
 		return timeByTurn;
 	}
-	
-	public void setTimeByTurn(int timeByTurn) {
-		this.timeByTurn = timeByTurn;
+	public static void setTimeByTurn(int timeByTurn) {
+		Option.timeByTurn = timeByTurn;
 	}
-	
-	public boolean isChrono() {
+	public static boolean isChrono() {
 		return chrono;
 	}
-	
-	public void setChrono(boolean chrono) {
-		this.chrono = chrono;
+	public static void setChrono(boolean chrono) {
+		Option.chrono = chrono;
 	}
-	
-	public int getGameLevel() {
+	public static int getGameLevel() {
 		return gameLevel;
 	}
-	
-	public void setGameLevel(int gameLevel) {
-		this.gameLevel = gameLevel;
+	public static void setGameLevel(int gameLevel) {
+		Option.gameLevel = gameLevel;
 	}
+	
 }
 

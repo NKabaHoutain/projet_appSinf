@@ -37,17 +37,10 @@ public class CaseItem extends JButton implements Observer{
 		super();
 		c=caase;
 	
-		/*
-		 * Pour afficher une image par case
-		 *
-		img = new ImageIcon("./Ressources/Images/Game/text60.jpg");		
-		 *
-		 */
+		
+		//img = new ImageIcon("./Ressources/Images/Game/text60.jpg");		
 		
 		
-		/*
-		 * Pour afficher une image pour les 16cases
-		 */
 		Toolkit tk = Toolkit.getDefaultToolkit();
 		Image texture = tk.getImage("./Ressources/Images/Game/text600.jpg");
 		img = new ImageIcon(tk.createImage (new FilteredImageSource ( texture.getSource(),

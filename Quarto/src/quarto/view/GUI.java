@@ -126,7 +126,8 @@ public class GUI implements ActionListener{
 			else if(((JButton) s).getText().equals(ViewConstante.BUTTON_VSPLAYER) ) {
 				controller.startGame();
 			}
-			else if(((JButton) s).getText().equals(ViewConstante.BUTTON_RETOUR) ) {
+			else if(((JButton) s).getText().equals(ViewConstante.BUTTON_RETOUR) ||
+					((JButton) s).getText().equals(ViewConstante.BUTTON_SAVE) ) {
 				try {
 					startMenu();
 				} catch (IOException e1) {
