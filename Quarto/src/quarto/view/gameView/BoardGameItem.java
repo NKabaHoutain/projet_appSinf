@@ -7,6 +7,7 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.PopupMenu;
 
 import java.awt.event.ActionEvent;
@@ -18,6 +19,7 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import quarto.constante.Constante;

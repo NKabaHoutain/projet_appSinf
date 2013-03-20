@@ -15,52 +15,22 @@ import quarto.model.Pion;
 
 public class PionItem extends JButton implements Observer{
 	
-	Pion pion;
+	private final Pion pion;
+	private final ImageIcon img;
 	
 	public PionItem (Pion pion) {
 		super();
 		this.pion = pion;
-	}
-
-	public static void drawPiece(Pion pion, Graphics g, int w, int h,Color fond) {
-		//g.drawImage(new ImageIcon(pion.getUrlImage()).getImage(), 0,0, null);
 		
-	
-		int s=((w<h)?w:h)/2;
-		
-		if(pion.isBlack())
-			g.setColor(Color.BLACK);
-		else
-			g.setColor(Color.WHITE);
-		if(pion.isSmall())
-			s=s/2;
-		if(pion.isCercle())
-			g.fillOval((w-s)/2, (h-s)/2, s, s);
-		else
-			g.fillRect((w-s)/2, (h-s)/2, s, s);
-		if(pion.isHollow()) {
-			g.setColor(fond);
-			s/=3;
-			if(pion.isCercle())
-				g.fillOval((w-s)/2, (h-s)/2, s, s);
-			else
-				g.fillRect((w-s)/2, (h-s)/2, s, s);			
-		}
+		img = new ImageIcon(pion.getUrlImage());		
 	}
 	
 	@Override
 	public void paintComponent(Graphics g) {
-		
-		g.setColor(Color.LIGHT_GRAY);
-		g.fillRect(0, 0, getWidth(), getHeight());
-		if(pion.isSelected()){
-			g.setColor(Color.RED);
-			g.fillRect(0, 0, getWidth(), getHeight());
-			//g.drawOval(1,1, getWidth()-2, getHeight()-2);
-		}
-		
-		//if(pion != null)
-		drawPiece(pion, g, getWidth(), getHeight(),Color.LIGHT_GRAY);
+		super.paintComponent(g);
+        if (img == null) return;
+        g.drawImage(img.getImage(), 0, 0, getWidth(), getHeight(), this);
+
 	}
 	
 	public Pion getPion() {

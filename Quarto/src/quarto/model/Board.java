@@ -194,7 +194,7 @@ public class Board extends Observable{
 	
 	private boolean win(Case c, int constante) {
 		for(int i=0; i<4; i++) {
-			if(winBis(c, i, cases[CaseField.getRow(c, i, constante)][CaseField.getLine(c, i, constante)].getPion().getCaract(i), 1, constante)) {
+			if(winBis(c, i, cases[CaseField.getRow(c, i, constante)][CaseField.getLine(c, i, constante)].getPion().getCaract(i), 0, constante)) {
 				caseWin = c;
 				this.constante = constante;
 				paintWinCase();

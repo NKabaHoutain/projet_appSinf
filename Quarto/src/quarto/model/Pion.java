@@ -29,7 +29,7 @@ public class Pion extends Observable{
 	}
 
 	public String getUrlImage() {
-		return Constante.PATHFILE + this.toString().replace(' ', '_') + ".jpg";
+		return "./Ressources/Images/Game/pellecouille.png";
 	}
 	
 	public boolean isBlack() {

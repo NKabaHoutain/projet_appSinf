@@ -50,14 +50,17 @@ public class RulesView extends JPanel {
 				
 		rules.setEditable(false);
 		
-		initButton(back, gui);
+		
 		
 		GUI.initElement(title);
 		GUI.initElement(rules);
 		
 		panelTitle.add(title);
 		panelText.add(rules);
-		panelButton.add(back);
+		if(gui!= null) {
+			initButton(back, gui);
+			panelButton.add(back);
+		}
 		
 		add(Box.createVerticalStrut(15));
 		add(panelTitle);

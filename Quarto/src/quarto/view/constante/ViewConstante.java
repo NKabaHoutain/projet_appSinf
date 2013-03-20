@@ -4,6 +4,8 @@ import java.awt.Dimension;
 
 public class ViewConstante {
 	
+	public final static int CASE_HEIGHT = 120;
+	
 	public final static Dimension preferredSize[] ={	new Dimension(350,50),
 														new Dimension(105,50),
 														new Dimension(60,20)
@@ -29,25 +31,26 @@ public class ViewConstante {
 	
 	
 	public final static String URL_LOGO = "C:\\Users\\Nicolas\\Pictures\\divers\\logo_quarto.jpg";
-	public final static String RULES = "Les joueurs ont à leur disposition 16 pièces qui se distinguent"+"\n" +
-			"les unes entre elles suivant quatre caractéristiques : \n"+"\n"+
+	
+	public final static String RULES = "Les joueurs ont ï¿½ leur disposition 16 piï¿½ces qui se distinguent"+"\n" +
+			"les unes entre elles suivant quatre caractï¿½ristiques : \n"+"\n"+
 
     "la couleur : blanche ou noire,"+"\n"+
     "la taille : grande ou petite,"+"\n"+
-    "la forme : ronde ou carrée" +"\n"+
-    "la consistance : pleine ou creuse (en fait un trou au sommet de la pièce)"+"\n"+"\n"+
+    "la forme : ronde ou carrï¿½e" +"\n"+
+    "la consistance : pleine ou creuse (en fait un trou au sommet de la piï¿½ce)"+"\n"+"\n"+
 
-	"Chaque pièce est unique et, avec 16 pièces, toutes les"+"\n"+
-	"combinaisons de caractéristiques possibles sont épuisées."+"\n"+ "Les pièces sont communes aux deux adversaires"+
+	"Chaque piï¿½ce est unique et, avec 16 piï¿½ces, toutes les"+"\n"+
+	"combinaisons de caractï¿½ristiques possibles sont ï¿½puisï¿½es."+"\n"+ "Les piï¿½ces sont communes aux deux adversaires"+
 	"( la couleur ne distingue pas un camp)."+"\n"+
-	"Pour gagner, il faut réaliser un alignement de 4 pièces ayant au moins"+"\n" +"une caractéristique en commun (4 blanches, 4 grandes, etc.)"+"\n" +
+	"Pour gagner, il faut rï¿½aliser un alignement de 4 piï¿½ces ayant au moins"+"\n" +"une caractï¿½ristique en commun (4 blanches, 4 grandes, etc.)"+"\n" +
 	"sur le plateau de jeu qui comporte 16 cases (4 sur 4)"+"\n"+"\n"+
 
-	"Le plateau de jeu offre 10 possibilités d’alignement"+"\n" +"(4 horizontales, 4 verticales et 2 diagonales)."+"\n"+
-	"Lorsque la seizième pièce est posée, le plateau est rempli."+"\n"+" Si aucun alignement n’est réalisé, la partie est nulle."+"\n"+"\n"+
+	"Le plateau de jeu offre 10 possibilitï¿½s dï¿½alignement"+"\n" +"(4 horizontales, 4 verticales et 2 diagonales)."+"\n"+
+	"Lorsque la seiziï¿½me piï¿½ce est posï¿½e, le plateau est rempli."+"\n"+" Si aucun alignement nï¿½est rï¿½alisï¿½, la partie est nulle."+"\n"+"\n"+
 
-	"La règle fondamentale du Quarto est la suivante : "+"\n"+
-	"la pièce qu’un joueur pose à son tour de jeu est choisie par son adversaire";
+	"La rï¿½gle fondamentale du Quarto est la suivante : "+"\n"+
+	"la piï¿½ce quï¿½un joueur pose ï¿½ son tour de jeu est choisie par son adversaire";
 
 	
 	public final static String BUTTON_STARTMENU = "Dï¿½marrer une partie";
@@ -57,6 +60,7 @@ public class ViewConstante {
 	public final static String BUTTON_VSPLAYER = "Vs J2";
 	public final static String BUTTON_VSIA = "Vs IA";
 	public final static String BUTTON_RETOUR = "Retour";
+	public final static String BUTTON_RETOUR_GAME = "Reprendre";
 	public final static String BUTTON_CLASSIC = "Classique";
 	public final static String BUTTON_TOURNOI = "Tournoi";
 	public final static String BUTTON_END_OF_GAME = "Fin partie";

@@ -30,6 +30,7 @@ public class GUI implements ActionListener{
 	private Controller controller;
 	private JFrame mainFrame = new JFrame("Quarto");
 	private Component c;
+	private GameItem gameItem;
 	
 	/* CONSTRUCTEUR
 	 ************** 
@@ -53,7 +54,7 @@ public class GUI implements ActionListener{
 	public void startGame(Board board) {
 		GameItem game = new GameItem(board,controller,this); 
 		replace(game , "Quarto - Game");
-	}
+	}	
 	
 	public void startGameMode() {
 		replace(new GameModeView(this), "Quarto - Mode de Jeu");
@@ -68,7 +69,7 @@ public class GUI implements ActionListener{
 	}
 	
 	public void startRules() {
-		replace(new RulesView(this),"Quarto-Règle du jeu");
+		replace(new RulesView(this),"Quarto-Rï¿½gle du jeu");
 	}
 	
 	public void startOptions() {
@@ -79,7 +80,6 @@ public class GUI implements ActionListener{
 		mainFrame.remove(c);
 		c=actuel;
 		mainFrame.add(c);
-		
 		endOfFrame();
 	}
 	
@@ -109,6 +109,9 @@ public class GUI implements ActionListener{
 	/**
 	 * Gere les actions relatives uniquement Ã  l'interface
 	 */
+	/* (non-Javadoc)
+	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object s = e.getSource();
@@ -137,16 +140,21 @@ public class GUI implements ActionListener{
 				controller.pionSelected();
 			}
 			else if(((JButton)s).getText().equals(ViewConstante.BUTTON_REGLE) ) {
-				startRules();
-				
+				if (c instanceof GameItem) {
+					JFrame frame = new JFrame();
+					frame.add(new RulesView(null));
+					frame.setVisible(true);
+					frame.setResizable(false);
+					frame.pack();
+					frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				}
+				else {
+					startRules();
+				}
 			}
 			else if(((JButton)s).getText().equals(ViewConstante.BUTTON_OPTION) ) {
 				startOptions();
 			}
 		}
-		
 	}
-	
-	
-
 }
