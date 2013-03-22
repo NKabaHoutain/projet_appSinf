@@ -78,7 +78,12 @@ public class Game {
 	}
 
 	public void undo() {
-		board.undo(nextPlayer());	
+		if(board.lastMoveisCase()) {
+			board.undo(PlayerInGame().getNom());	
+		}
+		else {
+			board.undo(nextPlayer());
+		}
 	}
 
 

@@ -28,6 +28,7 @@ import quarto.model.Board;
 import quarto.model.Case;
 import quarto.model.Pion;
 import quarto.view.GUI;
+import quarto.view.constante.ViewConstante;
 
 public class BoardGameItem extends JPanel implements Observer{
 
@@ -53,7 +54,8 @@ public class BoardGameItem extends JPanel implements Observer{
 				board.getCase(i,j).addObserver(b);
 				b.addActionListener(controller);
 				cases.add(b);
-				b.setPreferredSize(new Dimension(120, 120));
+				b.setPreferredSize(new Dimension(ViewConstante.CASE_HEIGHT, 
+													ViewConstante.CASE_HEIGHT));
 				board.getCase(i, j).addObserver(b);
 			}	
 		}

@@ -68,6 +68,10 @@ public class BoardSideItem extends JPanel implements Observer{
 		this.add(Box.createVerticalStrut(15));
 		this.setVisible(true);
 		
+		setBorder(BorderFactory.createEmptyBorder(ViewConstante.SIZE_BORDER_GAME, 
+				ViewConstante.SIZE_BORDER_GAME, 
+				ViewConstante.SIZE_BORDER_GAME,
+				ViewConstante.SIZE_BORDER_GAME));
 	}
 
 	
@@ -80,7 +84,7 @@ public class BoardSideItem extends JPanel implements Observer{
 	@Override
 	public void update(Observable ob, Object arg) {
 		if (arg instanceof Board) {
-			undo.setEnabled(Option.isUndo() && ((Board) arg).isHistoric());
+			undo.setEnabled(Option.isUndo() && ((Board) arg).isHistoric() );
 			selectPion.setEnabled(((Board) arg).canSelectedPion());
 		}
 		if (arg instanceof String) {

@@ -18,6 +18,7 @@ import java.util.Observer;
 
 import javax.imageio.ImageIO;
 import javax.swing.AbstractButton;
+import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -31,33 +32,43 @@ import quarto.view.constante.ViewConstante;
 public class CaseItem extends JButton implements Observer{
 	
 	private final Case c;
-	private final ImageIcon img;
+	private ImageIcon img;
+	private ImageIcon imgWin;
 	
 	public CaseItem(Case caase) {
 		super();
 		c=caase;
+		
+		img = loadImage("./Ressources/Images/Game/textureCartoon.jpg");
+		imgWin = loadImage("./Ressources/Images/Game/textureCartoonRed.jpg");
+		
+		
+	}
 	
-		
-		//img = new ImageIcon("./Ressources/Images/Game/text60.jpg");		
-		
-		
+	public ImageIcon loadImage(String path) {
 		Toolkit tk = Toolkit.getDefaultToolkit();
-		Image texture = tk.getImage("./Ressources/Images/Game/textureCartoon.jpg");
-		img = new ImageIcon(tk.createImage (new FilteredImageSource ( texture.getSource(),
+		Image image = tk.getImage(path);
+		return new ImageIcon(tk.createImage (new FilteredImageSource ( image.getSource(),
 				new CropImageFilter ( c.getY()*ViewConstante.CASE_HEIGHT,c.getX()*ViewConstante.CASE_HEIGHT, ViewConstante.CASE_HEIGHT, ViewConstante.CASE_HEIGHT))));
-		
 	}
 	
 	
 	public void paintComponent(Graphics g) {
-
+		
 		super.paintComponent(g);
-        if (img == null) return;
-        g.drawImage(img.getImage(), 0, 0, getWidth(), getHeight(), this);
+		if(c.isWin()) {
+	        if (imgWin == null) return;
+	        g.drawImage(imgWin.getImage(), 0,0, getWidth(), getHeight(), this);	
+		}
+		else {
+	        if (img == null) return;
+	        g.drawImage(img.getImage(), 0,0, getWidth(), getHeight(), this);
+		}
 	    
         if(c.getPion()!=null) {	
         	g.drawImage(new ImageIcon(c.getPion().getUrlImage()).getImage(), 0, 0, getWidth(), getHeight(), this);
         }
+        
 	}
 	
 	public Case getCase() {

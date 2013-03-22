@@ -5,12 +5,14 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Stack;
 
+import quarto.view.gameView.CaseItem;
+
 
 public class Board extends Observable{
 	
 	private List<Pion> pions;
 	private Case[][] cases;
-	private Stack <Case> historicMove;
+	private Stack <Object> historicMove;
 	
 	private boolean canSelectedPion;
 	
@@ -26,7 +28,7 @@ public class Board extends Observable{
 	public Board() {
 		createPions();
 		createCase();
-		historicMove = new Stack<Case>();
+		historicMove = new Stack<Object>();
 		canSelectedPion = true;
 	}
 	/**
@@ -95,6 +97,7 @@ public class Board extends Observable{
 	}
 	
 	public void pionSelected(String player) {
+		historicMove.add(getSelectedPion());
 		canSelectedPion = false;
 		change(BoardField.CASE_ACTIVE);
 		change(this);
@@ -102,18 +105,36 @@ public class Board extends Observable{
 		
 	}
 	
+	public boolean lastMoveisCase() {
+		return historicMove.lastElement() instanceof Case;
+	}
+	
 	public void undo(String player) {
-		Case c = historicMove.pop();
-		Pion p = c.getPion();
-		c.deletePion();
-		pions.add(p);
+		if(lastMoveisCase()) {
+			caseWin = null;
+			Case c = (Case) historicMove.pop();
+			Pion p = c.getPion();
+			c.deletePion();
+			pions.add(p);
+			
+			p.setAvailable(true);
 		
-		p.setAvailable(true);
-		
-		p.change();
-		c.change();
-		selectPion(p);
-		pionSelected(player);
+			p.change();
+			c.change();
+			selectPion(p);
+			pionSelected(player);
+		}
+		else {
+			Pion p = (Pion) historicMove.pop();
+			p.setSelected(false);
+			
+			canSelectedPion=true;			
+			
+			change(this);
+			change("Joueur " + player + " joue");
+			change(BoardField.PION_ACTIF);
+			
+		}
 	}
 
 	public void change(Object s) {
@@ -172,6 +193,7 @@ public class Board extends Observable{
 		}
 		return null;
 	}
+	
 	
 	public boolean canSelectedPion() {
 		return getSelectedPion() != null && canSelectedPion;
