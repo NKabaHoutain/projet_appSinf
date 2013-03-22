@@ -62,12 +62,7 @@ public class OptionsView extends JPanel implements ActionListener{
 		undo = new JCheckBox();
 		back = new JButton(ViewConstante.BUTTON_RETOUR);
 		save = new JButton(ViewConstante.BUTTON_SAVE);
-		
-		
-		
-		
-		
-		
+		save.addActionListener(this);
 		
 		title.setFont(titleFont);
 		panelTitle.add(Box.createVerticalStrut(100));
@@ -111,6 +106,7 @@ public class OptionsView extends JPanel implements ActionListener{
 		panelButton.add(back);
 		panelButton.add(save);
 		
+		init();
 		
 		this.setPreferredSize(new Dimension(600,600));
 		this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
@@ -129,7 +125,7 @@ public class OptionsView extends JPanel implements ActionListener{
 	}
 	
 
-	private void initButton() {
+	private void init() {
 		undo.setSelected(Option.isUndo());
 	}
 
