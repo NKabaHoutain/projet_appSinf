@@ -9,7 +9,7 @@ public class ViewConstante {
 	
 	public final static Dimension preferredSize[] ={	new Dimension(350,50),
 														new Dimension(105,50),
-														new Dimension(60,20)
+														new Dimension(100,20)
 																					};
 	public final static Dimension minSize[] = 		{	new Dimension(350,50),
 														new Dimension(105,40),

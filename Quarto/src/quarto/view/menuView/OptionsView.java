@@ -2,7 +2,9 @@ package quarto.view.menuView;
 import quarto.option.Option;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -16,20 +18,21 @@ import quarto.view.constante.ViewConstante;
 public class OptionsView extends JPanel implements ActionListener{
 	
 	JPanel panelTitle;
-	JPanel centerPanel;
+	JPanel panelVolume;
+	JPanel panelTimeBy;
+	JPanel panelChrono;
+	JPanel panelUndo;
 	JPanel panelButton;
 	JLabel title;
 	Font titleFont;
 	Font textFont;
-	JLabel musicText;
-	JLabel soundEffectText;
+	JLabel soundVolumeText;
 	JLabel chronoText;
 	JLabel timeByText;
 	JLabel undoText;
-	JSlider music;
-	JSlider sfx;
+	JSlider soundVolume;
 	JCheckBox chrono;
-	JComboBox timeBy;
+	JComboBox<Integer> timeBy;
 	JCheckBox undo;
 	JButton back;
 	JButton save;
@@ -37,25 +40,31 @@ public class OptionsView extends JPanel implements ActionListener{
 	public OptionsView(GUI gui) {
 		
 		panelTitle = new JPanel();
-		centerPanel= new JPanel();
+		panelVolume= new JPanel();
+		panelTimeBy = new JPanel();
+		panelChrono = new JPanel();
+		panelUndo = new JPanel();
 		panelButton = new JPanel();
 		title =  new JLabel("Options");
 		titleFont = new Font("Serif",Font.BOLD,36);
-		textFont = new Font ("Serif",Font.PLAIN,18); 
-		musicText = new JLabel("Niveau musique",SwingConstants.CENTER);
-		soundEffectText = new JLabel("Niveau sfx",SwingConstants.CENTER);
+		textFont = new Font ("Serif",Font.PLAIN,24); 
+		
+		soundVolumeText = new JLabel("Niveau sfx",SwingConstants.CENTER);
 		chronoText = new JLabel("Activer chrono",SwingConstants.CENTER);
 		timeByText = new JLabel("Temps par tour",SwingConstants.CENTER);
 		undoText = new JLabel("Activer undo",SwingConstants.CENTER);
 		
-		music = new JSlider();
-		sfx = new JSlider();
+		
+		soundVolume = new JSlider();
+		timeBy= new JComboBox<Integer>();
+		timeBy.setPreferredSize(new Dimension(205,25));
 		chrono = new JCheckBox();
-		timeBy= new JComboBox();
 		undo = new JCheckBox();
 		back = new JButton(ViewConstante.BUTTON_RETOUR);
 		save = new JButton(ViewConstante.BUTTON_SAVE);
-		save.addActionListener(this);
+		
+		
+		
 		
 		
 		
@@ -65,33 +74,53 @@ public class OptionsView extends JPanel implements ActionListener{
 		panelTitle.add(title);
 		panelTitle.setPreferredSize(new Dimension(600,100));
 		
-		centerPanel.setLayout(new GridLayout(5,2));
-		centerPanel.add(musicText);
-		centerPanel.add(music);
-		centerPanel.add(soundEffectText);
-		centerPanel.add(sfx);
-		centerPanel.add(chronoText);
-		centerPanel.add(chrono);
-		centerPanel.add(timeByText);
-		centerPanel.add(timeBy);
-		centerPanel.add(undoText);
-		centerPanel.add(undo);
+		soundVolumeText.setFont(textFont);
+		timeByText.setFont(textFont);
+		chronoText.setFont(textFont);
+		undoText.setFont(textFont);
+		
 	
-		panelButton.setLayout(new BoxLayout(panelButton,BoxLayout.X_AXIS));
+		panelVolume.setLayout(new FlowLayout(FlowLayout.LEFT));
+		panelVolume.add(Box.createHorizontalStrut(100));
+		panelVolume.add(soundVolumeText);
+		panelVolume.add(Box.createHorizontalStrut(51));
+		panelVolume.add(soundVolume);
+		
+		panelTimeBy.setLayout(new FlowLayout(FlowLayout.LEFT));
+		panelTimeBy.add(Box.createHorizontalStrut(100));
+		panelTimeBy.add(timeByText);
+		panelTimeBy.add(Box.createHorizontalStrut(16));
+		panelTimeBy.add(timeBy);
+	
+		
+		panelChrono.setLayout(new FlowLayout(FlowLayout.LEFT));
+		panelChrono.add(Box.createHorizontalStrut(100));
+		panelChrono.add(chronoText);
+		panelChrono.add(Box.createHorizontalStrut(14));
+		panelChrono.add(chrono);
+		
+		panelUndo.setLayout(new FlowLayout(FlowLayout.LEFT));
+		panelUndo.add(Box.createHorizontalStrut(100));
+		panelUndo.add(undoText);
+		panelUndo.add(Box.createHorizontalStrut(32));
+		panelUndo.add(undo);
+	
+		panelButton.setLayout(new FlowLayout());
 		initButton(back,gui);
 		initButton(save,gui);
 		panelButton.add(back);
-		panelButton.add(Box.createHorizontalStrut(15));
 		panelButton.add(save);
-		panelButton.setPreferredSize(new Dimension(600,100));
 		
 		
 		this.setPreferredSize(new Dimension(600,600));
 		this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
 		add(panelTitle);
-		add(centerPanel);
+		add(Box.createHorizontalGlue());
+		add(panelVolume);
+		add(panelTimeBy);
+		add(panelChrono);
+		add(panelUndo);
 		add(panelButton);
-		
 	}
 	private void initButton(JButton c, GUI gui) {
 		GUI.adjustSize(c, ViewConstante.BACK );

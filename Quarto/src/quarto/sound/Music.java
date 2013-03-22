@@ -14,7 +14,7 @@ public class Music extends Thread{
 	
 	public Music() {
 		
-		File repertory = new File(Constante.PATHFILE+Constante.MUSIQUE);
+		File repertory = new File(".\\Ressources\\Musics\\03-gael_faye-ma_femme.wav");
 		File[] files= repertory.listFiles();
 	
 		musics = new Sound[files.length];
