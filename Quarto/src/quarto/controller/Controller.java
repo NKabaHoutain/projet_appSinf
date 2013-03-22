@@ -71,9 +71,7 @@ public class Controller implements ActionListener, MouseListener{
 	public void actionPerformed(ActionEvent e) {
 		Object s = e.getSource();
 			if(s instanceof CaseItem) {
-				if (game.move(((CaseItem) s).getCase())) {
-					
-				}
+				game.move(((CaseItem) s).getCase());
 				
 			}
 			
@@ -112,7 +110,4 @@ public class Controller implements ActionListener, MouseListener{
 		// TODO Auto-generated method stub
 		
 	}
-
-	
-
 }

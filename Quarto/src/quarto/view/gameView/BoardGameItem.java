@@ -35,8 +35,8 @@ public class BoardGameItem extends JPanel implements Observer{
 	private List<CaseItem> cases = new ArrayList<CaseItem>();
 	private List<PionItem> pions= new ArrayList<PionItem>();
 	
-	private JPanel list = new JPanel();
-	private JPanel grille = new JPanel();
+	private PositionPionItem list;
+	private BoardItem grille;
 	/**
 	 * Construction du plateau de jeu.
 	 * Pour chaque case et pour chaque pièce, on crée un objet bouton correspondant;
@@ -69,22 +69,28 @@ public class BoardGameItem extends JPanel implements Observer{
 		
 		setLayout(new BorderLayout());
 		
-		grille=new JPanel();
-		grille.setLayout(new GridLayout(4,4));
+		grille=new BoardItem();
+		
 		for(CaseItem b : cases)
 			grille.add(b);
 		add(grille,BorderLayout.CENTER);
-		list=new JPanel();
-		list.setLayout(new GridLayout(2,8));
-		add(list,BorderLayout.SOUTH);
+		
+		list=new PositionPionItem();
 		for(PionItem b : pions)
 			list.add(b);
+		
+		add(list,BorderLayout.SOUTH);
+		
 		
 		enableCase(false);
 		
 		this.setVisible(true);
 		
+		
+		
 	}
+	
+	
 	
 	private void enableCase(boolean b) {
 		for(CaseItem c : cases) {

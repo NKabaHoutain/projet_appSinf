@@ -1,4 +1,5 @@
 package quarto.view.menuView;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -53,6 +54,8 @@ public class GameTypeView extends JPanel {
 			back.addActionListener(gui);
 			panelButton.add(back);
 			panelButton.add(Box.createVerticalStrut(15));
+			
+			
 			
 			this.setPreferredSize(new Dimension(600,600));
 			this.setLayout(new GridLayout(2,1));

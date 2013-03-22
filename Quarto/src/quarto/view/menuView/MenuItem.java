@@ -26,7 +26,7 @@ public class MenuItem extends JPanel {
 		 */
 		panelLogo = new JPanel();
 		panelButton = new JPanel();
-		logo = ImageIO.read(new File(Constante.PATHFILE+"Images/logo_quarto.jpg"));
+		logo = ImageIO.read(new File("Ressources/Images/Menu/logo_quarto.jpg"));
 		title = new JLabel( new ImageIcon (logo));
 		start = new JButton(ViewConstante.BUTTON_STARTMENU);
 		rules = new JButton(ViewConstante.BUTTON_REGLE);

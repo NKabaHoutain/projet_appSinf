@@ -32,8 +32,6 @@ public class GameItem extends JPanel implements Observer{
 		this.add(boardGame,BorderLayout.WEST);
 		this.add(boardSide,BorderLayout.EAST);
 		this.setVisible(true);
-		
-		
 	}
 	
 	public BoardGameItem getBoardGameItem() {

@@ -23,6 +23,13 @@ public class Game {
 		return board;
 	}
 	
+	private Player PlayerInGame() {
+		if(playerOne.isInGame()) {
+			return playerOne;
+		}
+		return playerTwo;
+	}
+	
 
 	private void changeGamer()
 	{
@@ -46,8 +53,18 @@ public class Game {
 		return playerTwo;
 	}
 
-	public boolean move(Case c) {
-		return board.move(c);
+	public void move(Case c) {
+		board.move(c);
+		int statement = board.getGameStat();
+		
+		if(statement>0) {
+			System.out.println(PlayerInGame().getNom() +"WIIIIIIIIN");
+		}
+		else if(statement==0) {
+			System.out.println("NUUUUUUUUL");
+		}
+		
+		
 	}
 
 	public void selectPion(Pion p) {

@@ -29,7 +29,7 @@ public class Pion extends Observable{
 	}
 
 	public String getUrlImage() {
-		return "./Ressources/Images/Game/pellecouille.png";
+		return "./Ressources/Images/Pions/"+ toString().replace(' ', '_')+".png";
 	}
 	
 	public boolean isBlack() {
@@ -76,9 +76,9 @@ public class Pion extends Observable{
 
 	public String toString() {
 		return "" + PionField.getShortName(caract[PionField.PION_SIZE],PionField.PION_SIZE) + 
-				" " + PionField.getShortName(caract[PionField.PION_BODY],PionField.PION_BODY)+
 				" " + PionField.getShortName(caract[PionField.PION_COLOR],PionField.PION_COLOR) +
-				" " + PionField.getShortName(caract[PionField.PION_SHAPE],PionField.PION_SHAPE);
+				" " + PionField.getShortName(caract[PionField.PION_SHAPE],PionField.PION_SHAPE) +
+				" " + PionField.getShortName(caract[PionField.PION_BODY],PionField.PION_BODY);
 	}
 	
 	

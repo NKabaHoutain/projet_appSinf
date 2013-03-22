@@ -42,9 +42,9 @@ public class CaseItem extends JButton implements Observer{
 		
 		
 		Toolkit tk = Toolkit.getDefaultToolkit();
-		Image texture = tk.getImage("./Ressources/Images/Game/text600.jpg");
+		Image texture = tk.getImage("./Ressources/Images/Game/textureCartoon.jpg");
 		img = new ImageIcon(tk.createImage (new FilteredImageSource ( texture.getSource(),
-				new CropImageFilter (c.getY()*ViewConstante.CASE_HEIGHT,c.getX()*ViewConstante.CASE_HEIGHT, ViewConstante.CASE_HEIGHT, ViewConstante.CASE_HEIGHT))));
+				new CropImageFilter ( c.getY()*ViewConstante.CASE_HEIGHT,c.getX()*ViewConstante.CASE_HEIGHT, ViewConstante.CASE_HEIGHT, ViewConstante.CASE_HEIGHT))));
 		
 	}
 	

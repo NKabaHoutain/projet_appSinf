@@ -68,10 +68,11 @@ public class Board extends Observable{
 	 * 
 	 * @param c
 	 */
-	public boolean move(Case c) {
+	public void move(Case c) {
 		canSelectedPion = true;
 		Pion p = getSelectedPion();
 		c.addPion(p);
+		pions.remove(p);
 		
 		p.setSelected(false);
 		
@@ -79,8 +80,7 @@ public class Board extends Observable{
 		change(BoardField.PION_ACTIF);
 		change(this);
 		
-		
-		return winGame(c);
+		winGame(c);
 	}
 	
 	/**
@@ -106,6 +106,7 @@ public class Board extends Observable{
 		Case c = historicMove.pop();
 		Pion p = c.getPion();
 		c.deletePion();
+		pions.add(p);
 		
 		p.setAvailable(true);
 		
@@ -126,6 +127,20 @@ public class Board extends Observable{
 	/* OPERATION D'INFORMATION
 	 ************************* 
 	 */
+	
+	public int getGameStat() {
+		if(caseWin == null) {
+			if(pions == null) {
+				return 0;
+			}
+			else {
+				return -1;
+			}
+		}
+		else {
+			return 1;
+		}
+	}
 	/**
 	 * 
 	 * @param i
