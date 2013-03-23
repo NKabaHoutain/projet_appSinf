@@ -1,11 +1,17 @@
 package quarto.model;
 
+import quarto.detail.Detail;
+
 public class Game {
 	
 	private Board board;
 	private Player playerOne;
 	private Player playerTwo;
 	
+	/*
+	 * INITIALISATION
+	 **************** 
+	 */
 	/**
 	 * Constructeur
 	 * @param p1
@@ -23,6 +29,18 @@ public class Game {
 		return board;
 	}
 	
+	public void addDetail() {
+		Detail.addDetail(isVsIa(), board.getGameStat(), board.getGameTime(), board.getNumberMove());
+	}
+	
+	public boolean isVsIa() {
+		return playerTwo.isIa();
+	}
+	
+	/*
+	 * METHODE SUR LES PLAYER
+	 ************************ 
+	 */
 	private Player PlayerInGame() {
 		if(playerOne.isInGame()) {
 			return playerOne;
@@ -30,7 +48,6 @@ public class Game {
 		return playerTwo;
 	}
 	
-
 	private void changeGamer()
 	{
 		playerOne.setInGame(!playerOne.isInGame());
@@ -53,28 +70,26 @@ public class Game {
 		return playerTwo;
 	}
 
+	/*
+	 * METHODE SUR LA BOARD
+	 ********************** 
+	 */
 	public void move(Case c) {
 		board.move(c);
 		int statement = board.getGameStat();
 		
-		if(statement>0) {
-			System.out.println(PlayerInGame().getNom() +"WIIIIIIIIN");
-		}
-		else if(statement==0) {
-			System.out.println("NUUUUUUUUL");
-		}
-		
-		
-	}
-
-	public void selectPion(Pion p) {
-		board.selectPion(p);
+		//TODO start dialogue pour recommencer
 		
 	}
 
 	public void pionSelected() {
 		board.pionSelected(nextPlayer());
 		
+		//TODO start de l'IA si IA
+	}
+	
+	public void selectPion(Pion p) {
+		board.selectPion(p);
 	}
 
 	public void undo() {

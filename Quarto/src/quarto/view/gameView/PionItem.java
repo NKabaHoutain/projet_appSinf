@@ -2,14 +2,11 @@ package quarto.view.gameView;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Shape;
 import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JPanel;
 
 import quarto.model.Pion;
 
@@ -31,6 +28,13 @@ public class PionItem extends JButton implements Observer{
         if (img == null) return;
         g.drawImage(img.getImage(), 0, 0, getWidth(), getHeight(), this);
 
+        if(pion.isSelected()) {
+
+        	setBackground(Color.red);
+        }
+        else {
+        	setBackground(Color.LIGHT_GRAY);
+        }
 	}
 	
 	public Pion getPion() {

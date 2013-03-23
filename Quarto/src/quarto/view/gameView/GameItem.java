@@ -1,12 +1,7 @@
 package quarto.view.gameView;
-import java.awt.BorderLayout;
-import java.awt.Container;
-import java.awt.GridLayout;
-import java.util.Observable;
-import java.util.Observer;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
+import java.awt.BorderLayout;
+
 import javax.swing.JPanel;
 
 import quarto.controller.Controller;

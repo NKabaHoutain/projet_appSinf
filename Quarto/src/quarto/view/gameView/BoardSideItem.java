@@ -68,10 +68,12 @@ public class BoardSideItem extends JPanel implements Observer{
 		this.add(Box.createVerticalStrut(15));
 		this.setVisible(true);
 		
-		setBorder(BorderFactory.createEmptyBorder(ViewConstante.SIZE_BORDER_GAME, 
+		setBorder(BorderFactory.createEmptyBorder(0, 
 				ViewConstante.SIZE_BORDER_GAME, 
-				ViewConstante.SIZE_BORDER_GAME,
+				0,
 				ViewConstante.SIZE_BORDER_GAME));
+		
+		
 	}
 
 	

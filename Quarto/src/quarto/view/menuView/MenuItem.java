@@ -1,8 +1,8 @@
 package quarto.view.menuView;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-import quarto.constante.Constante;
 import quarto.view.GUI;
 import quarto.view.constante.ViewConstante;
 
@@ -20,13 +20,18 @@ public class MenuItem extends JPanel {
 	JButton details;
 	Image logo;
 	
-	public MenuItem(GUI gui) throws IOException {
+	public MenuItem(GUI gui) {
 		/*
 		 * Initialisation des panels
 		 */
 		panelLogo = new JPanel();
 		panelButton = new JPanel();
-		logo = ImageIO.read(new File("Ressources/Images/Menu/logo_quarto.jpg"));
+		try {
+			logo = ImageIO.read(new File("Ressources/Images/Menu/logo_quarto.jpg"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		title = new JLabel( new ImageIcon (logo));
 		start = new JButton(ViewConstante.BUTTON_STARTMENU);
 		rules = new JButton(ViewConstante.BUTTON_REGLE);

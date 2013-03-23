@@ -4,6 +4,9 @@ import java.awt.Dimension;
 
 public class ViewConstante {
 	
+	
+	
+	
 	public final static int CASE_HEIGHT = 120;
 	public final static int SIZE_BORDER_GAME = 20;
 	
@@ -54,20 +57,20 @@ public class ViewConstante {
 	"la pi�ce qu�un joueur pose � son tour de jeu est choisie par son adversaire";
 
 	
-	public final static String BUTTON_STARTMENU = "D�marrer une partie";
-	public final static String BUTTON_REGLE = "R�gles";
+	public final static String BUTTON_STARTMENU = "Start game";
+	public final static String BUTTON_REGLE = "Rules";
 	public final static String BUTTON_OPTION = "Options";
-	public final static String BUTTON_DETAIL = "D�tails";
+	public final static String BUTTON_DETAIL = "Details";
 	public final static String BUTTON_VSPLAYER = "Vs J2";
 	public final static String BUTTON_VSIA = "Vs IA";
-	public final static String BUTTON_RETOUR = "Retour";
-	public final static String BUTTON_RETOUR_GAME = "Reprendre";
-	public final static String BUTTON_CLASSIC = "Classique";
-	public final static String BUTTON_TOURNOI = "Tournoi";
-	public final static String BUTTON_END_OF_GAME = "Fin partie";
-	public final static String BUTTON_RESTART = "Recommencer";
+	public final static String BUTTON_RETOUR = "Back";
+	public final static String BUTTON_RETOUR_GAME = "Resume";
+	public final static String BUTTON_CLASSIC = "Classic";
+	public final static String BUTTON_TOURNOI = "Tournament";
+	public final static String BUTTON_END_OF_GAME = "End";
+	public final static String BUTTON_RESTART = "Restart";
 	public final static String BUTTON_UNDO = "Undo";
-	public final static String BUTTON_SAVE = "Sauver";
+	public final static String BUTTON_SAVE = "Save";
 
 	public final static String BUTTON_FULLSCREEN = "Plein �cran";
 	public final static String BUTTON_SELECT_PION = "Select";

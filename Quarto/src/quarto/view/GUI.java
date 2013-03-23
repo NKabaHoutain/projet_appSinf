@@ -2,7 +2,6 @@ package quarto.view;
 
 import java.awt.Component;
 
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -14,15 +13,12 @@ import javax.swing.JFrame;
 import quarto.controller.Controller;
 import quarto.model.Board;
 import quarto.view.constante.ViewConstante;
-import quarto.view.gameView.BoardGameItem;
-import quarto.view.gameView.CaseItem;
 import quarto.view.gameView.GameItem;
 import quarto.view.menuView.GameModeView;
 import quarto.view.menuView.GameTypeView;
 import quarto.view.menuView.MenuItem;
 import quarto.view.menuView.OptionsView;
 import quarto.view.menuView.RulesView;
-import quarto.view.gameView.BoardSideItem;
 
 
 public class GUI implements ActionListener{
@@ -60,7 +56,7 @@ public class GUI implements ActionListener{
 		replace(new GameModeView(this), "Quarto - Mode de Jeu");
 	}
 	
-	public void startMenu() throws IOException {
+	public void startMenu(){
 		replace(new MenuItem(this), "Quarto");
 	}
 	
@@ -124,15 +120,15 @@ public class GUI implements ActionListener{
 				startGameType();
 			}
 			else if(((JButton) s).getText().equals(ViewConstante.BUTTON_VSPLAYER) ) {
-				controller.startGame();
+				controller.startGame(false);
+			}
+			else if (((JButton) s).getText().equals(ViewConstante.BUTTON_VSIA) ) {
+				controller.startGame(true);
 			}
 			else if(((JButton) s).getText().equals(ViewConstante.BUTTON_RETOUR) ||
 					((JButton) s).getText().equals(ViewConstante.BUTTON_SAVE) ) {
-				try {
-					startMenu();
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
+				
+				startMenu();
 			}
 			else if(((JButton) s).getText().equals(ViewConstante.BUTTON_UNDO) ) {
 				controller.undo();
@@ -155,6 +151,10 @@ public class GUI implements ActionListener{
 			}
 			else if(((JButton)s).getText().equals(ViewConstante.BUTTON_OPTION) ) {
 				startOptions();
+			}
+			
+			else if (((JButton)s).getText().equals(ViewConstante.BUTTON_END_OF_GAME) ) {
+				controller.endOfGame();
 			}
 		}
 	}

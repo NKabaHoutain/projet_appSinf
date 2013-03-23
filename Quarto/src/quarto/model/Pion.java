@@ -29,7 +29,7 @@ public class Pion extends Observable{
 	}
 
 	public String getUrlImage() {
-		return "./Ressources/Images/Pions/"+ toString().replace(' ', '_')+".png";
+		return Constante.getPathPion() + toString().replace(' ', '_') + ".png";
 	}
 	
 	public boolean isBlack() {

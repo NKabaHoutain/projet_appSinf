@@ -7,6 +7,8 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
+import quarto.constante.Constante;
+import quarto.option.Option;
 import quarto.view.constante.ViewConstante;
 
 public class BoardItem extends JPanel{
@@ -22,7 +24,7 @@ public class BoardItem extends JPanel{
 
 	public void paintComponent(Graphics g) {
 		
-		ImageIcon img = new ImageIcon("./Ressources/Images/Game/textureCartoonBlur.jpg");
+		ImageIcon img = new ImageIcon(Constante.getPathTheme(Option.getTheme()) + Constante.BORDER);
 
 		super.paintComponent(g);
         if (img == null) return;
