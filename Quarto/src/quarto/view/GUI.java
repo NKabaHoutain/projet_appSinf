@@ -18,9 +18,9 @@ import quarto.view.gameView.BoardGameItem;
 import quarto.view.gameView.CaseItem;
 import quarto.view.gameView.GameItem;
 import quarto.view.menuView.GameModeView;
-import quarto.view.menuView.GameTypeView;
 import quarto.view.menuView.MenuItem;
 import quarto.view.menuView.OptionsView;
+import quarto.view.menuView.PlayersInfoView;
 import quarto.view.menuView.RulesView;
 import quarto.view.gameView.BoardSideItem;
 
@@ -29,6 +29,7 @@ public class GUI implements ActionListener{
 	
 	private Controller controller;
 	private JFrame mainFrame = new JFrame("Quarto");
+	private PlayersInfoView dialog = null;
 	private Component c;
 	private GameItem gameItem;
 	
@@ -64,9 +65,7 @@ public class GUI implements ActionListener{
 		replace(new MenuItem(this), "Quarto");
 	}
 	
-	public void startGameType() {
-		replace(new GameTypeView(this), "Quarto - Type de partie");
-	}
+	
 	
 	public void startRules() {
 		replace(new RulesView(this),"Quarto-R�gle du jeu");
@@ -74,6 +73,10 @@ public class GUI implements ActionListener{
 	
 	public void startOptions() {
 		replace(new OptionsView(this),"Quarto-Options");
+	}
+	
+	public PlayersInfoView startPlayersInfo() {
+		return new PlayersInfoView(this);
 	}
 	
 	private void replace(Component actuel, String newName) {
@@ -109,9 +112,7 @@ public class GUI implements ActionListener{
 	/**
 	 * Gere les actions relatives uniquement à l'interface
 	 */
-	/* (non-Javadoc)
-	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-	 */
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object s = e.getSource();
@@ -120,11 +121,15 @@ public class GUI implements ActionListener{
 			if( ((JButton) s).getText().equals(ViewConstante.BUTTON_STARTMENU)) {
 				startGameMode();
 			}
-			else if(((JButton) s).getText().equals(ViewConstante.BUTTON_CLASSIC)  ) {
-				startGameType();
-			}
 			else if(((JButton) s).getText().equals(ViewConstante.BUTTON_VSPLAYER) ) {
+				 dialog = startPlayersInfo();
+			}
+			else if(((JButton )s).getText().equals(ViewConstante.BUTTON_START) ){
+				dialog.dispose();
 				controller.startGame();
+			}
+			else if(((JButton) s).getText().equals(ViewConstante.BUTTON_CANCEL)) {
+				dialog.dispose();
 			}
 			else if(((JButton) s).getText().equals(ViewConstante.BUTTON_RETOUR) ||
 					((JButton) s).getText().equals(ViewConstante.BUTTON_SAVE) ) {

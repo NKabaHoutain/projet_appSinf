@@ -23,15 +23,28 @@ public class OptionsView extends JPanel implements ActionListener{
 	JPanel panelChrono;
 	JPanel panelUndo;
 	JPanel panelButton;
+	JPanel panelLvl;
+	JPanel panelSound;
 	JLabel title;
 	Font titleFont;
 	Font textFont;
 	JLabel soundVolumeText;
+	JLabel musicText;
+	JLabel sfxText;
 	JLabel chronoText;
+	JLabel levelText;
+	JLabel easyText;
+	JLabel mediumText;
+	JLabel hardText;
 	JLabel timeByText;
 	JLabel undoText;
-	JSlider soundVolume;
+	JSlider soundVolume; 
+	JCheckBox music;
+	JCheckBox sfx;
 	JCheckBox chrono;
+	JCheckBox easy;
+	JCheckBox medium;
+	JCheckBox hard;
 	JComboBox<Integer> timeBy;
 	JCheckBox undo;
 	JButton back;
@@ -45,6 +58,9 @@ public class OptionsView extends JPanel implements ActionListener{
 		panelChrono = new JPanel();
 		panelUndo = new JPanel();
 		panelButton = new JPanel();
+		panelLvl = new JPanel();
+		panelSound = new JPanel();
+		
 		title =  new JLabel("Options");
 		titleFont = new Font("Serif",Font.BOLD,36);
 		textFont = new Font ("Serif",Font.PLAIN,24); 
@@ -53,6 +69,13 @@ public class OptionsView extends JPanel implements ActionListener{
 		chronoText = new JLabel("Activer chrono",SwingConstants.CENTER);
 		timeByText = new JLabel("Temps par tour",SwingConstants.CENTER);
 		undoText = new JLabel("Activer undo",SwingConstants.CENTER);
+		musicText = new JLabel("Musique:",SwingConstants.CENTER);
+		sfxText = new JLabel("sfx:",SwingConstants.CENTER);
+		levelText = new JLabel("Niveau: ",SwingConstants.CENTER);
+		easyText = new JLabel("Facile",SwingConstants.CENTER);
+		mediumText = new JLabel("Medium",SwingConstants.CENTER);
+		hardText = new JLabel("Difficile",SwingConstants.CENTER);
+		
 		
 		
 		soundVolume = new JSlider();
@@ -60,12 +83,13 @@ public class OptionsView extends JPanel implements ActionListener{
 		timeBy.setPreferredSize(new Dimension(205,25));
 		chrono = new JCheckBox();
 		undo = new JCheckBox();
+		music = new JCheckBox();
+		sfx = new JCheckBox();
+		easy = new JCheckBox();
+		medium = new JCheckBox();
+		hard = new JCheckBox();
 		back = new JButton(ViewConstante.BUTTON_RETOUR);
 		save = new JButton(ViewConstante.BUTTON_SAVE);
-		
-		
-		
-		
 		
 		
 		
@@ -75,9 +99,15 @@ public class OptionsView extends JPanel implements ActionListener{
 		panelTitle.setPreferredSize(new Dimension(600,100));
 		
 		soundVolumeText.setFont(textFont);
+		musicText.setFont(textFont);
+		sfxText.setFont(textFont);
 		timeByText.setFont(textFont);
 		chronoText.setFont(textFont);
 		undoText.setFont(textFont);
+		levelText.setFont(textFont);
+		easyText.setFont(textFont);
+		mediumText.setFont(textFont);
+		hardText.setFont(textFont);
 		
 	
 		panelVolume.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -85,6 +115,24 @@ public class OptionsView extends JPanel implements ActionListener{
 		panelVolume.add(soundVolumeText);
 		panelVolume.add(Box.createHorizontalStrut(51));
 		panelVolume.add(soundVolume);
+		
+		panelSound.setLayout(new FlowLayout(FlowLayout.LEFT));
+		panelSound.add(Box.createHorizontalStrut(100));
+		panelSound.add(musicText);
+		panelSound.add(music);
+		panelSound.add(Box.createHorizontalStrut(10));
+		panelSound.add(sfxText);
+		panelSound.add(sfx);
+		
+		panelLvl.setLayout(new FlowLayout(FlowLayout.LEFT));
+		panelLvl.add(Box.createHorizontalStrut(100));
+		panelLvl.add(levelText);
+		panelLvl.add(easyText);
+		panelLvl.add(easy);
+		panelLvl.add(mediumText);
+		panelLvl.add(medium);
+		panelLvl.add(hardText);
+		panelLvl.add(hard);
 		
 		panelTimeBy.setLayout(new FlowLayout(FlowLayout.LEFT));
 		panelTimeBy.add(Box.createHorizontalStrut(100));
@@ -117,7 +165,9 @@ public class OptionsView extends JPanel implements ActionListener{
 		add(panelTitle);
 		add(Box.createHorizontalGlue());
 		add(panelVolume);
+		add(panelSound);
 		add(panelTimeBy);
+		add(panelLvl);
 		add(panelChrono);
 		add(panelUndo);
 		add(panelButton);

@@ -14,7 +14,8 @@ public class GameModeView extends JPanel{
 	JPanel panelTitle;
 	JLabel title;
 	Font fontTitle;
-	JButton classic;
+	JButton vsIA;
+	JButton vsJ2;
 	JButton tournament;
 	JButton back;
 	
@@ -24,7 +25,8 @@ public class GameModeView extends JPanel{
 		panelTitle = new JPanel();
 		title = new JLabel("Mode de Jeu");
 		fontTitle = new Font("Serif",Font.BOLD,36);
-		classic = new JButton(ViewConstante.BUTTON_CLASSIC);
+		vsIA = new JButton(ViewConstante.BUTTON_VSIA);
+		vsJ2 = new JButton(ViewConstante.BUTTON_VSPLAYER);
 		tournament = new JButton(ViewConstante.BUTTON_TOURNOI);
 		back = new JButton(ViewConstante.BUTTON_RETOUR);
 		
@@ -41,12 +43,14 @@ public class GameModeView extends JPanel{
 		panelButton.setPreferredSize(new Dimension(500,550));
 		
 		
-		initButton(classic, gui);
+		initButton(vsJ2, gui);
+		initButton(vsIA,gui);
 		initButton(tournament,gui);
 		
-		panelButton.add(classic);
+		panelButton.add(vsJ2);
 		panelButton.add(Box.createRigidArea(ViewConstante.space[ViewConstante.GAMEMODE]));
-		
+		panelButton.add(vsIA);
+		panelButton.add(Box.createRigidArea(ViewConstante.space[ViewConstante.GAMEMODE]));
 		panelButton.add(tournament);
 		panelButton.add(Box.createHorizontalStrut(20));
 		
