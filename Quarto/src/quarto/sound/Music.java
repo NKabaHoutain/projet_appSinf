@@ -14,7 +14,10 @@ public class Music extends Thread{
 	
 	public Music() {
 		
+
 		File repertory = new File(".\\Ressources\\Musics\\");
+		//File repertory = new File("./Ressources/Musics/");
+		
 		File[] files= repertory.listFiles();
 	
 		musics = new Sound[files.length];

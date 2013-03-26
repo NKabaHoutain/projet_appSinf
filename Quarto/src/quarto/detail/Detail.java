@@ -1,33 +1,34 @@
 package quarto.detail;
 
-import java.sql.Time;
+import java.io.File;
+
+import quarto.constante.Constante;
+import quarto.option.Option;
+
+
 
 public class Detail {
 
-	private static int numberWinGame;
-	private static int numberLoseGame;
-	private static int numberDrawGame;
+	private static int[][] numberGame;
 	
-	private static Time gameTime;
-	private static Time minTimeInGame;
-	private static Time maxTimeInGame;
+	private static long gameTime;
+	private static long minTimeInGame;
+	private static long maxTimeInGame;
 	
 	private static int minMoveInGame;
 	private static int maxMoveInGame;
 		
-	public static void  addWinGame() {
-		numberWinGame++;
+	public static void addDetail(boolean isVsIa, int resultGame, long time, int move) {
+		if(isVsIa) {
+			numberGame[resultGame][Option.getGameLevel()] ++;
+		}
+		moveInGame(move);
+		gameTime(time);
+		
+		saveDetail();
 	}
 	
-	public static void  addLoseGame() {
-		numberLoseGame++;
-	}
-	
-	public static void  addDrawGame() {
-		numberDrawGame++;
-	}
-	
-	public static void moveInGame(int move) {
+	private static void moveInGame(int move) {
 		if(move<minMoveInGame) {
 			minMoveInGame = move;
 		}
@@ -36,11 +37,24 @@ public class Detail {
 		}
 	}
 	
-	public static void gameTime(Time time) {
-		
-		
-		if(time.compareTo(minTimeInGame)<0) {
+	private static void gameTime(long time) {
+		if(time < minTimeInGame) {
 			minTimeInGame = time;
 		}
+		
+		if(time > maxTimeInGame) {
+			maxTimeInGame = time;
+		}
+		
+		gameTime+= time;
+	}
+	
+	public static void loadDetail() {
+		File file = new File(Constante.getPathDetail());
+		
+	}
+	
+	private static void saveDetail() {
+		
 	}
 }

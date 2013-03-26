@@ -5,16 +5,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
-import java.util.Timer;
 
-import quarto.model.Case;
+import quarto.detail.Detail;
 import quarto.model.Game;
-import quarto.model.Pion;
 import quarto.model.Player;
-import quarto.sound.Audio;
 import quarto.sound.Music;
 import quarto.view.GUI;
-import quarto.view.gameView.BoardGameItem;
 import quarto.view.gameView.CaseItem;
 import quarto.view.gameView.PionItem;
 
@@ -32,6 +28,7 @@ public class Controller implements ActionListener, MouseListener{
 	 * @throws IOException
 	 */
 	public Controller() throws IOException {
+		Detail.loadDetail();
 		gui = new GUI(this);
 		music = new Music();
 		music.start();
@@ -43,13 +40,11 @@ public class Controller implements ActionListener, MouseListener{
 	/**
 	 * Démarre une partie
 	 */
-	public void startGame(){
+	public void startGame(boolean vsIa){
 		
-		game = new Game(new Player("Nico"), new Player("Kaba"));
+		game = new Game(new Player("Nico", false), new Player("Kaba", vsIa));
 		
 		gui.startGame(game.getBoard());
-		
-		
 	}
 	/**
 	 * Joue un coup en arrière dans la board
@@ -62,6 +57,11 @@ public class Controller implements ActionListener, MouseListener{
 		if(game.getBoard().getSelectedPion() != null) {
 			game.pionSelected();
 		}
+	}
+	
+	public void endOfGame() {
+		game.addDetail();
+		gui.startMenu();
 	}
 	
 	/**

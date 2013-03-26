@@ -3,11 +3,19 @@ package quarto.option;
 public class Option {
 	private static int volumeMusic;
 	private static int volumeEffects;
-	private static boolean undo;
+	private static boolean undo = true;
 	private static int timeByTurn;
 	private static boolean chrono;
 	private static int gameLevel;
+	private static int theme;
 	
+	
+	public static int getTheme() {
+		return theme;
+	}
+	public static void setTheme(int theme) {
+		Option.theme = theme;
+	}
 	public static int getVolumeMusic() {
 		return volumeMusic;
 	}

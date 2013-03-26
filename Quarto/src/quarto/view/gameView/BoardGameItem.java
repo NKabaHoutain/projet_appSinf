@@ -1,33 +1,19 @@
 package quarto.view.gameView;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.GridLayout;
-import java.awt.Image;
-import java.awt.PopupMenu;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 
-import quarto.constante.Constante;
 import quarto.controller.Controller;
 import quarto.model.Board;
-import quarto.model.Case;
 import quarto.model.Pion;
-import quarto.view.GUI;
+import quarto.view.constante.ViewConstante;
 
 public class BoardGameItem extends JPanel implements Observer{
 
@@ -53,7 +39,8 @@ public class BoardGameItem extends JPanel implements Observer{
 				board.getCase(i,j).addObserver(b);
 				b.addActionListener(controller);
 				cases.add(b);
-				b.setPreferredSize(new Dimension(120, 120));
+				b.setPreferredSize(new Dimension(ViewConstante.CASE_HEIGHT, 
+													ViewConstante.CASE_HEIGHT));
 				board.getCase(i, j).addObserver(b);
 			}	
 		}

@@ -5,17 +5,20 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Stack;
 
+import quarto.constante.Constante;
+
 
 public class Board extends Observable{
 	
 	private List<Pion> pions;
 	private Case[][] cases;
-	private Stack <Case> historicMove;
-	
+	private Stack <Object> historicMove;
 	private boolean canSelectedPion;
-	
 	private Case caseWin;
 	private int constante;
+	
+	private long timeStart;
+	
 	
 	/* INITIALISATION
 	 ****************
@@ -26,8 +29,11 @@ public class Board extends Observable{
 	public Board() {
 		createPions();
 		createCase();
-		historicMove = new Stack<Case>();
+		historicMove = new Stack<Object>();
 		canSelectedPion = true;
+		
+		timeStart = System.currentTimeMillis();
+		
 	}
 	/**
 	 * Crée les pions de la board
@@ -65,26 +71,47 @@ public class Board extends Observable{
 	 ************************ 
 	 */
 	/**
-	 * 
+	 * Bouge le pion selectionné sur la case 
+	 * Deselectionne le pion
+	 * Retire le pion de la liste
 	 * @param c
 	 */
 	public void move(Case c) {
-		canSelectedPion = true;
 		Pion p = getSelectedPion();
 		c.addPion(p);
 		pions.remove(p);
-		
 		p.setSelected(false);
 		
-		historicMove.push(c);
-		change(BoardField.PION_ACTIF);
-		change(this);
+		endOfAction(c, BoardField.PION_ACTIF, null);
 		
 		winGame(c);
 	}
 	
 	/**
 	 * 
+	 * @param player
+	 */
+	public void pionSelected(String player) {
+		endOfAction(getSelectedPion(), BoardField.CASE_ACTIVE, "Joueur " + player + " joue");
+	}
+	
+	/**
+	 * Change le moment de la partie, cad alterne entre selection de pion et pose de pion
+	 * puis met à jour l'interface
+	 * 
+	 * @param typeChange
+	 * @param msg
+	 */
+	private void endOfAction(Object o, boolean typeChange, String msg) {
+		historicMove.push(o);
+		canSelectedPion = !canSelectedPion;
+		change(typeChange);
+		change(this);
+		change(msg);
+	}
+	
+	/**
+	 * Selectionne le pion et deselectionne les autres puis met à jour l'interface
 	 * @param pion
 	 */
 	public void selectPion(Pion pion) {
@@ -93,33 +120,51 @@ public class Board extends Observable{
 		}
 		change(this);
 	}
-	
-	public void pionSelected(String player) {
-		canSelectedPion = false;
-		change(BoardField.CASE_ACTIVE);
-		change(this);
-		change("Joueur " + player + " joue");
-		
+	/**
+	 * 
+	 * @return
+	 */
+	public boolean lastMoveisCase() {
+		return historicMove.lastElement() instanceof Case;
 	}
 	
+	/**
+	 * 
+	 * @param player
+	 */
 	public void undo(String player) {
-		Case c = historicMove.pop();
-		Pion p = c.getPion();
-		c.deletePion();
-		pions.add(p);
+		if(lastMoveisCase()) {
+			caseWin = null;
+			Case c = (Case) historicMove.pop();
+			Pion p = c.getPion();
+			c.deletePion();
+			pions.add(p);
+			
+			p.setAvailable(true);
 		
-		p.setAvailable(true);
-		
-		p.change();
-		c.change();
-		selectPion(p);
-		pionSelected(player);
+			p.change();
+			c.change();
+			selectPion(p);
+			pionSelected(player);
+			
+			historicMove.pop();
+		}
+		else {
+			Pion p = (Pion) historicMove.pop();
+			p.setSelected(false);
+			
+			canSelectedPion=true;			
+			
+			change(this);
+			change("Joueur " + player + " joue");
+			change(BoardField.PION_ACTIF);
+			
+		}
 	}
 
 	public void change(Object s) {
 		setChanged();
 		this.notifyObservers(s);
-		
 		clearChanged();
 	}
 	
@@ -129,17 +174,25 @@ public class Board extends Observable{
 	 */
 	
 	public int getGameStat() {
-		if(caseWin == null) {
-			if(pions == null) {
-				return 0;
-			}
-			else {
-				return -1;
-			}
+		if(caseWin != null) {
+			return Constante.WINGAME;
 		}
 		else {
-			return 1;
+			return Constante.DRAWGAME;
 		}
+	}
+	
+	public int getNumberMove() {
+		if(lastMoveisCase()) {
+			return historicMove.size()/2;
+		}
+		else {
+			return historicMove.size()-1 /1;
+		}
+	}
+	
+	public long getGameTime() {
+		return System.currentTimeMillis()-timeStart;
 	}
 	/**
 	 * 

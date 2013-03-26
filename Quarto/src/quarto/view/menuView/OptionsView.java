@@ -1,12 +1,10 @@
 package quarto.view.menuView;
+
 import quarto.option.Option;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -63,7 +61,7 @@ public class OptionsView extends JPanel implements ActionListener{
 		
 		title =  new JLabel("Options");
 		titleFont = new Font("Serif",Font.BOLD,36);
-		textFont = new Font ("Serif",Font.PLAIN,24); 
+		textFont = new Font ("Serif",Font.PLAIN,18); 
 		
 		soundVolumeText = new JLabel("Niveau sfx",SwingConstants.CENTER);
 		chronoText = new JLabel("Activer chrono",SwingConstants.CENTER);
@@ -90,8 +88,8 @@ public class OptionsView extends JPanel implements ActionListener{
 		hard = new JCheckBox();
 		back = new JButton(ViewConstante.BUTTON_RETOUR);
 		save = new JButton(ViewConstante.BUTTON_SAVE);
-		
-		
+
+		save.addActionListener(this);
 		
 		title.setFont(titleFont);
 		panelTitle.add(Box.createVerticalStrut(100));
@@ -159,6 +157,7 @@ public class OptionsView extends JPanel implements ActionListener{
 		panelButton.add(back);
 		panelButton.add(save);
 		
+		init();
 		
 		this.setPreferredSize(new Dimension(600,600));
 		this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
@@ -179,7 +178,7 @@ public class OptionsView extends JPanel implements ActionListener{
 	}
 	
 
-	private void initButton() {
+	private void init() {
 		undo.setSelected(Option.isUndo());
 	}
 
