@@ -15,11 +15,30 @@ public class Constante {
 	/*
 	 * Constante des details
 	 */
+	public static final String GAMESTAT[] = { 	"LoseGame",
+												"DrawGame",
+												"WinGame"		};
 	public static final int LOSEGAME = 0;
 	public static final int DRAWGAME = 1;
 	public static final int WINGAME = 2;
 	
+	/*
+	 * Constante des times
+	 */ 
+	public static final String GAMETIME[] = {	"totalTime",
+												"minTime",
+												"maxTime"		};
+	public static final int TOTAL_TIME = 0;
+	public static final int MIN_TIME = 1;
+	public static final int MAX_TIME = 2;
 	
+	/*
+	 * Constante des moves
+	 */
+	public static final String GAMEMOVES[] = {		"maxMove",
+													"minMove" 		};
+	public static final int MAX_MOVE = 0;
+	public static final int MIN_MOVE = 1;
 
 	/*
 	 * Constante de la music

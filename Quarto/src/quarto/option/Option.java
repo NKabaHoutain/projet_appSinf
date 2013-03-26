@@ -7,7 +7,7 @@ public class Option {
 	private static int timeByTurn;
 	private static boolean chrono;
 	private static int gameLevel;
-	private static int theme;
+	private static int theme=1;
 	
 	
 	public static int getTheme() {
