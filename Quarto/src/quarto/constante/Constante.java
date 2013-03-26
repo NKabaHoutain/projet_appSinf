@@ -12,6 +12,10 @@ public class Constante {
 	public static final int LVL_MEDIUM = 1;
 	public static final int LVL_HARD = 2;
 	
+	public static final boolean VSIA = true;
+	public static final boolean VSPLAYER = false;
+	
+
 	/*
 	 * Constante des details
 	 */
@@ -21,7 +25,6 @@ public class Constante {
 	public static final int LOSEGAME = 0;
 	public static final int DRAWGAME = 1;
 	public static final int WINGAME = 2;
-	
 	/*
 	 * Constante des times
 	 */ 
@@ -40,10 +43,8 @@ public class Constante {
 	public static final int MAX_MOVE = 0;
 	public static final int MIN_MOVE = 1;
 
-	/*
-	 * Constante de la music
-	 */
-	public static boolean PlayMusic = false;
+	public static boolean PlayMusic = true;
+
 	
 	/*
 	 * Constante des path
