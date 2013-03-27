@@ -13,6 +13,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import quarto.view.GUI;
+import quarto.view.button.BackButton;
 import quarto.view.constante.ViewConstante;
 
 public class OptionsView extends JPanel implements ActionListener,ChangeListener{
@@ -47,6 +48,7 @@ public class OptionsView extends JPanel implements ActionListener,ChangeListener
 	JCheckBox hard;
 	JComboBox<Integer> timeBy;
 	JCheckBox undo;
+	
 	JButton back;
 	JButton save;
 	
@@ -90,12 +92,15 @@ public class OptionsView extends JPanel implements ActionListener,ChangeListener
 		easy = new JCheckBox();
 		medium = new JCheckBox();
 		hard = new JCheckBox();
+
 		back = new JButton(ViewConstante.BUTTON_RETOUR);
 		save = new JButton(ViewConstante.BUTTON_SAVE);
 		
 		soundVolume.addChangeListener(this);
 		soundVolume.setMajorTickSpacing(10);
 		soundVolume.setPaintTicks(true);
+
+	
 		save.addActionListener(this);
 		
 		
@@ -160,8 +165,6 @@ public class OptionsView extends JPanel implements ActionListener,ChangeListener
 		panelUndo.add(undo);
 	
 		panelButton.setLayout(new FlowLayout());
-		initButton(back,gui);
-		initButton(save,gui);
 		panelButton.add(back);
 		panelButton.add(save);
 		
@@ -179,13 +182,7 @@ public class OptionsView extends JPanel implements ActionListener,ChangeListener
 		add(panelUndo);
 		add(panelButton);
 	}
-	private void initButton(JButton c, GUI gui) {
-		GUI.adjustSize(c, ViewConstante.BACK );
-		c.addActionListener(gui);
-		GUI.initElement(c);
-	}
 	
-
 	private void init() {
 		undo.setSelected(Option.isUndo());
 	}

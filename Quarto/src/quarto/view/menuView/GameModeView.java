@@ -8,6 +8,8 @@ import java.awt.GridLayout;
 import javax.swing.*;
 
 import quarto.view.GUI;
+import quarto.view.button.BackButton;
+import quarto.view.button.MenuButton;
 import quarto.view.constante.ViewConstante;
 
 public class GameModeView extends JPanel{
@@ -15,10 +17,11 @@ public class GameModeView extends JPanel{
 	JPanel panelTitle;
 	JLabel title;
 	Font fontTitle;
-	JButton vsIA;
-	JButton vsJ2;
-	JButton tournament;
-	JButton back;
+	MenuButton vsIA;
+	MenuButton vsJ2;
+	MenuButton tournament;
+	
+	BackButton back;
 	
 	public GameModeView(GUI gui) {
 		
@@ -26,10 +29,11 @@ public class GameModeView extends JPanel{
 		panelTitle = new JPanel();
 		title = new JLabel("Mode de Jeu");
 		fontTitle = new Font("Serif",Font.BOLD,36);
-		vsIA = new JButton(ViewConstante.BUTTON_VSIA);
-		vsJ2 = new JButton(ViewConstante.BUTTON_VSPLAYER);
-		tournament = new JButton(ViewConstante.BUTTON_TOURNOI);
-		back = new JButton(ViewConstante.BUTTON_RETOUR);
+		vsIA = new MenuButton(ViewConstante.BUTTON_VSIA, gui, ViewConstante.GAMEMODE );
+		vsJ2 = new MenuButton(ViewConstante.BUTTON_VSPLAYER, gui, ViewConstante.GAMEMODE );
+		tournament = new MenuButton(ViewConstante.BUTTON_TOURNOI, gui, ViewConstante.GAMEMODE );
+		
+		back = new BackButton(ViewConstante.BUTTON_RETOUR, gui, ViewConstante.BACK );
 		
 		title.setFont(fontTitle);
 		title.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -44,9 +48,6 @@ public class GameModeView extends JPanel{
 		panelButton.setPreferredSize(new Dimension(500,550));
 		
 		
-		initButton(vsJ2, gui);
-		initButton(vsIA,gui);
-		initButton(tournament,gui);
 		
 		panelButton.add(vsJ2);
 		panelButton.add(Box.createRigidArea(ViewConstante.space[ViewConstante.GAMEMODE]));
@@ -55,9 +56,6 @@ public class GameModeView extends JPanel{
 		panelButton.add(tournament);
 		panelButton.add(Box.createHorizontalStrut(20));
 		
-		back.setPreferredSize(new Dimension(35,20));
-		GUI.initElement(back);
-		back.addActionListener(gui);
 		panelButton.add(back);
 		panelButton.add(Box.createVerticalStrut(15));
 		
@@ -67,12 +65,4 @@ public class GameModeView extends JPanel{
 		this.add(panelButton,Component.CENTER_ALIGNMENT);
 		this.setVisible(true);
 	}	
-	
-	private void initButton(JButton c, GUI gui) {
-		GUI.adjustSize(c, ViewConstante.GAMEMODE );
-
-		c.addActionListener(gui);
-		
-		GUI.initElement(c);
-	}
 }

@@ -1,5 +1,6 @@
 package quarto.view.menuView;
 
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 
@@ -10,6 +11,7 @@ import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 
 import quarto.view.GUI;
+import quarto.view.button.BackButton;
 import quarto.view.constante.ViewConstante;
 
 public class RulesView extends JPanel {
@@ -20,7 +22,7 @@ public class RulesView extends JPanel {
 	JPanel panelText;
 	JTextPane rules;
 	JPanel panelButton;
-	JButton back;
+	BackButton back;
 	
 	public RulesView(GUI gui){
 		
@@ -30,7 +32,7 @@ public class RulesView extends JPanel {
 		title = new JLabel(ViewConstante.BUTTON_REGLE);
 		fontTitle = new Font("Sherif",Font.BOLD,36);
 		rules = new JTextPane();
-		back = new JButton(ViewConstante.BUTTON_RETOUR);
+		back = new BackButton(ViewConstante.BUTTON_RETOUR, gui, ViewConstante.BACK);
 		
 		
 		this.setPreferredSize(new Dimension(600,600));
@@ -51,15 +53,12 @@ public class RulesView extends JPanel {
 				
 		rules.setEditable(false);
 		
-		
-		
-		GUI.initElement(title);
-		GUI.initElement(rules);
+		initElement(title);
+		initElement(rules);
 		
 		panelTitle.add(title);
 		panelText.add(rules);
 		if(gui!= null) {
-			initButton(back, gui);
 			panelButton.add(back);
 		}
 		
@@ -72,12 +71,10 @@ public class RulesView extends JPanel {
 		add(Box.createVerticalStrut(15));
 		
 	}
-	private void initButton(JButton c, GUI gui) {
-		GUI.adjustSize(c, ViewConstante.BACK );
-
-		c.addActionListener(gui);
-		
-		GUI.initElement(c);
+	
+	public static void initElement(JComponent c) {
+		c.setAlignmentX(Component.CENTER_ALIGNMENT);
+		c.setAlignmentY(Component.CENTER_ALIGNMENT);
 	}
 
 }

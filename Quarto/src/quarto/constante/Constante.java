@@ -63,6 +63,7 @@ public class Constante {
 	
 	public final static String PATH_DETAIL = "Details.txt";
 	
+	public final static String LOGO = "logo_quarto.jpg";
 	public final static String PLATEAU = "board.jpg";
 	public final static String PLATEAUWIN = "boardRed.jpg";
 	public final static String BORDER = "boardBlur.jpg";
@@ -87,4 +88,7 @@ public class Constante {
 		return PATH_RESSOURCE + PATH_DETAIL;
 	}
 	
+	public static String getPathLogo() {
+		return PATH_RESSOURCE + PATH_IMAGES +  PATH_MENU + LOGO;
+	}
 }

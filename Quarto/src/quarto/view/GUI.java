@@ -102,17 +102,6 @@ public class GUI implements ActionListener{
 		return mainFrame;
 	}
 	
-	public static void adjustSize(Component c, int constante) {
-		c.setMinimumSize(ViewConstante.minSize[constante]);
-		c.setMaximumSize(ViewConstante.maxSize[constante]);
-		c.setPreferredSize(ViewConstante.preferredSize[constante]);
-	}
-	
-	public static void initElement(JComponent c) {
-		c.setAlignmentX(Component.CENTER_ALIGNMENT);
-		c.setAlignmentY(Component.CENTER_ALIGNMENT);
-	}
-	
 	/**
 	 * Gere les actions relatives uniquement à l'interface
 	 */
