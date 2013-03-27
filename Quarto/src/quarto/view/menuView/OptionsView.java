@@ -9,11 +9,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import quarto.view.GUI;
 import quarto.view.constante.ViewConstante;
 
-public class OptionsView extends JPanel implements ActionListener{
+public class OptionsView extends JPanel implements ActionListener,ChangeListener{
 	
 	JPanel panelTitle;
 	JPanel panelVolume;
@@ -48,6 +50,8 @@ public class OptionsView extends JPanel implements ActionListener{
 	JButton back;
 	JButton save;
 	
+	int vol;
+	
 	public OptionsView(GUI gui) {
 		
 		panelTitle = new JPanel();
@@ -76,7 +80,7 @@ public class OptionsView extends JPanel implements ActionListener{
 		
 		
 		
-		soundVolume = new JSlider();
+		soundVolume = new JSlider(JSlider.HORIZONTAL,0,100,50);
 		timeBy= new JComboBox<Integer>();
 		timeBy.setPreferredSize(new Dimension(205,25));
 		chrono = new JCheckBox();
@@ -88,8 +92,12 @@ public class OptionsView extends JPanel implements ActionListener{
 		hard = new JCheckBox();
 		back = new JButton(ViewConstante.BUTTON_RETOUR);
 		save = new JButton(ViewConstante.BUTTON_SAVE);
-
+		
+		soundVolume.addChangeListener(this);
+		soundVolume.setMajorTickSpacing(10);
+		soundVolume.setPaintTicks(true);
 		save.addActionListener(this);
+		
 		
 		title.setFont(titleFont);
 		panelTitle.add(Box.createVerticalStrut(100));
@@ -191,6 +199,16 @@ public class OptionsView extends JPanel implements ActionListener{
 				Option.setUndo(undo.isSelected());
 			}
 		}
+		
+	}
+	@Override
+	public void stateChanged(ChangeEvent e) {
+		JSlider source = (JSlider)e.getSource();
+	    if (!source.getValueIsAdjusting()) {
+	        vol = (int)source.getValue();
+	        Option.setSoundVolume(vol);
+	        }
+
 		
 	}
 

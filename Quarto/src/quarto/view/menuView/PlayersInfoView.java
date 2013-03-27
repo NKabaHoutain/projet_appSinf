@@ -1,5 +1,6 @@
 package quarto.view.menuView;
 
+import java.awt.Dialog;
 import java.awt.FlowLayout;
 
 import javax.swing.*;
@@ -34,8 +35,7 @@ public class PlayersInfoView extends JDialog {
 	Timer shakeTimer;
 	
 
-	public PlayersInfoView(GUI gui, Point locationFrame){
-		
+	public PlayersInfoView(GUI gui,Point locationFrame){
 		
 		panelName1 = new JPanel();
 		panelName2 = new JPanel();
