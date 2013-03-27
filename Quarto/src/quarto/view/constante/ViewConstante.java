@@ -16,11 +16,11 @@ public class ViewConstante {
 																					};
 	public final static Dimension minSize[] = 		{	new Dimension(350,50),
 														new Dimension(105,40),
-														new Dimension(50,15)
+														new Dimension(100,20)
 																					};
 	public final static Dimension maxSize[] = 		{	new Dimension(400,50),
 														new Dimension(110,60),
-														new Dimension(50,30)
+														new Dimension(100,30)
 																					};
 	public final static Dimension space[] = 		{	new Dimension(0,5),
 														new Dimension(0,10)

@@ -8,6 +8,7 @@ import javax.swing.*;
 import quarto.constante.Constante;
 import quarto.detail.Detail;
 import quarto.view.GUI;
+import quarto.view.button.BackButton;
 import quarto.view.constante.ViewConstante;
 public class DetailsView extends JPanel {
 
@@ -36,7 +37,7 @@ public class DetailsView extends JPanel {
 	JLabel time;
 	JLabel move;
 	JLabel TotalTime;
-	JButton back;
+	BackButton back;
 	
 	Font titleFont;
 	Font textFont;
@@ -69,7 +70,7 @@ public class DetailsView extends JPanel {
 		time =  new JLabel(Detail.getStringTime());
 		move =  new JLabel(Detail.getStringMove());
 		TotalTime =  new JLabel(Detail.getStringTotalTime());
-		back = new JButton(ViewConstante.BUTTON_RETOUR);
+		back = new BackButton(ViewConstante.BUTTON_RETOUR, gui, ViewConstante.BACK );
 		
 		titleFont = new Font("Serif",Font.BOLD,36);
 		textFont = new Font ("Serif",Font.PLAIN,18); 
@@ -115,7 +116,6 @@ public class DetailsView extends JPanel {
 		panelGameNum.add(gameNumText);
 		panelGameNum.add(TotalTime);
 		
-		initButton(back,gui);
 		panelButton.add(back);
 		
 		setPreferredSize(new Dimension(600,600));
@@ -132,10 +132,5 @@ public class DetailsView extends JPanel {
 		
 		
 		
-	}
-	private void initButton(JButton c, GUI gui) {
-		GUI.adjustSize(c, ViewConstante.BACK );
-		c.addActionListener(gui);
-		GUI.initElement(c);
 	}
 }

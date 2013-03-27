@@ -8,26 +8,26 @@ import javax.swing.*;
 import quarto.model.Board;
 import quarto.option.Option;
 import quarto.view.GUI;
+import quarto.view.button.GameButton;
 import quarto.view.constante.ViewConstante;
 
 public class BoardSideItem extends JPanel implements Observer{
 	
-	JButton end;
-	JButton rules;
-	JButton restart;
-	JButton undo ;
-	JButton fullScreen;
+	GameButton end;
+	GameButton rules;
+	GameButton restart;
+	GameButton undo ;
 
 	JTextField msg;
 	JButton selectPion;
 
 
 	public BoardSideItem(GUI gui){
-		end = new JButton(ViewConstante.BUTTON_END_OF_GAME);
-		rules = new JButton(ViewConstante.BUTTON_REGLE);
-		restart = new JButton(ViewConstante.BUTTON_RESTART);
-		undo = new JButton(ViewConstante.BUTTON_UNDO);
-		fullScreen =  new JButton(ViewConstante.BUTTON_FULLSCREEN);
+		end = new GameButton(ViewConstante.BUTTON_END_OF_GAME, gui, ViewConstante.BOARDSIDE);
+		rules = new GameButton(ViewConstante.BUTTON_REGLE, gui, ViewConstante.BOARDSIDE);
+		restart = new GameButton(ViewConstante.BUTTON_RESTART, gui, ViewConstante.BOARDSIDE);
+		undo = new GameButton(ViewConstante.BUTTON_UNDO, gui, ViewConstante.BOARDSIDE);
+		
 		msg = new JTextField(ViewConstante.TEXTFIELD_MESSAGE);
 		selectPion = new JButton(ViewConstante.BUTTON_SELECT_PION);
 		
@@ -39,13 +39,7 @@ public class BoardSideItem extends JPanel implements Observer{
 		undo.setEnabled(false);
 		selectPion.setEnabled(false);
 
-
-		initButton(end, gui);
-		initButton(rules, gui);
-		initButton(restart, gui);
-		initButton(undo, gui);
-		initButton(fullScreen, gui);
-		initButton(selectPion,gui);
+		
 		msg.setPreferredSize(new Dimension(110,70));
 		msg.setEditable(false);
 		selectPion.setPreferredSize(new Dimension(110,40));
@@ -55,8 +49,6 @@ public class BoardSideItem extends JPanel implements Observer{
 		this.add(rules);
 		this.add(Box.createRigidArea(ViewConstante.space[ViewConstante.BOARDSIDE]));
 		this.add(undo);
-		this.add(Box.createRigidArea(ViewConstante.space[ViewConstante.BOARDSIDE]));
-		this.add(fullScreen);
 		this.add(Box.createRigidArea(ViewConstante.space[ViewConstante.BOARDSIDE]));
 		this.add(end);
 		this.add(Box.createRigidArea(ViewConstante.space[ViewConstante.BOARDSIDE]));
@@ -76,12 +68,6 @@ public class BoardSideItem extends JPanel implements Observer{
 		
 	}
 
-	
-	private void initButton(JButton c, GUI gui) {
-		GUI.adjustSize(c ,ViewConstante.BOARDSIDE);
-		c.addActionListener(gui);
-		GUI.initElement(c);		
-	}
 	
 	@Override
 	public void update(Observable ob, Object arg) {
