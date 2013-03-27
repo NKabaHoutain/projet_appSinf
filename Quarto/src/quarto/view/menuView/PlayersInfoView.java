@@ -29,13 +29,13 @@ public class PlayersInfoView extends JDialog {
 	private JTextField nameJ2;
 	
 	
-	JDialog dd;
-	Point naturalLocation;
-	Timer shakeTimer;
+	private JDialog dd;
+	private Point naturalLocation;
+	private Timer shakeTimer;
+	private boolean inShake;
 	
 
 	public PlayersInfoView(GUI gui, Point locationFrame){
-		
 		
 		panelName1 = new JPanel();
 		panelName2 = new JPanel();
@@ -70,7 +70,7 @@ public class PlayersInfoView extends JDialog {
 		pack();
 		setVisible(true);
 		setAlwaysOnTop(true); 
-		setModal(true);
+		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		
 		setLocation((int)(locationFrame.getX()+ViewConstante.SIZE_MAIN_FRAME/2- this.getSize().getHeight()/2),
 						(int)(locationFrame.getY()+ViewConstante.SIZE_MAIN_FRAME/2 - this.getSize().getWidth()/2));
@@ -78,6 +78,7 @@ public class PlayersInfoView extends JDialog {
 		dd = this;
 		
 		naturalLocation = getLocation();
+		inShake=false;
 		
 	}
 
@@ -97,36 +98,39 @@ public class PlayersInfoView extends JDialog {
 	
 	
 	public void startShake() {
-	    final long startTime;
-
-	    startTime = System.currentTimeMillis();
-	    shakeTimer = new Timer(5, new ActionListener() {
-	    	public void actionPerformed(ActionEvent e) {
-	    		double TWO_PI = Math.PI * 2.0;
-	    		double SHAKE_CYCLE = 50;
-
-	    		long elapsed = System.currentTimeMillis() - startTime;
-	    		double waveOffset = (elapsed % SHAKE_CYCLE) / SHAKE_CYCLE;
-	    		double angle = waveOffset * TWO_PI;
-
-	     	   int SHAKE_DISTANCE = 10;
-
-	     	   int shakenX = (int) ((Math.sin(angle) * SHAKE_DISTANCE) + naturalLocation.x);
-	    	    dd.setLocation(shakenX, naturalLocation.y);
-	    	    dd.repaint();
-
-	    	    int SHAKE_DURATION = 1000;
-	    	    if (elapsed >= SHAKE_DURATION)
-	    	    	stopShake();
-	    	}
-	    });
-	    
-	    shakeTimer.start();
+		if(!inShake) {
+		    final long startTime;
+		    inShake=true;
+	
+		    startTime = System.currentTimeMillis();
+		    shakeTimer = new Timer(5, new ActionListener() {
+		    	public void actionPerformed(ActionEvent e) {
+		    		double TWO_PI = Math.PI * 2.0;
+		    		double SHAKE_CYCLE = 50;
+	
+		    		long elapsed = System.currentTimeMillis() - startTime;
+		    		double waveOffset = (elapsed % SHAKE_CYCLE) / SHAKE_CYCLE;
+		    		double angle = waveOffset * TWO_PI;
+	
+		     	   int SHAKE_DISTANCE = 10;
+	
+		     	   int shakenX = (int) ((Math.sin(angle) * SHAKE_DISTANCE) + naturalLocation.x);
+		    	    dd.setLocation(shakenX, naturalLocation.y);
+		    	    dd.repaint();
+	
+		    	    int SHAKE_DURATION = 1000;
+		    	    if (elapsed >= SHAKE_DURATION)
+		    	    	stopShake();
+		    	}
+		    });
+		    shakeTimer.start();
+		}
 	  }
 
 	  public void stopShake() {
 	    shakeTimer.stop();
 	    dd.setLocation(naturalLocation);
 	    dd.repaint();
+	    inShake=false;
 	  }
 }

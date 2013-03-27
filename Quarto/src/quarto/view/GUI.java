@@ -76,8 +76,8 @@ public class GUI implements ActionListener{
 		replace(new DetailsView(this),"Quarto-Details");
 	}
 	
-	public PlayersInfoView startPlayersInfo() {
-		return new PlayersInfoView(this, mainFrame.getLocation());
+	public void startPlayersInfo() {
+		dialog= new PlayersInfoView(this, mainFrame.getLocation());
 	}
 	
 	private void replace(Component actuel, String newName) {
@@ -112,11 +112,13 @@ public class GUI implements ActionListener{
 				startGameMode();
 			}
 			else if(((JButton) s).getText().equals(ViewConstante.BUTTON_VSPLAYER) ) {
-				 dialog = startPlayersInfo();
+				 startPlayersInfo();
+				 mainFrame.setEnabled(false);
 			}
 			else if(((JButton )s).getText().equals(ViewConstante.BUTTON_START) ){
 				if(dialog.isName()) {
 					dialog.dispose();
+					mainFrame.setEnabled(true);
 					controller.startGame(Constante.VSPLAYER, dialog.getNameJ1(), dialog.getNameJ2());
 				}
 				else {
@@ -125,6 +127,7 @@ public class GUI implements ActionListener{
 			}
 			else if(((JButton) s).getText().equals(ViewConstante.BUTTON_CANCEL)) {
 				dialog.dispose();
+				mainFrame.setEnabled(true);
 			}
 			else if(((JButton) s).getText().equals(ViewConstante.BUTTON_RETOUR) ||
 					((JButton) s).getText().equals(ViewConstante.BUTTON_SAVE) ) {
