@@ -1,5 +1,7 @@
 package quarto.constante;
 
+import java.io.File;
+
 public class Constante {
 
 	/*

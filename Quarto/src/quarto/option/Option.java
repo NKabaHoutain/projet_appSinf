@@ -1,8 +1,7 @@
 package quarto.option;
 
 public class Option {
-	private static int volumeMusic;
-	private static int volumeEffects;
+	private static int soundVolume;
 	private static boolean undo = true;
 	private static int timeByTurn;
 	private static boolean chrono;
@@ -16,18 +15,7 @@ public class Option {
 	public static void setTheme(int theme) {
 		Option.theme = theme;
 	}
-	public static int getVolumeMusic() {
-		return volumeMusic;
-	}
-	public static void setVolumeMusic(int volumeMusic) {
-		Option.volumeMusic = volumeMusic;
-	}
-	public static int getVolumeEffects() {
-		return volumeEffects;
-	}
-	public static void setVolumeEffects(int volumeEffects) {
-		Option.volumeEffects = volumeEffects;
-	}
+	
 	public static boolean isUndo() {
 		return undo;
 	}
@@ -51,6 +39,12 @@ public class Option {
 	}
 	public static void setGameLevel(int gameLevel) {
 		Option.gameLevel = gameLevel;
+	}
+	public static int getSoundVolume() {
+		return soundVolume;
+	}
+	public static void setSoundVolume(int soundVolume) {
+		Option.soundVolume = soundVolume;
 	}
 	
 }

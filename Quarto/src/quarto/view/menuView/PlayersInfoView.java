@@ -1,5 +1,6 @@
 package quarto.view.menuView;
 
+import java.awt.Dialog;
 import java.awt.FlowLayout;
 
 import javax.swing.*;

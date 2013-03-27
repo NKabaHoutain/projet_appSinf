@@ -7,6 +7,7 @@ import java.util.Random;
 
 
 import quarto.constante.Constante;
+import quarto.option.Option;
 
 public class Music extends Thread{
 	
@@ -29,7 +30,7 @@ public class Music extends Thread{
 	
 	public void run() {
 		
-		Audio.setMasterOutputVolume(0.5f);
+		Audio.setMasterOutputVolume(Option.getSoundVolume()/100);
 		Random r = new Random();
 		int i= r.nextInt(musics.length);
 				
