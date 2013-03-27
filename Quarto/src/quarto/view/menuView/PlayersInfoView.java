@@ -34,7 +34,7 @@ public class PlayersInfoView extends JDialog {
 	Timer shakeTimer;
 	
 
-	public PlayersInfoView(GUI gui){
+	public PlayersInfoView(GUI gui, Point locationFrame){
 		
 		
 		panelName1 = new JPanel();
@@ -72,7 +72,13 @@ public class PlayersInfoView extends JDialog {
 		setAlwaysOnTop(true); 
 		setModal(true);
 		
+		setLocation((int)(locationFrame.getX()+ViewConstante.SIZE_MAIN_FRAME/2- this.getSize().getHeight()/2),
+						(int)(locationFrame.getY()+ViewConstante.SIZE_MAIN_FRAME/2 - this.getSize().getWidth()/2));
+		
 		dd = this;
+		
+		naturalLocation = getLocation();
+		
 	}
 
 
@@ -90,13 +96,9 @@ public class PlayersInfoView extends JDialog {
 	}
 	
 	
-	
-
-	 
 	public void startShake() {
 	    final long startTime;
-	    
-	    naturalLocation = dd.getLocation();
+
 	    startTime = System.currentTimeMillis();
 	    shakeTimer = new Timer(5, new ActionListener() {
 	    	public void actionPerformed(ActionEvent e) {

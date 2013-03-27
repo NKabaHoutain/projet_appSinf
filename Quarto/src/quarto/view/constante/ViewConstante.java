@@ -5,7 +5,7 @@ import java.awt.Dimension;
 public class ViewConstante {
 	
 	
-	
+	public final static int SIZE_MAIN_FRAME = 600;
 	
 	public final static int CASE_HEIGHT = 120;
 	public final static int SIZE_BORDER_GAME = 20;

@@ -77,7 +77,7 @@ public class GUI implements ActionListener{
 	}
 	
 	public PlayersInfoView startPlayersInfo() {
-		return new PlayersInfoView(this);
+		return new PlayersInfoView(this, mainFrame.getLocation());
 	}
 	
 	private void replace(Component actuel, String newName) {
