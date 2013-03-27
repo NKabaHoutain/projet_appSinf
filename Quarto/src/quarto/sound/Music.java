@@ -30,7 +30,6 @@ public class Music extends Thread{
 	
 	public void run() {
 		
-		Audio.setMasterOutputVolume(Option.getSoundVolume()/100);
 		Random r = new Random();
 		int i= r.nextInt(musics.length);
 				
