@@ -8,6 +8,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -21,18 +22,45 @@ public class Detail {
 	private static int[][] numberGame= new int[3][3];
 	private static long[] times = new long[3];
 	private static int[] moves = new int[2];
+	
+	public static String getStringLevel(int lvl) {
+		return numberGame[lvl][Constante.WINGAME] + "/" + 
+				numberGame[lvl][Constante.LOSEGAME] + "/" + 
+				numberGame[lvl][Constante.DRAWGAME];
+	}
+	
+	public static String getStringTime() {
+		return convertLongToTime(times[Constante.MAX_TIME]) + "/" + 
+				convertLongToTime(times[Constante.MIN_TIME]);
+	}
+	
+	public static String getStringMove() {
+		return moves[Constante.MAX_MOVE] + "/" + 
+				moves[Constante.MIN_MOVE];
+	}
+	
+	public static String getStringTotalTime() {
+		return convertLongToTime(times[Constante.TOTAL_TIME]);
+	}
+		
+	private static String convertLongToTime(long time) {
+		int seconde = (int) (time /1000) % 60;
+		int minute = (int) ((time/60000) %60) ;
+		int heure = (int) ((time/3600000));
+		return heure+"h "+minute+"min "+seconde+"sec";
+	}
 		
 	public static void addDetail(boolean isVsIa, int resultGame, long time, int move) {
 		if(isVsIa) {
 			numberGame[resultGame][Option.getGameLevel()] ++;
 		}
+		
 		moveInGame(move);
-
+		gameTime(time);
 		
 		try {
 			saveDetail();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -74,14 +102,21 @@ public class Detail {
 		try{
 		      in  = new BufferedWriter(new FileWriter(file.getAbsolutePath()));
 		      
+		      
+		      
 		      for(int i=0; i<Constante.GAMELEVEL.length; i++) {
 					in.write(Constante.GAMELEVEL[i]);
+					in.newLine();
 					writeLevel(i, in);
-					in.write('\n');
+					in.newLine();
 				}
 		      
+		      in.write(DetailField.MOVE);
+		      in.newLine();
 		      writeMove(in);
-		      in.write('\n');
+		      in.newLine();
+		      in.write(DetailField.TIME);
+		      in.newLine();
 		      writeTime(in);
 		      
 		    }
@@ -96,16 +131,19 @@ public class Detail {
 	private static void writeLevel(int lvl, BufferedWriter in) throws IOException {
 		for(int i=0; i<Constante.GAMESTAT.length; i++) {
 			in.write(Constante.GAMESTAT[i] + "=" + numberGame[lvl][i]);
+			in.newLine();
 		}
 	}
 	private static void writeMove(BufferedWriter in) throws IOException {
 		for(int i=0; i<Constante.GAMEMOVES.length; i++) {
 			in.write(Constante.GAMEMOVES[i] + "=" + moves[i]);
+			in.newLine();
 		}
 	}
 	private static void writeTime(BufferedWriter in) throws IOException {
 		for(int i=0; i<Constante.GAMETIME.length; i++) {
 			in.write(Constante.GAMETIME[i] + "=" + times[i]);
+			in.newLine();
 		}
 	}
 	
@@ -124,17 +162,34 @@ public class Detail {
 		
 			List<String> details = takeDetails(file);
 			
-			for(int i=0; i<details.size(); i++) {
-				if(details.get(i).equals(DetailField.TIME)) {
-					addTime(details.subList(i+1, i+1+Constante.GAMETIME.length));
+			if(details.size()!=0) {
+			
+				for(int i=0; i<details.size(); i++) {
+					if(details.get(i).equals(DetailField.TIME)) {
+						addTime(details.subList(i+1, i+1+Constante.GAMETIME.length));
+					}
+					else if(details.get(i).equals(DetailField.MOVE)) {
+						addMove(details.subList(i+1, i+1+Constante.GAMEMOVES.length));
+					}
+					else if(details.get(i).contains(DetailField.NIVEAU)) {
+						int lvl = details.get(i).charAt(details.get(i).length()-1) - '0';
+						addNumber(details.subList(i+1, i+1+Constante.GAMELEVEL.length), lvl);
+					}
 				}
-				else if(details.get(i).equals(DetailField.MOVE)) {
-					addMove(details.subList(i+1, i+1+Constante.GAMEMOVES.length));
+			}
+			else {
+				for(int i=0; i<Constante.GAMELEVEL.length; i++) {
+					for(int j=0; i<Constante.GAMESTAT.length; i++) {
+						numberGame[i][j] = 0;
+					}
 				}
-				else if(details.get(i).contains(DetailField.NIVEAU)) {
-					int lvl = details.get(i).charAt(details.get(i).length()-1) - '0';
-					addNumber(details.subList(i+1, i+1+Constante.GAMELEVEL.length), lvl);
+				
+				for(int i=0; i<Constante.GAMETIME.length; i++) {
+					times[i] = 0;
 				}
+				
+				moves[Constante.MAX_MOVE] = 0;
+				moves[Constante.MIN_MOVE] = 16;
 			}
 		}
 	}

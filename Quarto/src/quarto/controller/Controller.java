@@ -40,9 +40,9 @@ public class Controller implements ActionListener, MouseListener{
 	/**
 	 * Démarre une partie
 	 */
-	public void startGame(boolean vsIa){
+	public void startGame(boolean vsIa, String J1, String J2){
 		
-		game = new Game(new Player("Nico", false), new Player("Kaba", vsIa));
+		game = new Game(new Player(J1, false), new Player(J2, vsIa));
 		
 		gui.startGame(game.getBoard());
 	}

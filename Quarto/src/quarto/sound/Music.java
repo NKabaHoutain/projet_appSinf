@@ -3,6 +3,7 @@ package quarto.sound;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.InputStream;
+import java.util.Random;
 
 
 import quarto.constante.Constante;
@@ -15,8 +16,7 @@ public class Music extends Thread{
 	public Music() {
 		
 
-		File repertory = new File(".\\Ressources\\Musics\\");
-		//File repertory = new File("./Ressources/Musics/");
+		File repertory = new File(Constante.getPathMusic());
 		
 		File[] files= repertory.listFiles();
 	
@@ -30,12 +30,16 @@ public class Music extends Thread{
 	public void run() {
 		
 		Audio.setMasterOutputVolume(0.5f);
-		
+		Random r = new Random();
+		int i= r.nextInt(musics.length);
+				
 		while(Constante.PlayMusic) {
-			for(int i=0;  i< musics.length; i++) {
+			while(i< musics.length) {
 				InputStream stream = new ByteArrayInputStream(musics[i].getSamples());
 				musics[i].play(stream);
+				i++;
 			}
+			i=0;
 		}
 	}
 }

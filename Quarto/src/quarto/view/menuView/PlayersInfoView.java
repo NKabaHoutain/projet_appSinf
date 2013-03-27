@@ -7,6 +7,15 @@ import javax.swing.*;
 import quarto.view.GUI;
 import quarto.view.constante.ViewConstante;
 
+
+import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
+import javax.swing.Timer;
+
 public class PlayersInfoView extends JDialog {
 	
 	private JPanel panelName1;
@@ -18,6 +27,11 @@ public class PlayersInfoView extends JDialog {
 	private JLabel j2;
 	private JTextField nameJ1;
 	private JTextField nameJ2;
+	
+	
+	JDialog dd;
+	Point naturalLocation;
+	Timer shakeTimer;
 	
 
 	public PlayersInfoView(GUI gui){
@@ -55,16 +69,62 @@ public class PlayersInfoView extends JDialog {
 		
 		pack();
 		setVisible(true);
+		setAlwaysOnTop(true); 
+		setModal(true);
 		
+		dd = this;
 	}
 
 
-	public JTextField getNameJ1() {
-		return nameJ1;
+	public String getNameJ1() {
+		return nameJ1.getText();
 	}
 
 
-	public JTextField getNameJ2() {
-		return nameJ2;
+	public String getNameJ2() {
+		return nameJ2.getText();
 	}
+	
+	public boolean isName() {
+		return ! (nameJ1.getText().equals("") || nameJ2.getText().equals(""));
+	}
+	
+	
+	
+
+	 
+	public void startShake() {
+	    final long startTime;
+	    
+	    naturalLocation = dd.getLocation();
+	    startTime = System.currentTimeMillis();
+	    shakeTimer = new Timer(5, new ActionListener() {
+	    	public void actionPerformed(ActionEvent e) {
+	    		double TWO_PI = Math.PI * 2.0;
+	    		double SHAKE_CYCLE = 50;
+
+	    		long elapsed = System.currentTimeMillis() - startTime;
+	    		double waveOffset = (elapsed % SHAKE_CYCLE) / SHAKE_CYCLE;
+	    		double angle = waveOffset * TWO_PI;
+
+	     	   int SHAKE_DISTANCE = 10;
+
+	     	   int shakenX = (int) ((Math.sin(angle) * SHAKE_DISTANCE) + naturalLocation.x);
+	    	    dd.setLocation(shakenX, naturalLocation.y);
+	    	    dd.repaint();
+
+	    	    int SHAKE_DURATION = 1000;
+	    	    if (elapsed >= SHAKE_DURATION)
+	    	    	stopShake();
+	    	}
+	    });
+	    
+	    shakeTimer.start();
+	  }
+
+	  public void stopShake() {
+	    shakeTimer.stop();
+	    dd.setLocation(naturalLocation);
+	    dd.repaint();
+	  }
 }

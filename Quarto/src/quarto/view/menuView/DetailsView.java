@@ -5,6 +5,8 @@ import java.awt.Font;
 
 import javax.swing.*;
 
+import quarto.constante.Constante;
+import quarto.detail.Detail;
 import quarto.view.GUI;
 import quarto.view.constante.ViewConstante;
 public class DetailsView extends JPanel {
@@ -33,13 +35,13 @@ public class DetailsView extends JPanel {
 	JLabel hard;
 	JLabel time;
 	JLabel move;
-	JLabel gameNum;
+	JLabel TotalTime;
 	JButton back;
 	
 	Font titleFont;
 	Font textFont;
 	
-	DetailsView(GUI gui) {
+	public DetailsView(GUI gui) {
 		
 		panelTitle = new JPanel();
 		panelResult = new JPanel();
@@ -52,20 +54,21 @@ public class DetailsView extends JPanel {
 		panelButton = new JPanel();
 		
 		title = new JLabel("Details",SwingConstants.CENTER);
-		resultText= new JLabel("Victoires/Défaites/Nulles",SwingConstants.CENTER);
+		resultText= new JLabel("Victoires/Defaites/Nulles",SwingConstants.CENTER);
 		easyText= new JLabel("Facile",SwingConstants.CENTER);
 		mediumText = new JLabel("Moyen",SwingConstants.CENTER);
 		hardText = new JLabel("Difficile",SwingConstants.CENTER);
 		timeText = new JLabel("Temps max/min: ",SwingConstants.CENTER);
-		moveText = new JLabel("Nombre Coups: ",SwingConstants.CENTER);
-		gameNumText = new JLabel("Nombre partie jouees: ",SwingConstants.CENTER);
+		moveText = new JLabel("Nombre Coups max/min: ",SwingConstants.CENTER);
+		gameNumText = new JLabel("Temps total: ",SwingConstants.CENTER);
 		
-		easy = new JLabel();
-		medium =  new JLabel();
-		hard =  new JLabel();
-		time =  new JLabel();
-		move =  new JLabel();
-		gameNum =  new JLabel();
+		easy = new JLabel(Detail.getStringLevel(Constante.LVL_EASY));
+		medium =  new JLabel(Detail.getStringLevel(Constante.LVL_MEDIUM));
+		hard =  new JLabel(Detail.getStringLevel(Constante.LVL_HARD));
+		
+		time =  new JLabel(Detail.getStringTime());
+		move =  new JLabel(Detail.getStringMove());
+		TotalTime =  new JLabel(Detail.getStringTotalTime());
 		back = new JButton(ViewConstante.BUTTON_RETOUR);
 		
 		titleFont = new Font("Serif",Font.BOLD,36);
@@ -110,7 +113,7 @@ public class DetailsView extends JPanel {
 		
 		panelGameNum.setLayout(new FlowLayout());
 		panelGameNum.add(gameNumText);
-		panelGameNum.add(gameNum);
+		panelGameNum.add(TotalTime);
 		
 		initButton(back,gui);
 		panelButton.add(back);

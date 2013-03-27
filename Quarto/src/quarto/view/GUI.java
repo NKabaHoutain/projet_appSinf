@@ -8,6 +8,7 @@ import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 
 import quarto.constante.Constante;
@@ -15,6 +16,7 @@ import quarto.controller.Controller;
 import quarto.model.Board;
 import quarto.view.constante.ViewConstante;
 import quarto.view.gameView.GameItem;
+import quarto.view.menuView.DetailsView;
 import quarto.view.menuView.GameModeView;
 import quarto.view.menuView.MenuItem;
 import quarto.view.menuView.OptionsView;
@@ -62,14 +64,16 @@ public class GUI implements ActionListener{
 		replace(new MenuItem(this), "Quarto");
 	}
 	
-	
-	
 	public void startRules() {
 		replace(new RulesView(this),"Quarto-R�gle du jeu");
 	}
 	
 	public void startOptions() {
 		replace(new OptionsView(this),"Quarto-Options");
+	}
+	
+	private void startDetail() {
+		replace(new DetailsView(this),"Quarto-Details");
 	}
 	
 	public PlayersInfoView startPlayersInfo() {
@@ -122,8 +126,13 @@ public class GUI implements ActionListener{
 				 dialog = startPlayersInfo();
 			}
 			else if(((JButton )s).getText().equals(ViewConstante.BUTTON_START) ){
-				dialog.dispose();
-				controller.startGame(Constante.VSPLAYER);
+				if(dialog.isName()) {
+					dialog.dispose();
+					controller.startGame(Constante.VSPLAYER, dialog.getNameJ1(), dialog.getNameJ2());
+				}
+				else {
+					dialog.startShake();
+				}
 			}
 			else if(((JButton) s).getText().equals(ViewConstante.BUTTON_CANCEL)) {
 				dialog.dispose();
@@ -159,6 +168,12 @@ public class GUI implements ActionListener{
 			else if (((JButton)s).getText().equals(ViewConstante.BUTTON_END_OF_GAME) ) {
 				controller.endOfGame();
 			}
+			
+			else if (((JButton)s).getText().equals(ViewConstante.BUTTON_DETAIL) ) {
+				startDetail();
+			}
 		}
 	}
+
+	
 }

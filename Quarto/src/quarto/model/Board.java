@@ -192,6 +192,7 @@ public class Board extends Observable{
 	}
 	
 	public long getGameTime() {
+		System.out.println(System.currentTimeMillis()-timeStart);
 		return System.currentTimeMillis()-timeStart;
 	}
 	/**
