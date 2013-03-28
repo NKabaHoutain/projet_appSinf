@@ -18,7 +18,7 @@ public class Controller implements ActionListener, MouseListener{
 	
 	private GUI gui;
 	private Game game;
-	private Music music;
+	public static Music music;
 	
 	/* CONSTRUCTEUR
 	 ************** 
@@ -110,4 +110,6 @@ public class Controller implements ActionListener, MouseListener{
 		// TODO Auto-generated method stub
 		
 	}
+
+	
 }

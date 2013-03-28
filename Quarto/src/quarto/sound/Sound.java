@@ -9,6 +9,8 @@ public class Sound {
     private AudioFormat format;
     private byte[] samples;
     
+    SourceDataLine line;
+    
     /**
      * 
      * @param filename le lien vers le fichier song (URL ou absolute path)
@@ -42,9 +44,10 @@ public class Sound {
     	return samples;
     }
     public void play(InputStream source) {
-	    int bufferSize = format.getFrameSize() * Math.round(format.getSampleRate() / 10);
+	    
+    	int bufferSize = format.getFrameSize() * Math.round(format.getSampleRate() / 10);
 	    byte[] buffer = new byte[bufferSize];
-	    SourceDataLine line;
+	    
 	    try{
 	    	DataLine.Info info = new DataLine.Info(SourceDataLine.class, format);
 	    	line = (SourceDataLine)AudioSystem.getLine(info);
@@ -68,5 +71,13 @@ public class Sound {
 	    }
 	    line.drain();
 	    line.close();
+    }
+    
+    public void stop() {
+    	line.stop();
+    }
+    
+    public void restart() {
+    	line.start();
     }
 }

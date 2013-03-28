@@ -12,10 +12,10 @@ import quarto.option.Option;
 public class Music extends Thread{
 	
 	Sound [] musics;
+	int i;
 	
 	
 	public Music() {
-		
 
 		File repertory = new File(Constante.getPathMusic());
 		
@@ -31,9 +31,9 @@ public class Music extends Thread{
 	public void run() {
 		
 		Random r = new Random();
-		int i= r.nextInt(musics.length);
+		i= r.nextInt(musics.length);
 				
-		while(Constante.PlayMusic) {
+		while(Option.isPlayMusic()) {
 			while(i< musics.length) {
 				InputStream stream = new ByteArrayInputStream(musics[i].getSamples());
 				musics[i].play(stream);
@@ -41,5 +41,13 @@ public class Music extends Thread{
 			}
 			i=0;
 		}
+	}
+	
+	public void stopMusic() {
+		musics[i].stop();
+	}
+	
+	public void restart() {
+		musics[i].restart();
 	}
 }

@@ -19,7 +19,7 @@ public class BoardSideItem extends JPanel implements Observer{
 	GameButton undo ;
 
 	JTextField msg;
-	JButton selectPion;
+	GameButton selectPion;
 
 
 	public BoardSideItem(GUI gui){
@@ -29,7 +29,7 @@ public class BoardSideItem extends JPanel implements Observer{
 		undo = new GameButton(ViewConstante.BUTTON_UNDO, gui, ViewConstante.BOARDSIDE);
 		
 		msg = new JTextField(ViewConstante.TEXTFIELD_MESSAGE);
-		selectPion = new JButton(ViewConstante.BUTTON_SELECT_PION);
+		selectPion = new GameButton(ViewConstante.BUTTON_SELECT_PION, gui, ViewConstante.BOARDSIDE);
 		
 		
 		this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));

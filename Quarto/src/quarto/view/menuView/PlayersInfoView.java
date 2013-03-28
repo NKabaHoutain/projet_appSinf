@@ -94,7 +94,7 @@ public class PlayersInfoView extends JDialog {
 	}
 	
 	public boolean isName() {
-		return ! (nameJ1.getText().equals("") || nameJ2.getText().equals(""));
+		return ! (nameJ1.getText().equals("") || nameJ2.getText().equals("") || nameJ1.getText().equals(nameJ2.getText()));
 	}
 	
 	

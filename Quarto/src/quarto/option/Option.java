@@ -1,14 +1,30 @@
 package quarto.option;
 
+import quarto.sound.Audio;
+
 public class Option {
-	private static int soundVolume;
+	private static int soundVolume = 50;
+	private static boolean playMusic = true;
+	private static boolean playSfx = true;
 	private static boolean undo = true;
 	private static int timeByTurn;
-	private static boolean chrono;
+	private static boolean chrono = true;
 	private static int gameLevel;
 	private static int theme=0;
 	
 	
+	public static boolean isPlayMusic() {
+		return playMusic;
+	}
+	public static void setPlayMusic(boolean playMusic) {
+		Option.playMusic = playMusic;
+	}
+	public static boolean isPlaySfx() {
+		return playSfx;
+	}
+	public static void setPlaySfx(boolean playSfx) {
+		Option.playSfx = playSfx;
+	}
 	public static int getTheme() {
 		return theme;
 	}
@@ -45,7 +61,7 @@ public class Option {
 	}
 	public static void setSoundVolume(int soundVolume) {
 		Option.soundVolume = soundVolume;
+		Audio.setMasterOutputVolume((float) soundVolume/100);
 	}
-	
-}
+	}
 

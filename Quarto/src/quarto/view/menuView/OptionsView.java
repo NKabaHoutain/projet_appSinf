@@ -1,5 +1,6 @@
 package quarto.view.menuView;
 
+import quarto.controller.Controller;
 import quarto.option.Option;
 
 import java.awt.Dimension;
@@ -49,12 +50,16 @@ public class OptionsView extends JPanel implements ActionListener,ChangeListener
 	JComboBox<Integer> timeBy;
 	JCheckBox undo;
 	
-	JButton back;
-	JButton save;
+	BackButton back;
+	BackButton save;
+	
+	GUI gui;
 	
 	int vol;
 	
 	public OptionsView(GUI gui) {
+		
+		this.gui = gui;
 		
 		panelTitle = new JPanel();
 		panelVolume= new JPanel();
@@ -93,8 +98,8 @@ public class OptionsView extends JPanel implements ActionListener,ChangeListener
 		medium = new JCheckBox();
 		hard = new JCheckBox();
 
-		back = new JButton(ViewConstante.BUTTON_RETOUR);
-		save = new JButton(ViewConstante.BUTTON_SAVE);
+		back = new BackButton(ViewConstante.BUTTON_RETOUR, gui, ViewConstante.BACK );
+		save = new BackButton(ViewConstante.BUTTON_SAVE, gui, ViewConstante.BACK );
 		
 		soundVolume.addChangeListener(this);
 		soundVolume.setMajorTickSpacing(10);
@@ -185,6 +190,10 @@ public class OptionsView extends JPanel implements ActionListener,ChangeListener
 	
 	private void init() {
 		undo.setSelected(Option.isUndo());
+		vol = Option.getSoundVolume();
+		sfx.setSelected(Option.isPlaySfx());
+		music.setSelected(Option.isPlayMusic());
+		chrono.setSelected(Option.isChrono());
 	}
 
 	@Override
@@ -194,6 +203,18 @@ public class OptionsView extends JPanel implements ActionListener,ChangeListener
 		if(s instanceof JButton) {
 			if( ((JButton) s).getText().equals(ViewConstante.BUTTON_SAVE)) {
 				Option.setUndo(undo.isSelected());
+				Option.setSoundVolume(vol);
+				Option.setPlaySfx(sfx.isSelected());
+				Option.setPlayMusic(music.isSelected());
+				
+				if(!music.isSelected()) {
+					Controller.music.stopMusic();
+				}
+				else {
+					Controller.music.restart();
+				}
+				
+				Option.setChrono(chrono.isSelected());
 			}
 		}
 		
@@ -203,10 +224,8 @@ public class OptionsView extends JPanel implements ActionListener,ChangeListener
 		JSlider source = (JSlider)e.getSource();
 	    if (!source.getValueIsAdjusting()) {
 	        vol = (int)source.getValue();
-	        Option.setSoundVolume(vol);
+	        
 	        }
-
-		
 	}
 
 }
