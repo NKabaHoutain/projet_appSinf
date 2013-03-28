@@ -95,8 +95,11 @@ public class OptionsView extends JPanel implements ActionListener,ChangeListener
 		music = new JCheckBox();
 		sfx = new JCheckBox();
 		easy = new JCheckBox();
+		easy.addActionListener(this);
 		medium = new JCheckBox();
+		medium.addActionListener(this);
 		hard = new JCheckBox();
+		hard.addActionListener(this);
 
 		back = new BackButton(ViewConstante.BUTTON_RETOUR, gui, ViewConstante.BACK );
 		save = new BackButton(ViewConstante.BUTTON_SAVE, gui, ViewConstante.BACK );
@@ -217,8 +220,17 @@ public class OptionsView extends JPanel implements ActionListener,ChangeListener
 				Option.setChrono(chrono.isSelected());
 			}
 		}
+		else if (s instanceof JCheckBox) {
+			methLevel(((JCheckBox)s));
+		}
 		
 	}
+	private void methLevel(JCheckBox box) {
+		easy.setSelected(easy == box);
+		medium.setSelected(medium == box);
+		hard.setSelected(hard == box);
+	}
+
 	@Override
 	public void stateChanged(ChangeEvent e) {
 		JSlider source = (JSlider)e.getSource();
