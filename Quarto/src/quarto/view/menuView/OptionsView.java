@@ -27,6 +27,7 @@ public class OptionsView extends JPanel implements ActionListener,ChangeListener
 	JPanel panelButton;
 	JPanel panelLvl;
 	JPanel panelSound;
+	JPanel panelTheme;
 	JLabel title;
 	Font titleFont;
 	Font textFont;
@@ -40,6 +41,8 @@ public class OptionsView extends JPanel implements ActionListener,ChangeListener
 	JLabel hardText;
 	JLabel timeByText;
 	JLabel undoText;
+	JLabel themeText;
+	JLabel themeName;
 	JSlider soundVolume; 
 	JCheckBox music;
 	JCheckBox sfx;
@@ -50,10 +53,13 @@ public class OptionsView extends JPanel implements ActionListener,ChangeListener
 	JComboBox<Integer> timeBy;
 	JCheckBox undo;
 	
+
 	BackButton back;
 	BackButton save;
+	JButton changeTheme;
 	
 	GUI gui;
+
 	
 	int vol;
 	
@@ -69,6 +75,7 @@ public class OptionsView extends JPanel implements ActionListener,ChangeListener
 		panelButton = new JPanel();
 		panelLvl = new JPanel();
 		panelSound = new JPanel();
+		panelTheme = new JPanel();
 		
 		title =  new JLabel("Options");
 		titleFont = new Font("Serif",Font.BOLD,36);
@@ -84,7 +91,8 @@ public class OptionsView extends JPanel implements ActionListener,ChangeListener
 		easyText = new JLabel("Facile",SwingConstants.CENTER);
 		mediumText = new JLabel("Medium",SwingConstants.CENTER);
 		hardText = new JLabel("Difficile",SwingConstants.CENTER);
-		
+		themeText = new JLabel("Theme",SwingConstants.CENTER);
+		themeName = new JLabel (Option.getThemeName().replace("/", ""),SwingConstants.CENTER);
 		
 		
 		soundVolume = new JSlider(JSlider.HORIZONTAL,0,100,50);
@@ -101,8 +109,11 @@ public class OptionsView extends JPanel implements ActionListener,ChangeListener
 		hard = new JCheckBox();
 		hard.addActionListener(this);
 
+
 		back = new BackButton(ViewConstante.BUTTON_RETOUR, gui, ViewConstante.BACK );
 		save = new BackButton(ViewConstante.BUTTON_SAVE, gui, ViewConstante.BACK );
+		changeTheme = new JButton("Changer");
+
 		
 		soundVolume.addChangeListener(this);
 		soundVolume.setMajorTickSpacing(10);
@@ -110,7 +121,7 @@ public class OptionsView extends JPanel implements ActionListener,ChangeListener
 
 	
 		save.addActionListener(this);
-		
+		changeTheme.addActionListener(this);
 		
 		title.setFont(titleFont);
 		panelTitle.add(Box.createVerticalStrut(100));
@@ -127,6 +138,8 @@ public class OptionsView extends JPanel implements ActionListener,ChangeListener
 		easyText.setFont(textFont);
 		mediumText.setFont(textFont);
 		hardText.setFont(textFont);
+		themeText.setFont(textFont);
+		themeName.setFont(textFont);
 		
 	
 		panelVolume.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -172,6 +185,14 @@ public class OptionsView extends JPanel implements ActionListener,ChangeListener
 		panelUndo.add(Box.createHorizontalStrut(32));
 		panelUndo.add(undo);
 	
+		panelTheme.setLayout(new FlowLayout(FlowLayout.LEFT));
+		panelTheme.add(Box.createHorizontalStrut(100));
+		panelTheme.add(themeText);
+		panelTheme.add(Box.createHorizontalStrut(25));
+		panelTheme.add(themeName);
+		panelTheme.add(Box.createHorizontalStrut(20));
+		panelTheme.add(changeTheme);
+		
 		panelButton.setLayout(new FlowLayout());
 		panelButton.add(back);
 		panelButton.add(save);
@@ -188,6 +209,7 @@ public class OptionsView extends JPanel implements ActionListener,ChangeListener
 		add(panelLvl);
 		add(panelChrono);
 		add(panelUndo);
+		add(panelTheme);
 		add(panelButton);
 	}
 	
@@ -206,7 +228,7 @@ public class OptionsView extends JPanel implements ActionListener,ChangeListener
 		if(s instanceof JButton) {
 			if( ((JButton) s).getText().equals(ViewConstante.BUTTON_SAVE)) {
 				Option.setUndo(undo.isSelected());
-				Option.setSoundVolume(vol);
+				//Option.setSoundVolume(vol);
 				Option.setPlaySfx(sfx.isSelected());
 				Option.setPlayMusic(music.isSelected());
 				
