@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 
 import javax.swing.*;
 
+import quarto.constante.Constante;
 import quarto.view.GUI;
 import quarto.view.constante.ViewConstante;
 
@@ -35,8 +36,9 @@ public class PlayersInfoView extends JDialog {
 	private Timer shakeTimer;
 	private boolean inShake;
 	
+	
 
-	public PlayersInfoView(GUI gui, Point locationFrame){
+	public PlayersInfoView(GUI gui, Point locationFrame, boolean type){
 		
 		panelName1 = new JPanel();
 		panelName2 = new JPanel();
@@ -56,6 +58,11 @@ public class PlayersInfoView extends JDialog {
 		panelName2.setLayout(new FlowLayout());
 		panelName2.add(j2);
 		panelName2.add(nameJ2);
+		if(type)
+		{
+			nameJ2.setEditable(false);
+			nameJ2.setText("CPU");
+		}
 		
 		panelButton.setLayout(new FlowLayout());
 		start.addActionListener(gui);

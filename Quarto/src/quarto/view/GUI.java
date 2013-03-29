@@ -79,8 +79,8 @@ public class GUI implements ActionListener{
 		replace(new DetailsView(this),"Quarto-Details");
 	}
 	
-	public void startPlayersInfo() {
-		dialog= new PlayersInfoView(this, mainFrame.getLocation());
+	public void startPlayersInfo(boolean type) {
+		dialog= new PlayersInfoView(this, mainFrame.getLocation(),type);
 	}
 	
 	private void replace(Component actuel, String newName) {
@@ -115,7 +115,11 @@ public class GUI implements ActionListener{
 				startGameMode();
 			}
 			else if(((JButton) s).getText().equals(ViewConstante.BUTTON_VSPLAYER) ) {
-				 startPlayersInfo();
+				 startPlayersInfo(Constante.VSPLAYER);
+				 mainFrame.setEnabled(false);
+			}
+			else if (((JButton) s).getText().equals(ViewConstante.BUTTON_VSIA) ) {
+				 startPlayersInfo(Constante.VSIA);
 				 mainFrame.setEnabled(false);
 			}
 			else if(((JButton )s).getText().equals(ViewConstante.BUTTON_START) ){
