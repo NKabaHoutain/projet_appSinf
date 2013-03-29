@@ -115,8 +115,9 @@ public class GUI implements ActionListener{
 				startGameMode();
 			}
 			else if(((JButton) s).getText().equals(ViewConstante.BUTTON_VSPLAYER) ) {
+				 mainFrame.setEnabled(false); 
 				 startPlayersInfo();
-				 mainFrame.setEnabled(false);
+				
 			}
 			else if(((JButton )s).getText().equals(ViewConstante.BUTTON_START) ){
 				if(dialog.isName()) {

@@ -6,6 +6,7 @@ import java.util.Observable;
 import java.util.Stack;
 
 import quarto.constante.Constante;
+import quarto.ia.Move;
 
 
 public class Board extends Observable{
@@ -79,12 +80,15 @@ public class Board extends Observable{
 	public void move(Case c) {
 		Pion p = getSelectedPion();
 		c.addPion(p);
+		c.change();
 		pions.remove(p);
 		p.setSelected(false);
 		
 		endOfAction(c, BoardField.PION_ACTIF, null);
 		
-		winGame(c);
+		if(winGame(c)) {
+			paintWinCase();
+		}
 	}
 	
 	/**
@@ -117,6 +121,7 @@ public class Board extends Observable{
 	public void selectPion(Pion pion) {
 		for(Pion p : pions) {
 			p.setSelected(p==pion);
+			p.change();
 		}
 		change(this);
 	}
@@ -209,12 +214,7 @@ public class Board extends Observable{
 	 * @return
 	 */
 	public List<Pion> getAvailablePions() {
-		List<Pion> result = new ArrayList<Pion>();
-		for(Pion p :pions) {
-			if(p.isAvailable()) result.add(p);
-		}
-		
-		return result;
+		return pions;
 	}
 	/**
 	 * 
@@ -241,10 +241,24 @@ public class Board extends Observable{
 		}
 	}
 	
+	public List<Case> getAvailableCase() {
+		List<Case> casesAvailable = new ArrayList<Case>();
+		
+		for(int i=0; i<cases.length; i++) {
+			for(int j=0; j<cases[i].length; j++) {
+				if(!cases[i][j].isPion()) {
+					casesAvailable.add(cases[i][j]);
+				}
+			}
+		}
+		
+		return casesAvailable;
+	}
+	
 	/* TEST DE VICTOIRE
 	 ****************** 
 	 */
-	private boolean winGame(Case c) {
+	public boolean winGame(Case c) {
 		for (int i=0; i<4; i++) {
 			if((Filled(c, CaseField.WINTAB[i]) && win(c, CaseField.WINTAB[i]))) {
 				return true;
@@ -266,7 +280,6 @@ public class Board extends Observable{
 			if(winBis(c, i, cases[CaseField.getRow(c, i, constante)][CaseField.getLine(c, i, constante)].getPion().getCaract(i), 0, constante)) {
 				caseWin = c;
 				this.constante = constante;
-				paintWinCase();
 				return true;
 			}
 		}
@@ -285,5 +298,40 @@ public class Board extends Observable{
 				return false;
 			}
 		}
+	}
+	
+	/* POUR L'IA
+	 *********** 
+	 */
+	
+	public void playMove(Move m) {
+		cases[m.getX()][m.getY()].addPion(m.getPionPose());
+		pions.remove(m.getPionPose());
+		for(Pion p : pions) {
+			if(p.equals(m.getSelectedPion())) {
+				p.setSelected(true);
+			}
+		}
+	}
+	
+	public void undoMove(Move m) {
+		Pion previous = cases[m.getX()][m.getY()].getPion();
+		cases[m.getX()][m.getY()].deletePion();
+		pions.add(previous);
+		
+		for(Pion p : pions) {
+			if(p.equals(m.getSelectedPion())) {
+				p.setSelected(false);
+			}
+			p.setAvailable(true);
+		}
+	}
+	
+	public Case getWinCase() {
+		return caseWin;
+	}
+	
+	public int sizeHistoric() {
+		return historicMove.size();
 	}
 }

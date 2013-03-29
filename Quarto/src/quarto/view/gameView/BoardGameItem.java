@@ -76,9 +76,7 @@ public class BoardGameItem extends JPanel implements Observer{
 		
 		
 	}
-	
-	
-	
+
 	private void enableCase(boolean b) {
 		for(CaseItem c : cases) {
 			c.setEnabled(b && ! c.isPion());
@@ -89,7 +87,6 @@ public class BoardGameItem extends JPanel implements Observer{
 		for(PionItem p : pions) {
 			p.setEnabled(b && p.getPion().isAvailable());
 		}
-		
 	}
 	
 	@Override

@@ -33,7 +33,7 @@ public class Music extends Thread{
 		Random r = new Random();
 		i= r.nextInt(musics.length);
 				
-		while(Option.isPlayMusic()) {
+		while(true) {
 			while(i< musics.length) {
 				InputStream stream = new ByteArrayInputStream(musics[i].getSamples());
 				musics[i].play(stream);

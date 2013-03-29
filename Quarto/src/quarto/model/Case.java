@@ -34,7 +34,6 @@ public class Case extends Observable{
 	public void addPion(Pion p) {
 		pion = p;
 		p.setAvailable(false);
-		change();
 	}
 	
 	public void change() {

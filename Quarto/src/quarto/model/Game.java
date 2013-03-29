@@ -1,6 +1,8 @@
 package quarto.model;
 
 import quarto.detail.Detail;
+import quarto.ia.Ia;
+import quarto.ia.Move;
 
 public class Game {
 	
@@ -78,14 +80,16 @@ public class Game {
 		board.move(c);
 		int statement = board.getGameStat();
 		
+		
 		//TODO start dialogue pour recommencer
 		
 	}
 
 	public void pionSelected() {
 		board.pionSelected(nextPlayer());
-		
-		//TODO start de l'IA si IA
+		if(PlayerInGame().isIa()) {
+			playIa(Ia.playIa(board));
+		}
 	}
 	
 	public void selectPion(Pion p) {
@@ -100,6 +104,13 @@ public class Game {
 			board.undo(nextPlayer());
 		}
 	}
+	
+	public void playIa(Move m) {
+		move(m.getCase());
+		board.selectPion(m.getSelectedPion());
+		pionSelected();
+	}
+	
 
 
 }
