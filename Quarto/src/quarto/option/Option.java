@@ -1,5 +1,7 @@
 package quarto.option;
 
+import quarto.constante.Constante;
+
 public class Option {
 	private static int soundVolume;
 	private static boolean undo = true;
@@ -46,6 +48,8 @@ public class Option {
 	public static void setSoundVolume(int soundVolume) {
 		Option.soundVolume = soundVolume;
 	}
-	
+	public static String getThemeName() {
+		return Constante.PATH_THEME[theme];
+	}
 }
 
