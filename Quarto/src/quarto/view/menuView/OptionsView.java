@@ -228,7 +228,7 @@ public class OptionsView extends JPanel implements ActionListener,ChangeListener
 		if(s instanceof JButton) {
 			if( ((JButton) s).getText().equals(ViewConstante.BUTTON_SAVE)) {
 				Option.setUndo(undo.isSelected());
-				Option.setSoundVolume(vol);
+				//Option.setSoundVolume(vol);
 				Option.setPlaySfx(sfx.isSelected());
 				Option.setPlayMusic(music.isSelected());
 				

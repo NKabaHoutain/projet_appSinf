@@ -3,7 +3,7 @@ package quarto.option;
 
 import quarto.constante.Constante;
 
-import quarto.sound.Audio;
+//import quarto.sound.Audio;
 
 
 public class Option {
@@ -63,10 +63,10 @@ public class Option {
 	public static int getSoundVolume() {
 		return soundVolume;
 	}
-	public static void setSoundVolume(int soundVolume) {
+	/*public static void setSoundVolume(int soundVolume) {
 		Option.soundVolume = soundVolume;
 		Audio.setMasterOutputVolume((float) soundVolume/100);
-	}
+	}*/
 
 	public static String getThemeName() {
 		return Constante.PATH_THEME[theme];
