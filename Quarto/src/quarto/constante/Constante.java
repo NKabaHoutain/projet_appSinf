@@ -45,7 +45,6 @@ public class Constante {
 	public static final int MAX_MOVE = 0;
 	public static final int MIN_MOVE = 1;
 
-	public static boolean PlayMusic = true;
 
 	
 	/*

@@ -1,5 +1,6 @@
 package quarto.view.menuView;
 
+import quarto.controller.Controller;
 import quarto.option.Option;
 
 import java.awt.Dimension;
@@ -52,13 +53,19 @@ public class OptionsView extends JPanel implements ActionListener,ChangeListener
 	JComboBox<Integer> timeBy;
 	JCheckBox undo;
 	
+
+	BackButton back;
+	BackButton save;
 	JButton changeTheme;
-	JButton back;
-	JButton save;
+	
+	GUI gui;
+
 	
 	int vol;
 	
 	public OptionsView(GUI gui) {
+		
+		this.gui = gui;
 		
 		panelTitle = new JPanel();
 		panelVolume= new JPanel();
@@ -96,12 +103,17 @@ public class OptionsView extends JPanel implements ActionListener,ChangeListener
 		music = new JCheckBox();
 		sfx = new JCheckBox();
 		easy = new JCheckBox();
+		easy.addActionListener(this);
 		medium = new JCheckBox();
+		medium.addActionListener(this);
 		hard = new JCheckBox();
+		hard.addActionListener(this);
 
-		back = new JButton(ViewConstante.BUTTON_RETOUR);
-		save = new JButton(ViewConstante.BUTTON_SAVE);
+
+		back = new BackButton(ViewConstante.BUTTON_RETOUR, gui, ViewConstante.BACK );
+		save = new BackButton(ViewConstante.BUTTON_SAVE, gui, ViewConstante.BACK );
 		changeTheme = new JButton("Changer");
+
 		
 		soundVolume.addChangeListener(this);
 		soundVolume.setMajorTickSpacing(10);
@@ -203,6 +215,10 @@ public class OptionsView extends JPanel implements ActionListener,ChangeListener
 	
 	private void init() {
 		undo.setSelected(Option.isUndo());
+		vol = Option.getSoundVolume();
+		sfx.setSelected(Option.isPlaySfx());
+		music.setSelected(Option.isPlayMusic());
+		chrono.setSelected(Option.isChrono());
 	}
 
 	@Override
@@ -212,19 +228,38 @@ public class OptionsView extends JPanel implements ActionListener,ChangeListener
 		if(s instanceof JButton) {
 			if( ((JButton) s).getText().equals(ViewConstante.BUTTON_SAVE)) {
 				Option.setUndo(undo.isSelected());
+				Option.setSoundVolume(vol);
+				Option.setPlaySfx(sfx.isSelected());
+				Option.setPlayMusic(music.isSelected());
+				
+				if(!music.isSelected()) {
+					Controller.music.stopMusic();
+				}
+				else {
+					Controller.music.restart();
+				}
+				
+				Option.setChrono(chrono.isSelected());
 			}
+		}
+		else if (s instanceof JCheckBox) {
+			methLevel(((JCheckBox)s));
 		}
 		
 	}
+	private void methLevel(JCheckBox box) {
+		easy.setSelected(easy == box);
+		medium.setSelected(medium == box);
+		hard.setSelected(hard == box);
+	}
+
 	@Override
 	public void stateChanged(ChangeEvent e) {
 		JSlider source = (JSlider)e.getSource();
 	    if (!source.getValueIsAdjusting()) {
 	        vol = (int)source.getValue();
-	        Option.setSoundVolume(vol);
+	        
 	        }
-
-		
 	}
 
 }
