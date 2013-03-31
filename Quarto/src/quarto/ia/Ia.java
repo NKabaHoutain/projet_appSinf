@@ -11,17 +11,15 @@ import quarto.model.Case;
 import quarto.model.Pion;
 
 public class Ia {
-	private final static int HORIZON = 3;
+	private final static int HORIZON = 4;
 	private static Move bestMove;
 	
 	public static Move playIa(Board board) {
 		if(board.sizeHistoric() < 3) {
 			return randomMove(board);
 		}
-		else if (board.sizeHistoric() < 13)
-			play(board, HORIZON, Integer.MIN_VALUE, Integer.MAX_VALUE, null);
-		else
-			nega(board, HORIZON, null);
+		play(board, HORIZON, Integer.MIN_VALUE, Integer.MAX_VALUE, null);
+		
 		return bestMove;
 	}
 	
@@ -32,43 +30,14 @@ public class Ia {
 		else {
 			Move meilleurCoup = null;
 			
-			int i =0;
-			List<Move> allMove = allMove(board);
-			while(i<allMove.size() && alpha<beta) {
-				board.playMove(allMove.get(i));
-				int score = - play( board, horizon-1, -beta, -alpha, allMove.get(i).getCase());
-				board.undoMove(allMove.get(i));
-				
-				if (score > alpha) {
-					alpha = score;
-					meilleurCoup = allMove.get(i);
-				}
-				i++;
-			}
-			
-			if(horizon == HORIZON) {
-				bestMove = meilleurCoup;
-			}
-			return alpha;
-		}
-	}
-	
-	private static int nega(Board board, int horizon, Case c) {
-		if(winGame(board, c) || horizon <= 0) {
-			return heuristic(board, horizon);
-		}
-		else {
-			Move meilleurCoup = null;
-			int max = Integer.MIN_VALUE;
-			
 			for(Move m : allMove(board)) {
-				
 				board.playMove(m);
-				int score = - nega( board, horizon-1,  m.getCase());
+				int score = - play( board, horizon-1, -beta, -alpha, m.getCase());
 				board.undoMove(m);
 				
-				if(score>=max){
-					max=score;
+				if(score >=beta) return score;
+				if(score > alpha) {
+					alpha = score;
 					meilleurCoup = m;
 				}
 			}
@@ -76,8 +45,7 @@ public class Ia {
 			if(horizon == HORIZON) {
 				bestMove = meilleurCoup;
 			}
-			
-			return max;
+			return alpha;
 		}
 	}
 	
@@ -106,7 +74,11 @@ public class Ia {
 			return 0;
 		}
 		else {
-			return -(1+horizon);
+			if(((HORIZON-horizon)%2) == 1)
+				return - (1+horizon);
+			else
+				return 1+horizon;
+					
 		}
 	}
 	
