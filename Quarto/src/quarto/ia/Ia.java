@@ -11,7 +11,7 @@ import quarto.model.Case;
 import quarto.model.Pion;
 
 public class Ia {
-	private final static int HORIZON = 4;
+	private final static int HORIZON = 2;
 	private static Move bestMove;
 	
 	public static Move playIa(Board board) {

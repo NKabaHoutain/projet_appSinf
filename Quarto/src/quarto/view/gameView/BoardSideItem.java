@@ -15,7 +15,7 @@ public class BoardSideItem extends JPanel implements Observer{
 	
 	GameButton end;
 	GameButton rules;
-	GameButton restart;
+	//GameButton restart;
 	GameButton undo ;
 
 	JTextField msg;
@@ -25,7 +25,7 @@ public class BoardSideItem extends JPanel implements Observer{
 	public BoardSideItem(GUI gui){
 		end = new GameButton(ViewConstante.BUTTON_END_OF_GAME, gui, ViewConstante.BOARDSIDE);
 		rules = new GameButton(ViewConstante.BUTTON_REGLE, gui, ViewConstante.BOARDSIDE);
-		restart = new GameButton(ViewConstante.BUTTON_RESTART, gui, ViewConstante.BOARDSIDE);
+		//restart = new GameButton(ViewConstante.BUTTON_RESTART, gui, ViewConstante.BOARDSIDE);
 		undo = new GameButton(ViewConstante.BUTTON_UNDO, gui, ViewConstante.BOARDSIDE);
 		
 		msg = new JTextField(ViewConstante.TEXTFIELD_MESSAGE);
@@ -52,8 +52,8 @@ public class BoardSideItem extends JPanel implements Observer{
 		this.add(Box.createRigidArea(ViewConstante.space[ViewConstante.BOARDSIDE]));
 		this.add(end);
 		this.add(Box.createRigidArea(ViewConstante.space[ViewConstante.BOARDSIDE]));
-		this.add(restart);
-		this.add(Box.createRigidArea(ViewConstante.space[ViewConstante.BOARDSIDE]));
+		//this.add(restart);
+		//this.add(Box.createRigidArea(ViewConstante.space[ViewConstante.BOARDSIDE]));
 		this.add(msg);
 		this.add(Box.createRigidArea(ViewConstante.space[ViewConstante.BOARDSIDE]));
 		this.add(selectPion);

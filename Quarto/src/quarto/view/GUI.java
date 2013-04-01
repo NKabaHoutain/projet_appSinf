@@ -18,6 +18,7 @@ import quarto.constante.Constante;
 import quarto.controller.Controller;
 import quarto.model.Board;
 import quarto.view.constante.ViewConstante;
+import quarto.view.gameView.EndView;
 import quarto.view.gameView.GameItem;
 import quarto.view.menuView.DetailsView;
 import quarto.view.menuView.GameModeView;
@@ -31,7 +32,8 @@ public class GUI implements ActionListener{
 	
 	private Controller controller;
 	private JFrame mainFrame = new JFrame("Quarto");
-	private PlayersInfoView dialog = null;
+	private PlayersInfoView playerDialog = null;
+	private EndView endDialog;
 	private Component c;
 	private GameItem gameItem;
 	
@@ -80,7 +82,11 @@ public class GUI implements ActionListener{
 	}
 	
 	public void startPlayersInfo(boolean type) {
-		dialog= new PlayersInfoView(this, mainFrame.getLocation(),type);
+		 playerDialog= new PlayersInfoView(this, mainFrame.getLocation(),type);
+	}
+	
+	public void startEndView() {
+		endDialog = new EndView(this);
 	}
 	
 	private void replace(Component actuel, String newName) {
@@ -124,17 +130,17 @@ public class GUI implements ActionListener{
 				startPlayersInfo(Constante.VSIA);
 			}
 			else if(((JButton )s).getText().equals(ViewConstante.BUTTON_START) ){
-				if(dialog.isName()) {
-					dialog.dispose();
+				if(playerDialog.isName()) {
+					playerDialog.dispose();
 					mainFrame.setEnabled(true);
-					controller.startGame(dialog.isIa(), dialog.getNameJ1(), dialog.getNameJ2());
+					controller.startGame(playerDialog.isIa(), playerDialog.getNameJ1(), playerDialog.getNameJ2());
 				}
 				else {
-					dialog.startShake();
+					playerDialog.startShake();
 				}
 			}
 			else if(((JButton) s).getText().equals(ViewConstante.BUTTON_CANCEL)) {
-				dialog.dispose();
+				playerDialog.dispose();
 				mainFrame.setEnabled(true);
 			}
 			else if(((JButton) s).getText().equals(ViewConstante.BUTTON_RETOUR) ||
@@ -166,11 +172,25 @@ public class GUI implements ActionListener{
 			}
 			
 			else if (((JButton)s).getText().equals(ViewConstante.BUTTON_END_OF_GAME) ) {
-				controller.endOfGame();
+				mainFrame.setEnabled(false);
+				startEndView();
 			}
-			
+			else if (((JButton)s).getText().equals(ViewConstante.BUTTON_GIVE_UP) ) {
+				controller.endOfGame();
+				endDialog.dispose();
+				mainFrame.setEnabled(true);
+			}
+			else if (((JButton)s).getText().equals(ViewConstante.BUTTON_RESTART) ) {
+				controller.startGame(playerDialog.isIa(), playerDialog.getNameJ1(), playerDialog.getNameJ2());
+				endDialog.dispose();
+				mainFrame.setEnabled(true);
+			}
 			else if (((JButton)s).getText().equals(ViewConstante.BUTTON_DETAIL) ) {
 				startDetail();
+			}
+			else if (((JButton)s).getText().equals(ViewConstante.BUTTON_RETOUR_GAME)) {
+				endDialog.dispose();
+				mainFrame.setEnabled(true);
 			}
 		}
 	}
