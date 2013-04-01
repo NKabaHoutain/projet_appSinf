@@ -9,15 +9,16 @@ DrawGame=0
 WinGame=0
 
 Niveau3
-LoseGame=5
+LoseGame=2
 DrawGame=0
 WinGame=0
 
 Move
-maxMove=14
-minMove=3
+maxMove=10
+minMove=10
 
 Time
-totalTime=571508
+totalTime=49381
 minTime=0
-maxTime=263990
+maxTime=28806
+

@@ -31,13 +31,12 @@ public class Ia {
 			Move meilleurCoup = null;
 			
 			for(Move m : allMove(board)) {
-				
 				board.playMove(m);
 				int score = - play( board, horizon-1, -beta, -alpha, m.getCase());
 				board.undoMove(m);
 				
-				if(score>=beta) return score;
-				if(score>=alpha){
+				if(score >=beta) return score;
+				if(score > alpha) {
 					alpha = score;
 					meilleurCoup = m;
 				}
@@ -75,7 +74,11 @@ public class Ia {
 			return 0;
 		}
 		else {
-			return -(1+horizon);
+			if(((HORIZON-horizon)%2) == 1)
+				return - (1+horizon);
+			else
+				return 1+horizon;
+					
 		}
 	}
 	
