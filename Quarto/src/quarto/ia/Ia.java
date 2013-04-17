@@ -18,7 +18,7 @@ public class Ia {
 		if(board.sizeHistoric() < 3) {
 			return randomMove(board);
 		}
-		else if (board.sizeHistoric() <7) {
+		else if (board.sizeHistoric() <9) {
 			HORIZON = 2;
 			nega(board, HORIZON, null);
 		}

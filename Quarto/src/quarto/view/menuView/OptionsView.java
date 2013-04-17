@@ -17,10 +17,9 @@ import quarto.view.GUI;
 import quarto.view.button.BackButton;
 import quarto.view.constante.ViewConstante;
 
-public class OptionsView extends JPanel implements ActionListener,ChangeListener{
+public class OptionsView extends JPanel implements ActionListener {
 	
 	JPanel panelTitle;
-	JPanel panelVolume;
 	JPanel panelTimeBy;
 	JPanel panelChrono;
 	JPanel panelUndo;
@@ -31,7 +30,6 @@ public class OptionsView extends JPanel implements ActionListener,ChangeListener
 	JLabel title;
 	Font titleFont;
 	Font textFont;
-	JLabel soundVolumeText;
 	JLabel musicText;
 	JLabel sfxText;
 	JLabel chronoText;
@@ -42,8 +40,7 @@ public class OptionsView extends JPanel implements ActionListener,ChangeListener
 	JLabel timeByText;
 	JLabel undoText;
 	JLabel themeText;
-	JLabel themeName;
-	JSlider soundVolume; 
+	JLabel themeName; 
 	JCheckBox music;
 	JCheckBox sfx;
 	JCheckBox chrono;
@@ -59,16 +56,12 @@ public class OptionsView extends JPanel implements ActionListener,ChangeListener
 	JButton changeTheme;
 	
 	GUI gui;
-
-	
-	int vol;
 	
 	public OptionsView(GUI gui) {
 		
 		this.gui = gui;
 		
 		panelTitle = new JPanel();
-		panelVolume= new JPanel();
 		panelTimeBy = new JPanel();
 		panelChrono = new JPanel();
 		panelUndo = new JPanel();
@@ -81,21 +74,21 @@ public class OptionsView extends JPanel implements ActionListener,ChangeListener
 		titleFont = new Font("Serif",Font.BOLD,36);
 		textFont = new Font ("Serif",Font.PLAIN,18); 
 		
-		soundVolumeText = new JLabel("Niveau sfx",SwingConstants.CENTER);
-		chronoText = new JLabel("Activer chrono",SwingConstants.CENTER);
-		timeByText = new JLabel("Temps par tour",SwingConstants.CENTER);
-		undoText = new JLabel("Activer undo",SwingConstants.CENTER);
-		musicText = new JLabel("Musique:",SwingConstants.CENTER);
+		
+		chronoText = new JLabel("Activer chrono:",SwingConstants.CENTER);
+		timeByText = new JLabel("Temps par tour: ",SwingConstants.CENTER);
+		undoText = new JLabel("Activer undo:",SwingConstants.CENTER);
+		musicText = new JLabel("Musique: ",SwingConstants.CENTER);
 		sfxText = new JLabel("sfx:",SwingConstants.CENTER);
 		levelText = new JLabel("Niveau: ",SwingConstants.CENTER);
 		easyText = new JLabel("Facile",SwingConstants.CENTER);
 		mediumText = new JLabel("Medium",SwingConstants.CENTER);
 		hardText = new JLabel("Difficile",SwingConstants.CENTER);
-		themeText = new JLabel("Theme",SwingConstants.CENTER);
+		themeText = new JLabel("Theme: ",SwingConstants.CENTER);
 		themeName = new JLabel (Option.getThemeName().replace("/", ""),SwingConstants.CENTER);
 		
 		
-		soundVolume = new JSlider(JSlider.HORIZONTAL,0,100,50);
+		
 		timeBy= new JComboBox<Integer>();
 		timeBy.setPreferredSize(new Dimension(205,25));
 		chrono = new JCheckBox();
@@ -115,10 +108,7 @@ public class OptionsView extends JPanel implements ActionListener,ChangeListener
 		changeTheme = new JButton("Changer");
 
 		
-		soundVolume.addChangeListener(this);
-		soundVolume.setMajorTickSpacing(10);
-		soundVolume.setPaintTicks(true);
-
+	
 	
 		save.addActionListener(this);
 		changeTheme.addActionListener(this);
@@ -128,7 +118,7 @@ public class OptionsView extends JPanel implements ActionListener,ChangeListener
 		panelTitle.add(title);
 		panelTitle.setPreferredSize(new Dimension(600,100));
 		
-		soundVolumeText.setFont(textFont);
+		
 		musicText.setFont(textFont);
 		sfxText.setFont(textFont);
 		timeByText.setFont(textFont);
@@ -141,12 +131,6 @@ public class OptionsView extends JPanel implements ActionListener,ChangeListener
 		themeText.setFont(textFont);
 		themeName.setFont(textFont);
 		
-	
-		panelVolume.setLayout(new FlowLayout(FlowLayout.LEFT));
-		panelVolume.add(Box.createHorizontalStrut(100));
-		panelVolume.add(soundVolumeText);
-		panelVolume.add(Box.createHorizontalStrut(51));
-		panelVolume.add(soundVolume);
 		
 		panelSound.setLayout(new FlowLayout(FlowLayout.LEFT));
 		panelSound.add(Box.createHorizontalStrut(100));
@@ -159,6 +143,7 @@ public class OptionsView extends JPanel implements ActionListener,ChangeListener
 		panelLvl.setLayout(new FlowLayout(FlowLayout.LEFT));
 		panelLvl.add(Box.createHorizontalStrut(100));
 		panelLvl.add(levelText);
+		panelLvl.add(Box.createHorizontalStrut(25));
 		panelLvl.add(easyText);
 		panelLvl.add(easy);
 		panelLvl.add(mediumText);
@@ -176,7 +161,7 @@ public class OptionsView extends JPanel implements ActionListener,ChangeListener
 		panelChrono.setLayout(new FlowLayout(FlowLayout.LEFT));
 		panelChrono.add(Box.createHorizontalStrut(100));
 		panelChrono.add(chronoText);
-		panelChrono.add(Box.createHorizontalStrut(14));
+		panelChrono.add(Box.createHorizontalStrut(18));
 		panelChrono.add(chrono);
 		
 		panelUndo.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -203,7 +188,7 @@ public class OptionsView extends JPanel implements ActionListener,ChangeListener
 		this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
 		add(panelTitle);
 		add(Box.createHorizontalGlue());
-		add(panelVolume);
+
 		add(panelSound);
 		add(panelTimeBy);
 		add(panelLvl);
@@ -215,7 +200,6 @@ public class OptionsView extends JPanel implements ActionListener,ChangeListener
 	
 	private void init() {
 		undo.setSelected(Option.isUndo());
-		vol = Option.getSoundVolume();
 		sfx.setSelected(Option.isPlaySfx());
 		music.setSelected(Option.isPlayMusic());
 		chrono.setSelected(Option.isChrono());
@@ -252,14 +236,4 @@ public class OptionsView extends JPanel implements ActionListener,ChangeListener
 		medium.setSelected(medium == box);
 		hard.setSelected(hard == box);
 	}
-
-	@Override
-	public void stateChanged(ChangeEvent e) {
-		JSlider source = (JSlider)e.getSource();
-	    if (!source.getValueIsAdjusting()) {
-	        vol = (int)source.getValue();
-	        
-	        }
-	}
-
 }
