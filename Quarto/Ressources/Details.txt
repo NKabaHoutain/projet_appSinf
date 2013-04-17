@@ -15,9 +15,9 @@ WinGame=0
 
 Move
 maxMove=10
-minMove=10
+minMove=3
 
 Time
-totalTime=49381
+totalTime=56836
 minTime=0
 maxTime=28806

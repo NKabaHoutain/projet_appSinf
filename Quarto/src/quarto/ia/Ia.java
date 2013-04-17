@@ -11,17 +11,30 @@ import quarto.model.Case;
 import quarto.model.Pion;
 
 public class Ia {
-	private final static int HORIZON = 4;
+	private static int HORIZON = 1;
 	private static Move bestMove;
 	
 	public static Move playIa(Board board) {
 		if(board.sizeHistoric() < 3) {
 			return randomMove(board);
 		}
-		play(board, HORIZON, Integer.MIN_VALUE, Integer.MAX_VALUE, null);
+		else if (board.sizeHistoric() <7) {
+			HORIZON = 2;
+			nega(board, HORIZON, null);
+		}
+		else if (board.sizeHistoric() <19) {
+			HORIZON = 3;
+			nega(board, HORIZON, null);
+		}	
+		else {
+			HORIZON = 4;
+			nega(board, HORIZON, null);
+		}
 		
 		return bestMove;
 	}
+	
+	//play(board, HORIZON, Integer.MIN_VALUE, Integer.MAX_VALUE, null);
 	
 	private static int play(Board board, int horizon, int alpha, int beta, Case c) {
 		if(winGame(board, c) || horizon <= 0) {
@@ -29,15 +42,44 @@ public class Ia {
 		}
 		else {
 			Move meilleurCoup = null;
+			int max = Integer.MIN_VALUE;
 			
 			for(Move m : allMove(board)) {
 				board.playMove(m);
 				int score = - play( board, horizon-1, -beta, -alpha, m.getCase());
 				board.undoMove(m);
 				
+				if(score>=max) {
+					max = score;
+					meilleurCoup = m;
+				}
+				if(score > alpha) alpha = score;
 				if(score >=beta) return score;
-				if(score > alpha) {
-					alpha = score;
+			}
+			
+			if(horizon == HORIZON) {
+				bestMove = meilleurCoup;
+			}
+			return alpha;
+		}
+	}
+	
+	private static int nega(Board board, int horizon, Case c) {
+		if(winGame(board, c) || horizon <= 0) {
+			return heuristic(board, horizon);
+		}
+		else {
+			Move meilleurCoup = null;
+			int max = Integer.MIN_VALUE;
+			
+			for(Move m : allMove(board)) {
+				
+				board.playMove(m);
+				int score = - nega( board, horizon-1,  m.getCase());
+				board.undoMove(m);
+				
+				if(score>=max){
+					max=score;
 					meilleurCoup = m;
 				}
 			}
@@ -45,7 +87,8 @@ public class Ia {
 			if(horizon == HORIZON) {
 				bestMove = meilleurCoup;
 			}
-			return alpha;
+			
+			return max;
 		}
 	}
 	
@@ -74,11 +117,7 @@ public class Ia {
 			return 0;
 		}
 		else {
-			if(((HORIZON-horizon)%2) == 1)
-				return - (1+horizon);
-			else
-				return 1+horizon;
-					
+				return -(1+horizon);
 		}
 	}
 	
