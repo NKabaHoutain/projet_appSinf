@@ -2,6 +2,7 @@ package quarto.view.gameView;
 
 
 import java.awt.BorderLayout;
+import java.awt.Point;
 
 import javax.swing.*;
 
@@ -16,7 +17,7 @@ public class EndView extends JDialog {
 	JButton resume;
 	JButton reset;
 	
-	public EndView(GUI gui) {
+	public EndView(GUI gui, Point locationFrame) {
 		
 		
 		panelGiveUp = new JPanel();
@@ -46,6 +47,9 @@ public class EndView extends JDialog {
 		setVisible(true);
 		setAlwaysOnTop(true); 
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+		
+		setLocation((int)(locationFrame.getX()+ViewConstante.SIZE_MAIN_FRAME/2- this.getSize().getHeight()/2),
+				(int)(locationFrame.getY()+ViewConstante.SIZE_MAIN_FRAME/2 - this.getSize().getWidth()/2));
 		
 		
 	}

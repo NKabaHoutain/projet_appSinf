@@ -74,10 +74,13 @@ public class ViewConstante {
 	public final static String BUTTON_CANCEL = "Annuler";
 	public final static String BUTTON_SAVE = "Save";
 	public final static String BUTTON_GIVE_UP ="Give up";
+	public static final String BUTTON_HELP = "Help";
 
 	public final static String BUTTON_FULLSCREEN = "Plein �cran";
 	public final static String BUTTON_SELECT_PION = "Select";
 	
 	public final static String TEXTFIELD_MESSAGE = "J1 choississez \n un pion";
+
+	
 	
 }

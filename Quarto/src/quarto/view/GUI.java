@@ -56,8 +56,8 @@ public class GUI implements ActionListener{
 	/* DEMARRAGE DES INTERFACES
 	 ************************** 
 	 */
-	public void startGame(Board board) {
-		GameItem game = new GameItem(board,controller,this); 
+	public void startGame(Board board, String p1, String p2) {
+		GameItem game = new GameItem(board,controller,this, p1, p2); 
 		replace(game , "Quarto - Game");
 	}	
 	
@@ -86,7 +86,7 @@ public class GUI implements ActionListener{
 	}
 	
 	public void startEndView() {
-		endDialog = new EndView(this);
+		endDialog = new EndView(this, mainFrame.getLocation());
 	}
 	
 	private void replace(Component actuel, String newName) {

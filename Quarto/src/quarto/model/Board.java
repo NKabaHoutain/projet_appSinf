@@ -188,10 +188,12 @@ public class Board extends Observable{
 	}
 	
 	public int getNumberMove() {
-		if(lastMoveisCase()) {
+		if(historicMove.size() == 0) 
+			return 0;
+		else if(lastMoveisCase()) {
 			return historicMove.size()/2;
 		}
-		else {
+		else{
 			return historicMove.size()-1 /1;
 		}
 	}

@@ -69,6 +69,7 @@ public class BoardGameItem extends JPanel implements Observer{
 		add(list,BorderLayout.SOUTH);
 		
 		
+		
 		enableCase(false);
 		
 		this.setVisible(true);

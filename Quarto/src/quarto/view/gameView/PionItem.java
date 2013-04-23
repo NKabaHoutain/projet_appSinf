@@ -8,17 +8,20 @@ import java.util.Observer;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
+import quarto.constante.Constante;
 import quarto.model.Pion;
+import quarto.option.Option;
 
 public class PionItem extends JButton implements Observer{
 	
 	private final Pion pion;
 	private final ImageIcon img;
+	private final ImageIcon fond;
 	
 	public PionItem (Pion pion) {
 		super();
 		this.pion = pion;
-		
+		fond = new ImageIcon(Constante.getPathTheme(Option.getTheme()) + Constante.BACKPION);
 		img = new ImageIcon(pion.getUrlImage());		
 	}
 	
@@ -26,15 +29,16 @@ public class PionItem extends JButton implements Observer{
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
         if (img == null) return;
-        g.drawImage(img.getImage(), 0, 0, getWidth(), getHeight(), this);
 
         if(pion.isSelected()) {
 
         	setBackground(Color.red);
         }
         else {
-        	setBackground(Color.LIGHT_GRAY);
+        	g.drawImage(fond.getImage(), 0, 0, getWidth(), getHeight(), this);
         }
+        
+        g.drawImage(img.getImage(), 0, 0, getWidth(), getHeight(), this);
 	}
 	
 	public Pion getPion() {

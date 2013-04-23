@@ -16,10 +16,10 @@ public class GameItem extends JPanel{
 	BoardSideItem boardSide;
 	GUI gui;
 	
-	public GameItem(Board board, Controller controller,GUI gui){
+	public GameItem(Board board, Controller controller,GUI gui, String p1, String p2){
 		this.gui = gui;
 		boardGame = new BoardGameItem(board,controller);
-		boardSide = new BoardSideItem(gui);
+		boardSide = new BoardSideItem(gui, controller.isIa(), p1, p2);
 		board.addObserver(boardGame);
 		board.addObserver(boardSide);
 		this.setLayout(new BorderLayout());

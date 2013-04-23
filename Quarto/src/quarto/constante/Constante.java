@@ -56,6 +56,7 @@ public class Constante {
 	public final static String PATH_RESSOURCE = "./Ressources/";
 	public final static String PATH_MUSIC = "Musics/";
 	public final static String PATH_IMAGES = "Images/";
+	public final static String PATH_GAME = "Game/";
 	public final static String PATH_PIONS = "Pions/";
 	public final static String PATH_MENU = "Menu/";
 	public final static String PATH_TEXTURE = "Textures/";
@@ -66,6 +67,10 @@ public class Constante {
 	public final static String PLATEAU = "board.jpg";
 	public final static String PLATEAUWIN = "boardRed.jpg";
 	public final static String BORDER = "boardBlur.jpg";
+	public final static String BACKGROUND = "back.jpg";
+	public final static String BACKPION = "backPion.jpg";
+	public final static String USER = "Icon.png";
+	public final static String CPU ="Cpu.png";
 	
 	public final static String[] PATH_THEME = {	"Parquet/" ,
 												"Planche/"		};
@@ -89,5 +94,13 @@ public class Constante {
 	
 	public static String getPathLogo() {
 		return PATH_RESSOURCE + PATH_IMAGES +  PATH_MENU + LOGO;
+	}
+	
+	public static String getUserLogo() {
+		return PATH_RESSOURCE + PATH_IMAGES + PATH_GAME + USER;
+	}
+	
+	public static String getCpuLogo() {
+		return PATH_RESSOURCE + PATH_IMAGES + PATH_GAME + CPU;
 	}
 }

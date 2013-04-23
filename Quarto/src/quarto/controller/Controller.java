@@ -44,7 +44,7 @@ public class Controller implements ActionListener, MouseListener{
 		
 		game = new Game(new Player(J1, false), new Player(J2, vsIa));
 		
-		gui.startGame(game.getBoard());
+		gui.startGame(game.getBoard(), J1, J2);
 	}
 	/**
 	 * Joue un coup en arrière dans la board
@@ -62,6 +62,10 @@ public class Controller implements ActionListener, MouseListener{
 	public void endOfGame() {
 		game.addDetail();
 		gui.startMenu();
+	}
+	
+	public boolean isIa() {
+		return game.isVsIa();
 	}
 	
 	/**
