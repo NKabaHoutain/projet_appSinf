@@ -3,6 +3,7 @@ package quarto.view.menuView;
 import quarto.controller.Controller;
 import quarto.option.Option;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -17,11 +18,9 @@ import quarto.view.GUI;
 import quarto.view.button.BackButton;
 import quarto.view.constante.ViewConstante;
 
-public class OptionsView extends JPanel implements ActionListener {
+public class OptionsView extends PanelParcho implements ActionListener {
 	
 	JPanel panelTitle;
-	JPanel panelTimeBy;
-	JPanel panelChrono;
 	JPanel panelUndo;
 	JPanel panelButton;
 	JPanel panelLvl;
@@ -32,22 +31,18 @@ public class OptionsView extends JPanel implements ActionListener {
 	Font textFont;
 	JLabel musicText;
 	JLabel sfxText;
-	JLabel chronoText;
 	JLabel levelText;
 	JLabel easyText;
 	JLabel mediumText;
 	JLabel hardText;
-	JLabel timeByText;
 	JLabel undoText;
 	JLabel themeText;
 	JLabel themeName; 
 	JCheckBox music;
 	JCheckBox sfx;
-	JCheckBox chrono;
 	JCheckBox easy;
 	JCheckBox medium;
 	JCheckBox hard;
-	JComboBox<Integer> timeBy;
 	JCheckBox undo;
 	
 
@@ -62,8 +57,6 @@ public class OptionsView extends JPanel implements ActionListener {
 		this.gui = gui;
 		
 		panelTitle = new JPanel();
-		panelTimeBy = new JPanel();
-		panelChrono = new JPanel();
 		panelUndo = new JPanel();
 		panelButton = new JPanel();
 		panelLvl = new JPanel();
@@ -75,8 +68,6 @@ public class OptionsView extends JPanel implements ActionListener {
 		textFont = new Font ("Serif",Font.PLAIN,18); 
 		
 		
-		chronoText = new JLabel("Activer chrono:",SwingConstants.CENTER);
-		timeByText = new JLabel("Temps par tour: ",SwingConstants.CENTER);
 		undoText = new JLabel("Activer undo:",SwingConstants.CENTER);
 		musicText = new JLabel("Musique: ",SwingConstants.CENTER);
 		sfxText = new JLabel("sfx:",SwingConstants.CENTER);
@@ -87,11 +78,9 @@ public class OptionsView extends JPanel implements ActionListener {
 		themeText = new JLabel("Theme: ",SwingConstants.CENTER);
 		themeName = new JLabel (Option.getThemeName().replace("/", ""),SwingConstants.CENTER);
 		
+		undoText.setForeground(Color.white);
+		sfxText.setForeground(Color.white);
 		
-		
-		timeBy= new JComboBox<Integer>();
-		timeBy.setPreferredSize(new Dimension(205,25));
-		chrono = new JCheckBox();
 		undo = new JCheckBox();
 		music = new JCheckBox();
 		sfx = new JCheckBox();
@@ -106,23 +95,18 @@ public class OptionsView extends JPanel implements ActionListener {
 		back = new BackButton(ViewConstante.BUTTON_RETOUR, gui, ViewConstante.BACK );
 		save = new BackButton(ViewConstante.BUTTON_SAVE, gui, ViewConstante.BACK );
 		changeTheme = new JButton("Changer");
-
-		
-	
 	
 		save.addActionListener(this);
 		changeTheme.addActionListener(this);
 		
 		title.setFont(titleFont);
-		panelTitle.add(Box.createVerticalStrut(100));
+		panelTitle.add(Box.createVerticalStrut(105));
 		panelTitle.add(title);
 		panelTitle.setPreferredSize(new Dimension(600,100));
 		
 		
 		musicText.setFont(textFont);
 		sfxText.setFont(textFont);
-		timeByText.setFont(textFont);
-		chronoText.setFont(textFont);
 		undoText.setFont(textFont);
 		levelText.setFont(textFont);
 		easyText.setFont(textFont);
@@ -151,19 +135,6 @@ public class OptionsView extends JPanel implements ActionListener {
 		panelLvl.add(hardText);
 		panelLvl.add(hard);
 		
-		panelTimeBy.setLayout(new FlowLayout(FlowLayout.LEFT));
-		panelTimeBy.add(Box.createHorizontalStrut(100));
-		panelTimeBy.add(timeByText);
-		panelTimeBy.add(Box.createHorizontalStrut(16));
-		panelTimeBy.add(timeBy);
-	
-		
-		panelChrono.setLayout(new FlowLayout(FlowLayout.LEFT));
-		panelChrono.add(Box.createHorizontalStrut(100));
-		panelChrono.add(chronoText);
-		panelChrono.add(Box.createHorizontalStrut(18));
-		panelChrono.add(chrono);
-		
 		panelUndo.setLayout(new FlowLayout(FlowLayout.LEFT));
 		panelUndo.add(Box.createHorizontalStrut(100));
 		panelUndo.add(undoText);
@@ -186,15 +157,23 @@ public class OptionsView extends JPanel implements ActionListener {
 		
 		this.setPreferredSize(new Dimension(600,600));
 		this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
+		panelTitle.setOpaque(false);
 		add(panelTitle);
 		add(Box.createHorizontalGlue());
-
-		add(panelSound);
-		add(panelTimeBy);
+		
+		panelSound.setOpaque(false);
+		add(panelSound);		
+		add(Box.createVerticalGlue());
+		panelLvl.setOpaque(false);
 		add(panelLvl);
-		add(panelChrono);
+		add(Box.createVerticalGlue());
+		panelUndo.setOpaque(false);
 		add(panelUndo);
+		add(Box.createVerticalGlue());
+		panelTheme.setOpaque(false);
 		add(panelTheme);
+		add(Box.createVerticalGlue());
+		panelButton.setOpaque(false);
 		add(panelButton);
 	}
 	
@@ -202,7 +181,6 @@ public class OptionsView extends JPanel implements ActionListener {
 		undo.setSelected(Option.isUndo());
 		sfx.setSelected(Option.isPlaySfx());
 		music.setSelected(Option.isPlayMusic());
-		chrono.setSelected(Option.isChrono());
 	}
 
 	@Override
@@ -222,8 +200,6 @@ public class OptionsView extends JPanel implements ActionListener {
 				else {
 					Controller.music.restart();
 				}
-				
-				Option.setChrono(chrono.isSelected());
 			}
 		}
 		else if (s instanceof JCheckBox) {

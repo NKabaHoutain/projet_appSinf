@@ -77,14 +77,14 @@ public class Board extends Observable{
 	 * Retire le pion de la liste
 	 * @param c
 	 */
-	public void move(Case c) {
+	public void move(Case c, String player) {
 		Pion p = getSelectedPion();
 		c.addPion(p);
 		c.change();
 		pions.remove(p);
 		p.setSelected(false);
 		
-		endOfAction(c, BoardField.PION_ACTIF, null);
+		endOfAction(c, BoardField.PION_ACTIF, player);
 		
 		if(winGame(c)) {
 			paintWinCase();
@@ -96,7 +96,7 @@ public class Board extends Observable{
 	 * @param player
 	 */
 	public void pionSelected(String player) {
-		endOfAction(getSelectedPion(), BoardField.CASE_ACTIVE, "Joueur " + player + " joue");
+		endOfAction(getSelectedPion(), BoardField.CASE_ACTIVE, player);
 	}
 	
 	/**
@@ -151,6 +151,7 @@ public class Board extends Observable{
 			c.change();
 			selectPion(p);
 			pionSelected(player);
+			change(player);
 			
 			historicMove.pop();
 		}
@@ -161,7 +162,7 @@ public class Board extends Observable{
 			canSelectedPion=true;			
 			
 			change(this);
-			change("Joueur " + player + " joue");
+			change(player);
 			change(BoardField.PION_ACTIF);
 			
 		}

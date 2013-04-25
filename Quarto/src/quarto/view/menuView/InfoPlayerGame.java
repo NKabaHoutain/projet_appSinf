@@ -1,9 +1,12 @@
 package quarto.view.menuView;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.TextField;
 
+import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -11,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import quarto.constante.Constante;
+import quarto.view.constante.ViewConstante;
 
 public class InfoPlayerGame extends JPanel{
 	
@@ -25,12 +29,14 @@ public class InfoPlayerGame extends JPanel{
 			else
 				secondP = new PlayerView(Constante.getUserLogo(), p2);
 			
-			info = new JLabel("Select");
+			info = new JLabel("SELECT");
 			info.setMaximumSize(new Dimension(100, 20));
 			info.setAlignmentX(CENTER_ALIGNMENT);
+			info.setFont(new Font("Sherif", Font.BOLD, 18));
+			info.setForeground(Color.white);
 			
-		
-			
+			firstP.setBorder(BorderFactory.createLineBorder(Color.red,3));
+			secondP.setBorder(BorderFactory.createLineBorder(Color.black,3));
 
 			this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
 			
@@ -42,10 +48,26 @@ public class InfoPlayerGame extends JPanel{
 			this.add(secondP);
 			this.add(Box.createVerticalGlue());
 
-		}
-		
-		public void setText(String text) {
+			setOpaque(false);
 			
 		}
+		
+		public void change(String name) {
+			if(info.getText().equals(ViewConstante.SELECT))
+				info.setText(ViewConstante.MOVE);
+			else
+				info.setText(ViewConstante.SELECT);
+			
+			
+			if(name.equals(firstP.getNom())) {
+				firstP.setBorder(BorderFactory.createLineBorder(Color.red,3));
+				secondP.setBorder(BorderFactory.createLineBorder(Color.black,3));
+			}
+			else {
+				firstP.setBorder(BorderFactory.createLineBorder(Color.black,3));
+				secondP.setBorder(BorderFactory.createLineBorder(Color.red,3));
+			}
+		}
+		
 }
 

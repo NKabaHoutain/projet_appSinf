@@ -14,7 +14,7 @@ import quarto.view.GUI;
 import quarto.view.button.BackButton;
 import quarto.view.constante.ViewConstante;
 
-public class RulesView extends JPanel {
+public class RulesView extends PanelParcho {
 	
 	JPanel panelTitle;
 	JLabel title;
@@ -46,7 +46,7 @@ public class RulesView extends JPanel {
 		MutableAttributeSet center = new SimpleAttributeSet();		
 		StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
 		doc.setParagraphAttributes(0, 0, center, true);
-		rules.setOpaque(true);
+		rules.setOpaque(false);
 		rules.setText(ViewConstante.RULES);
 		title.setFont(fontTitle);
 		
@@ -62,13 +62,16 @@ public class RulesView extends JPanel {
 			panelButton.add(back);
 		}
 		
-		add(Box.createVerticalStrut(15));
+		add(Box.createVerticalStrut(30));
+		panelTitle.setOpaque(false);
 		add(panelTitle);
-		add(Box.createVerticalStrut(10));
-		add(panelText);
 		add(Box.createVerticalStrut(5));
+		panelText.setOpaque(false);
+		add(panelText);
+		add(Box.createVerticalStrut(0));
+		panelButton.setOpaque(false);
 		add(panelButton);
-		add(Box.createVerticalStrut(15));
+		add(Box.createVerticalStrut(25));
 		
 	}
 	

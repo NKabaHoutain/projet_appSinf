@@ -1,7 +1,9 @@
 package quarto.view.button;
 
+import java.awt.Color;
 import java.awt.Component;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 
 import quarto.view.GUI;
@@ -21,5 +23,10 @@ public class BackButton extends JButton{
 		setAlignmentX(Component.CENTER_ALIGNMENT);
 		setAlignmentY(Component.CENTER_ALIGNMENT);
 		
+		setContentAreaFilled(false);
+		
+		setForeground(Color.black);
+		
+		setBorder(BorderFactory.createLineBorder(Color.black));
 	}
 }

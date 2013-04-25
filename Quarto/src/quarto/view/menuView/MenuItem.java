@@ -12,7 +12,7 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
-public class MenuItem extends JPanel {
+public class MenuItem extends PanelFond {
 	
 	JPanel panelButton;
 	JPanel panelLogo;
@@ -24,6 +24,8 @@ public class MenuItem extends JPanel {
 	Image logo;
 	
 	public MenuItem(GUI gui) {
+		super();
+		
 		/*
 		 * Initialisation des panels
 		 */
@@ -49,6 +51,7 @@ public class MenuItem extends JPanel {
 		panelLogo.add(Box.createVerticalStrut(40));
 		panelLogo.add(title);
 		panelLogo.add(Box.createHorizontalGlue());
+		panelLogo.setOpaque(false);
 		
 		panelButton.setPreferredSize(new Dimension(500,100));
 		
@@ -63,12 +66,17 @@ public class MenuItem extends JPanel {
 		
 		panelButton.add(details);
 		panelButton.add(Box.createGlue());
+		panelButton.setOpaque(false);
 		
 		this.setPreferredSize(new Dimension(600,600));
 		this.setLayout(new GridLayout(2,1));
 		this.add(panelLogo,Component.CENTER_ALIGNMENT);
 		this.add(panelButton,Component.CENTER_ALIGNMENT);
 		this.setVisible(true);
+	}
+	
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
 	}
 
 }

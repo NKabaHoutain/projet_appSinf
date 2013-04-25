@@ -10,7 +10,7 @@ import quarto.detail.Detail;
 import quarto.view.GUI;
 import quarto.view.button.BackButton;
 import quarto.view.constante.ViewConstante;
-public class DetailsView extends JPanel {
+public class DetailsView extends PanelParcho {
 
 	JPanel panelTitle;
 	JPanel panelResult;
@@ -77,9 +77,9 @@ public class DetailsView extends JPanel {
 		
 		title.setFont(titleFont);
 		title.setFont(titleFont);
-		panelTitle.add(Box.createVerticalStrut(100));
+		panelTitle.add(Box.createVerticalStrut(105));
 		panelTitle.add(title);
-		panelTitle.setPreferredSize(new Dimension(600,100));
+		panelTitle.setPreferredSize(new Dimension(600,50));
 		
 		resultText.setFont(textFont);
 		easyText.setFont(textFont);
@@ -120,14 +120,23 @@ public class DetailsView extends JPanel {
 		
 		setPreferredSize(new Dimension(600,600));
 		setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
+		panelTitle.setOpaque(false);
 		add(panelTitle);
+		panelResult.setOpaque(false);
 		add(panelResult);
+		panelEasy.setOpaque(false);
 		add(panelEasy);
+		panelMedium.setOpaque(false);
 		add(panelMedium);
+		panelHard.setOpaque(false);
 		add(panelHard);
+		panelTime.setOpaque(false);
 		add(panelTime);
+		panelMove.setOpaque(false);
 		add(panelMove);
+		panelGameNum.setOpaque(false);
 		add(panelGameNum);
+		panelButton.setOpaque(false);
 		add(panelButton);
 		
 		

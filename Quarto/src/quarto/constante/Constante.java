@@ -63,14 +63,24 @@ public class Constante {
 	
 	public final static String PATH_DETAIL = "Details.txt";
 	
-	public final static String LOGO = "logo_quarto.jpg";
+	public final static String LOGO = "logo_quarto.png";
+	public final static String BACKMENU = "backGround.jpg";
+	public final static String MENU = "Menu.png";
+	public final static String PARCHO = "parcho.png";
+	public final static String BACKPARCHO = "backParcho.jpg";
 	public final static String PLATEAU = "board.jpg";
 	public final static String PLATEAUWIN = "boardRed.jpg";
 	public final static String BORDER = "boardBlur.jpg";
 	public final static String BACKGROUND = "back.jpg";
 	public final static String BACKPION = "backPion.jpg";
+	public final static String DEGRAD ="Degrad.jpg";
 	public final static String USER = "Icon.png";
 	public final static String CPU ="Cpu.png";
+	public final static String END = "end.png";
+	public final static String HELP = "help.png";
+	public final static String UNDO = "undo.png";
+	public final static String RULES = "rules.png";
+	public final static String HAND = "hand.png";
 	
 	public final static String[] PATH_THEME = {	"Parquet/" ,
 												"Planche/"		};
@@ -96,11 +106,19 @@ public class Constante {
 		return PATH_RESSOURCE + PATH_IMAGES +  PATH_MENU + LOGO;
 	}
 	
+	public static String getPathMenu() {
+		return PATH_RESSOURCE + PATH_IMAGES +  PATH_MENU;
+	}
+	
 	public static String getUserLogo() {
 		return PATH_RESSOURCE + PATH_IMAGES + PATH_GAME + USER;
 	}
 	
 	public static String getCpuLogo() {
 		return PATH_RESSOURCE + PATH_IMAGES + PATH_GAME + CPU;
+	}
+	
+	public static String getPathGame() {
+		return PATH_RESSOURCE + PATH_IMAGES + PATH_GAME;
 	}
 }

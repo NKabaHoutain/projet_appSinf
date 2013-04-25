@@ -76,7 +76,6 @@ public class Controller implements ActionListener, MouseListener{
 		Object s = e.getSource();
 			if(s instanceof CaseItem) {
 				game.move(((CaseItem) s).getCase());
-				
 			}
 			
 			if ( s instanceof PionItem) {

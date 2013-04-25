@@ -58,7 +58,6 @@ public class Game {
 	
 	private String nextPlayer() {
 		changeGamer();
-		
 		if(playerOne.isInGame()) {
 			return playerOne.getNom();
 		}
@@ -77,7 +76,7 @@ public class Game {
 	 ********************** 
 	 */
 	public void move(Case c) {
-		board.move(c);
+		board.move(c, PlayerInGame().getNom());
 		int statement = board.getGameStat();
 		
 		
@@ -87,6 +86,7 @@ public class Game {
 
 	public void pionSelected() {
 		board.pionSelected(nextPlayer());
+		
 		if(PlayerInGame().isIa()) {
 			playIa(Ia.playIa(board));
 		}
