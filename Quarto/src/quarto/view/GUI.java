@@ -20,6 +20,7 @@ import quarto.model.Board;
 import quarto.view.constante.ViewConstante;
 import quarto.view.gameView.EndView;
 import quarto.view.gameView.GameItem;
+import quarto.view.gameView.HelpView;
 import quarto.view.menuView.DetailsView;
 import quarto.view.menuView.GameModeView;
 import quarto.view.menuView.MenuItem;
@@ -184,6 +185,14 @@ public class GUI implements ActionListener{
 				controller.startGame(playerDialog.isIa(), playerDialog.getNameJ1(), playerDialog.getNameJ2());
 				endDialog.dispose();
 				mainFrame.setEnabled(true);
+			}
+			else if(((JButton)s).getText().equals(ViewConstante.BUTTON_HELP)){
+				JFrame frame = new JFrame();
+				frame.add(new HelpView(null));
+				frame.setVisible(true);
+				frame.setResizable(false);
+				frame.pack();
+				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			}
 			else if (((JButton)s).getText().equals(ViewConstante.BUTTON_DETAIL) ) {
 				startDetail();

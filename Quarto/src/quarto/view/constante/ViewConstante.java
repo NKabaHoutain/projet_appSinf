@@ -56,6 +56,16 @@ public class ViewConstante {
 
 	"La regle fondamentale du Quarto est la suivante : "+"\n"+
 	"La piece a jouer est choisie par l adversaire";
+	
+	public final static String HELP = "Deroulement de la partie: \n"+"\n Le petit cadre autour de l'icone de joueurs\n permet d'identifier"+
+	"c est a quelle joueur de jouer. \nSi le cadre est rouge,cela  signifie que c est a ce joueur de jouer.\n"+
+			"  il lui suffit juste d'effectuer la tache demandee (move/select)\n"+"  Pour selectionner un pion, chaque joueur peut\n soit cliquer sur le pion puis la main"+
+	" soit faire un double clique \n(quand le pion est selectionne, le fond devient rouge)\n"+
+			"Afin de poser le pion, le joueur dois juste cliquer\n sur la case sur laquelle il souhaite poser le pion\n"+
+	"\n Utilite des boutons\n"+
+			"\n Livre : acceder aux regles de Quarto!\n"+
+			"Fleche: Annuler la derniere action (undo)\n"+
+			"X: Fin de partie, le joueur peut soit abandonner,\n soit recommencer la partie";
 
 	
 	public final static String BUTTON_STARTMENU = "Start game";

@@ -18,6 +18,6 @@ maxMove=10
 minMove=0
 
 Time
-totalTime=1008022
+totalTime=1047033
 minTime=0
 maxTime=319988

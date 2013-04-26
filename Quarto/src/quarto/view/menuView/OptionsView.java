@@ -115,6 +115,15 @@ public class OptionsView extends PanelParcho implements ActionListener {
 		themeText.setFont(textFont);
 		themeName.setFont(textFont);
 		
+		music.setOpaque(false);
+		sfx.setOpaque(false);
+		undo.setOpaque(false);
+		easy.setOpaque(false);
+		medium.setOpaque(false);
+		hard.setOpaque(false);
+		
+		music.setForeground(Color.white);
+		
 		
 		panelSound.setLayout(new FlowLayout(FlowLayout.LEFT));
 		panelSound.add(Box.createHorizontalStrut(100));

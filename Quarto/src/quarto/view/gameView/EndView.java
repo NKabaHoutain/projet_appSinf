@@ -2,20 +2,22 @@ package quarto.view.gameView;
 
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Point;
 
 import javax.swing.*;
 
 import quarto.view.GUI;
+import quarto.view.button.DialogButton;
 import quarto.view.constante.ViewConstante;
 
 public class EndView extends JDialog {
 	JPanel panelGiveUp;
 	JPanel panelResume;
 	JPanel panelReset;
-	JButton giveUp;
-	JButton resume;
-	JButton reset;
+	DialogButton giveUp;
+	DialogButton resume;
+	DialogButton reset;
 	
 	public EndView(GUI gui, Point locationFrame) {
 		
@@ -24,24 +26,25 @@ public class EndView extends JDialog {
 		panelResume = new JPanel();
 		panelReset = new JPanel();
 		
-		giveUp = new JButton(ViewConstante.BUTTON_GIVE_UP);
-		resume = new JButton(ViewConstante.BUTTON_RETOUR_GAME);
-		reset = new JButton(ViewConstante.BUTTON_RESTART);
+		giveUp = new DialogButton(ViewConstante.BUTTON_GIVE_UP,gui);
+		resume = new DialogButton(ViewConstante.BUTTON_RETOUR_GAME,gui);
+		reset = new DialogButton(ViewConstante.BUTTON_RESTART,gui);
 		Box dialog = new Box(BoxLayout.Y_AXIS);
 		
 		panelGiveUp.add(giveUp, BorderLayout.CENTER);
 		panelResume.add(resume, BorderLayout.CENTER);
 		panelReset.add(reset, BorderLayout.CENTER);
 		
-		giveUp.addActionListener(gui);
-		resume.addActionListener(gui);
-		reset.addActionListener(gui);
+		panelGiveUp.setBackground(Color.black);
+		panelResume.setBackground(Color.black);
+		panelReset.setBackground(Color.black);
 		
 		dialog.add(panelResume);
 		dialog.add(panelReset);
 		dialog.add(panelGiveUp);
 		
 		add(dialog);
+		
 		
 		pack();
 		setVisible(true);

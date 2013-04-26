@@ -1,12 +1,15 @@
 package quarto.view.menuView;
 
+import java.awt.Color;
 import java.awt.Dialog;
 import java.awt.FlowLayout;
+import java.awt.Graphics;
 
 import javax.swing.*;
 
 import quarto.constante.Constante;
 import quarto.view.GUI;
+import quarto.view.button.DialogButton;
 import quarto.view.constante.ViewConstante;
 
 
@@ -23,8 +26,8 @@ public class PlayersInfoView extends JDialog {
 	private JPanel panelName1;
 	private JPanel panelName2;
 	private JPanel panelButton;
-	private JButton start;
-	private JButton cancel;
+	private DialogButton start;
+	private DialogButton cancel;
 	private JLabel j1;
 	private JLabel j2;
 	private JTextField nameJ1;
@@ -47,13 +50,20 @@ public class PlayersInfoView extends JDialog {
 		panelName1 = new JPanel();
 		panelName2 = new JPanel();
 		panelButton = new JPanel();
-		start = new JButton(ViewConstante.BUTTON_START);
-		cancel = new JButton(ViewConstante.BUTTON_CANCEL);
+		start = new DialogButton(ViewConstante.BUTTON_START,gui);
+		cancel = new DialogButton(ViewConstante.BUTTON_CANCEL,gui);
 		j1 = new JLabel("Nom J1");
 		j2 = new JLabel("Nom J2");
-		nameJ1 = new JTextField(10);
-		nameJ2 = new JTextField(10);
+		nameJ1 = new JTextField(7);
+		nameJ2 = new JTextField(7);
 		Box dialog = new Box(BoxLayout.Y_AXIS);
+		
+		panelName1.setBackground(Color.black);
+		panelName2.setBackground(Color.black);
+		panelButton.setBackground(Color.black);
+
+		j1.setForeground(Color.white);
+		j2.setForeground(Color.WHITE);
 		
 		panelName1.setLayout(new FlowLayout());
 		panelName1.add(j1);
@@ -69,8 +79,6 @@ public class PlayersInfoView extends JDialog {
 		}
 		
 		panelButton.setLayout(new FlowLayout());
-		start.addActionListener(gui);
-		cancel.addActionListener(gui);
 		panelButton.add(start);
 		panelButton.add(cancel);
 		
@@ -78,16 +86,19 @@ public class PlayersInfoView extends JDialog {
 		dialog.add(panelName2);
 		dialog.add(panelButton);
 		add(dialog);
+
 		
 		pack();
 		setVisible(true);
 		setAlwaysOnTop(true); 
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		
+		
 		setLocation((int)(locationFrame.getX()+ViewConstante.SIZE_MAIN_FRAME/2- this.getSize().getHeight()/2),
 						(int)(locationFrame.getY()+ViewConstante.SIZE_MAIN_FRAME/2 - this.getSize().getWidth()/2));
 		
 		dd = this;
+		
 		
 		naturalLocation = getLocation();
 		inShake=false;
@@ -149,4 +160,5 @@ public class PlayersInfoView extends JDialog {
 	  public boolean isIa() {
 		  return isIa;
 	  }
+	
 }
