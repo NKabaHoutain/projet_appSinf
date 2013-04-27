@@ -6,26 +6,48 @@ import java.util.Random;
 
 import quarto.model.Board;
 import quarto.model.Case;
+import quarto.model.Game;
 import quarto.model.Pion;
 
-public class Ia {
-	private static int HORIZON = 1;
+public class Ia extends Thread{
+	private static int HORIZON = 3;
 	private static Move bestMove;
 	
+	private Game game;
+	private Board board;
+	
+	public Ia(Game g, Board b) {
+		game = g;
+		board = b;
+	}
+	public void run() {
+		game.getBoard().setIa(true);
+		game.getBoard().change(game.getBoard());
+		try {
+			Thread.sleep(4000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Move m = playIa(board);
+		game.getBoard().setIa(false);
+		game.playIa(m);
+		
+	}
 	public static Move playIa(Board board) {
 		if(board.sizeHistoric() < 3) {
 			return randomMove(board);
 		}
 		else if (board.sizeHistoric() <9) {
-			HORIZON = 2;
+			HORIZON = 3;
 			nega(board, HORIZON, null);
 		}
 		else if (board.sizeHistoric() <19) {
-			HORIZON = 3;
+			HORIZON = 4;
 			nega(board, HORIZON, null);
 		}	
 		else {
-			HORIZON = 4;
+			HORIZON = 5;
 			nega(board, HORIZON, null);
 		}
 		

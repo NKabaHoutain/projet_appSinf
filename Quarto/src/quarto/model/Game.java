@@ -10,6 +10,8 @@ public class Game {
 	private Player playerOne;
 	private Player playerTwo;
 	
+	private Ia t;
+	
 	/*
 	 * INITIALISATION
 	 **************** 
@@ -88,7 +90,10 @@ public class Game {
 		board.pionSelected(nextPlayer());
 		
 		if(PlayerInGame().isIa()) {
-			playIa(Ia.playIa(board));
+			t = new Ia(this, board);
+			board.change(null);
+			t.start();
+			//playIa(Ia.playIa(board));
 		}
 	}
 	

@@ -68,9 +68,6 @@ public class Pion extends Observable{
 	
 	public void setAvailable(boolean available) {
 		this.available = available;
-		setChanged();
-		this.notifyObservers();
-		clearChanged();
 	}
 
 	public String toString() {
@@ -79,6 +76,4 @@ public class Pion extends Observable{
 				" " + PionField.getShortName(caract[PionField.PION_SHAPE],PionField.PION_SHAPE) +
 				" " + PionField.getShortName(caract[PionField.PION_BODY],PionField.PION_BODY);
 	}
-	
-	
 }

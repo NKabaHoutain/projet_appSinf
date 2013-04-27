@@ -58,5 +58,4 @@ public class Case extends Observable{
 	public boolean isWin() {
 		return win;
 	}
-	
 }

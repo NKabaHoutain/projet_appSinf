@@ -8,7 +8,7 @@ import quarto.constante.Constante;
 
 public class Option {
 	private static int soundVolume = 50;
-	private static boolean playMusic = true;
+	private static boolean playMusic = false;
 	private static boolean playSfx = true;
 	private static boolean undo = true;
 	private static int timeByTurn;

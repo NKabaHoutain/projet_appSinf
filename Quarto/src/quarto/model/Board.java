@@ -20,6 +20,15 @@ public class Board extends Observable{
 	
 	private long timeStart;
 	
+	private boolean playIa;
+	
+	public void setIa(boolean b) {
+		playIa = b;
+	}
+	
+	public boolean playIa() {
+		return playIa;
+	}
 	
 	/* INITIALISATION
 	 ****************
@@ -80,10 +89,13 @@ public class Board extends Observable{
 	public void move(Case c, String player) {
 		Pion p = getSelectedPion();
 		c.addPion(p);
-		c.change();
 		pions.remove(p);
 		p.setSelected(false);
 		
+		if(!playIa) {
+			p.change();
+			c.change();
+		}
 		endOfAction(c, BoardField.PION_ACTIF, player);
 		
 		if(winGame(c)) {
@@ -109,9 +121,9 @@ public class Board extends Observable{
 	private void endOfAction(Object o, boolean typeChange, String msg) {
 		historicMove.push(o);
 		canSelectedPion = !canSelectedPion;
-		change(typeChange);
 		change(this);
 		change(msg);
+		change(typeChange);
 	}
 	
 	/**
@@ -121,9 +133,11 @@ public class Board extends Observable{
 	public void selectPion(Pion pion) {
 		for(Pion p : pions) {
 			p.setSelected(p==pion);
-			p.change();
+			if(!playIa)
+				p.change();
 		}
 		change(this);
+		change(BoardField.PION_ACTIF);
 	}
 	/**
 	 * 
@@ -169,9 +183,11 @@ public class Board extends Observable{
 	}
 
 	public void change(Object s) {
-		setChanged();
-		this.notifyObservers(s);
-		clearChanged();
+		if(!playIa) {
+			setChanged();
+			this.notifyObservers(s);
+			clearChanged();
+		}
 	}
 	
 	
