@@ -165,7 +165,7 @@ public class Board extends Observable{
 			c.change();
 			selectPion(p);
 			pionSelected(player);
-			change(player);
+			change(BoardField.CASE_ACTIVE);
 			
 			historicMove.pop();
 		}

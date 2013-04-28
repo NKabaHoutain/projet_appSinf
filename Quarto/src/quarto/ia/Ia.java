@@ -24,7 +24,7 @@ public class Ia extends Thread{
 		game.getBoard().setIa(true);
 		game.getBoard().change(game.getBoard());
 		try {
-			Thread.sleep(4000);
+			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -38,7 +38,7 @@ public class Ia extends Thread{
 		if(board.sizeHistoric() < 3) {
 			return randomMove(board);
 		}
-		else if (board.sizeHistoric() <9) {
+		else if (board.sizeHistoric() <11) {
 			HORIZON = 3;
 			nega(board, HORIZON, null);
 		}
