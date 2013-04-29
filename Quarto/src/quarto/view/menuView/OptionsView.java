@@ -1,5 +1,6 @@
 package quarto.view.menuView;
 
+import quarto.constante.Constante;
 import quarto.controller.Controller;
 import quarto.option.Option;
 
@@ -44,6 +45,8 @@ public class OptionsView extends PanelParcho implements ActionListener {
 	JCheckBox medium;
 	JCheckBox hard;
 	JCheckBox undo;
+	
+	JFrame frame;
 	
 
 	BackButton back;
@@ -93,11 +96,10 @@ public class OptionsView extends PanelParcho implements ActionListener {
 
 
 		back = new BackButton(ViewConstante.BUTTON_RETOUR, gui, ViewConstante.BACK );
-		save = new BackButton(ViewConstante.BUTTON_SAVE, gui, ViewConstante.BACK );
+		save = new BackButton(ViewConstante.BUTTON_SAVE, this, ViewConstante.BACK );
 		changeTheme = new JButton(ViewConstante.BUTTON_CHANGE);
-	
-	
-		changeTheme.addActionListener(gui);
+		
+		changeTheme.addActionListener(this);
 		
 		title.setFont(titleFont);
 		panelTitle.add(Box.createVerticalStrut(105));
@@ -199,9 +201,9 @@ public class OptionsView extends PanelParcho implements ActionListener {
 		if(s instanceof JButton) {
 			if( ((JButton) s).getText().equals(ViewConstante.BUTTON_SAVE)) {
 				Option.setUndo(undo.isSelected());
-				//Option.setSoundVolume(vol);
 				Option.setPlaySfx(sfx.isSelected());
 				Option.setPlayMusic(music.isSelected());
+				Option.setGameLevel(getLevel());
 				
 				if(!music.isSelected()) {
 					Controller.music.stopMusic();
@@ -209,6 +211,24 @@ public class OptionsView extends PanelParcho implements ActionListener {
 				else {
 					Controller.music.restart();
 				}
+				
+				gui.startMenu();
+			}
+			else if(s instanceof ThemeItem) {
+				Option.setTheme(((ThemeItem) s).getTheme());
+				themeName.setText(Option.getThemeName().replace("/", ""));
+				frame.dispose();
+			}
+			else if(((JButton)s).getText().equals(ViewConstante.BUTTON_CHANGE)){
+				frame = new JFrame();
+				frame.add(new ThemesView(this));
+				frame.setVisible(true);
+				frame.setResizable(false);
+				frame.pack();
+				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			}
+			else if(((JButton)s).getText().equals(ViewConstante.BUTTON_RETOUR_OPTION)){
+				frame.dispose();
 			}
 		}
 		else if (s instanceof JCheckBox) {
@@ -220,5 +240,14 @@ public class OptionsView extends PanelParcho implements ActionListener {
 		easy.setSelected(easy == box);
 		medium.setSelected(medium == box);
 		hard.setSelected(hard == box);
+	}
+	
+	private int getLevel() {
+		if(hard.isSelected())
+			return Constante.LVL_HARD;
+		else if(medium.isSelected())
+			return Constante.LVL_MEDIUM;
+		else
+			return Constante.LVL_EASY;
 	}
 }

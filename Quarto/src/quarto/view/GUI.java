@@ -72,7 +72,7 @@ public class GUI implements ActionListener{
 	}
 	
 	public void startRules() {
-		replace(new RulesView(this),"Quarto-R�gle du jeu");
+		replace(new RulesView(this),"Quarto-Regle du jeu");
 	}
 	
 	public void startOptions() {
@@ -194,14 +194,7 @@ public class GUI implements ActionListener{
 				frame.pack();
 				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			}
-			else if(((JButton)s).getText().equals(ViewConstante.BUTTON_CHANGE)){
-				JFrame frame = new JFrame();
-				frame.add(new ThemesView(this));
-				frame.setVisible(true);
-				frame.setResizable(false);
-				frame.pack();
-				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-			}
+			
 			else if (((JButton)s).getText().equals(ViewConstante.BUTTON_DETAIL) ) {
 				startDetail();
 			}

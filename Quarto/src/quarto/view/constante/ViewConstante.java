@@ -88,6 +88,7 @@ public class ViewConstante {
 	public final static String BUTTON_CHANGE ="Change";
 	public static final String BUTTON_HELP = "Help";
 	public static final String BUTTON_APPLY = "Apply";
+	public static final String BUTTON_RETOUR_OPTION = "Back";
 
 	public final static String BUTTON_FULLSCREEN = "Plein �cran";
 	public final static String BUTTON_SELECT_PION = "Select";
