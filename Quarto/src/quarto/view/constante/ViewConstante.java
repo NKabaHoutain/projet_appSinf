@@ -84,7 +84,7 @@ public class ViewConstante {
 	public final static String BUTTON_START = "GO!";
 	public final static String BUTTON_CANCEL = "Annuler";
 	public final static String BUTTON_SAVE = "Save";
-	public final static String BUTTON_GIVE_UP ="Give up";
+	public final static String BUTTON_GIVE_UP ="Quit";
 	public static final String BUTTON_HELP = "Help";
 
 	public final static String BUTTON_FULLSCREEN = "Plein �cran";

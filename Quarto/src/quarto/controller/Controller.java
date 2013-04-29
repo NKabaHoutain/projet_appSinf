@@ -6,12 +6,16 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
 
+import javax.swing.JFrame;
+
 import quarto.detail.Detail;
+import quarto.ia.Ia;
 import quarto.model.Game;
 import quarto.model.Player;
 import quarto.sound.Music;
 import quarto.view.GUI;
 import quarto.view.gameView.CaseItem;
+import quarto.view.gameView.EndView;
 import quarto.view.gameView.PionItem;
 
 public class Controller implements ActionListener, MouseListener{
@@ -19,6 +23,8 @@ public class Controller implements ActionListener, MouseListener{
 	private GUI gui;
 	private Game game;
 	public static Music music;
+	
+	private Ia t;
 	
 	/* CONSTRUCTEUR
 	 ************** 
@@ -56,11 +62,16 @@ public class Controller implements ActionListener, MouseListener{
 	public void pionSelected() {
 		if(game.getBoard().getSelectedPion() != null) {
 			game.pionSelected();
+			
+			if(game.PlayerInGame().isIa()) {
+				t = new Ia(game, game.getBoard(), gui);
+				game.getBoard().change(null);
+				t.start();
+			}
 		}
 	}
 	
 	public void endOfGame() {
-		game.addDetail();
 		gui.startMenu();
 	}
 	
@@ -75,7 +86,10 @@ public class Controller implements ActionListener, MouseListener{
 	public void actionPerformed(ActionEvent e) {
 		Object s = e.getSource();
 			if(s instanceof CaseItem) {
-				game.move(((CaseItem) s).getCase());
+				if(game.move(((CaseItem) s).getCase())) {
+					game.addDetail();
+					gui.startEndView(false);
+				}
 			}
 			
 			if ( s instanceof PionItem) {
@@ -86,7 +100,7 @@ public class Controller implements ActionListener, MouseListener{
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		if(arg0.getClickCount() > 1) {
-			game.pionSelected();
+			pionSelected();
 		}
 	}
 

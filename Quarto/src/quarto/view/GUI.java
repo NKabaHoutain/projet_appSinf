@@ -86,8 +86,8 @@ public class GUI implements ActionListener{
 		 playerDialog= new PlayersInfoView(this, mainFrame.getLocation(),type);
 	}
 	
-	public void startEndView() {
-		endDialog = new EndView(this, mainFrame.getLocation());
+	public void startEndView(Boolean b) {
+		endDialog = new EndView(this, mainFrame.getLocation(), b);
 	}
 	
 	private void replace(Component actuel, String newName) {
@@ -98,7 +98,6 @@ public class GUI implements ActionListener{
 	}
 	
 	private void endOfFrame(){
-		
 		mainFrame.setVisible(true);
 		mainFrame.setResizable(false);
 		mainFrame.pack();
@@ -174,7 +173,7 @@ public class GUI implements ActionListener{
 			
 			else if (((JButton)s).getText().equals(ViewConstante.BUTTON_END_OF_GAME) ) {
 				mainFrame.setEnabled(false);
-				startEndView();
+				startEndView(true);
 			}
 			else if (((JButton)s).getText().equals(ViewConstante.BUTTON_GIVE_UP) ) {
 				controller.endOfGame();

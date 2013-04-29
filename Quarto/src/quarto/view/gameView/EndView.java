@@ -19,8 +19,7 @@ public class EndView extends JDialog {
 	DialogButton resume;
 	DialogButton reset;
 	
-	public EndView(GUI gui, Point locationFrame) {
-		
+	public EndView(GUI gui, Point locationFrame, Boolean b) {
 		
 		panelGiveUp = new JPanel();
 		panelResume = new JPanel();
@@ -39,7 +38,8 @@ public class EndView extends JDialog {
 		panelResume.setBackground(Color.black);
 		panelReset.setBackground(Color.black);
 		
-		dialog.add(panelResume);
+		if(b)
+			dialog.add(panelResume);
 		dialog.add(panelReset);
 		dialog.add(panelGiveUp);
 		

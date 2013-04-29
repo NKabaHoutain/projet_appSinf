@@ -1,5 +1,6 @@
 package quarto.model;
 
+import quarto.constante.Constante;
 import quarto.detail.Detail;
 import quarto.ia.Ia;
 import quarto.ia.Move;
@@ -10,7 +11,6 @@ public class Game {
 	private Player playerOne;
 	private Player playerTwo;
 	
-	private Ia t;
 	
 	/*
 	 * INITIALISATION
@@ -34,7 +34,11 @@ public class Game {
 	}
 	
 	public void addDetail() {
-		Detail.addDetail(isVsIa(), board.getGameStat(), board.getGameTime(), board.getNumberMove());
+		if(PlayerInGame().isIa() && board.getGameStat()==Constante.WINGAME ) 
+			Detail.addDetail(isVsIa(), Constante.LOSEGAME, board.getGameTime(), board.getNumberMove());
+		
+		else
+			Detail.addDetail(isVsIa(), board.getGameStat(), board.getGameTime(), board.getNumberMove());
 	}
 	
 	public boolean isVsIa() {
@@ -45,7 +49,7 @@ public class Game {
 	 * METHODE SUR LES PLAYER
 	 ************************ 
 	 */
-	private Player PlayerInGame() {
+	public Player PlayerInGame() {
 		if(playerOne.isInGame()) {
 			return playerOne;
 		}
@@ -77,24 +81,13 @@ public class Game {
 	 * METHODE SUR LA BOARD
 	 ********************** 
 	 */
-	public void move(Case c) {
+	public boolean move(Case c) {
 		board.move(c, PlayerInGame().getNom());
-		int statement = board.getGameStat();
-		
-		
-		//TODO start dialogue pour recommencer
-		
+		return board.getGameStat() != Constante.NOWINGAME ;
 	}
 
 	public void pionSelected() {
 		board.pionSelected(nextPlayer());
-		
-		if(PlayerInGame().isIa()) {
-			t = new Ia(this, board);
-			board.change(null);
-			t.start();
-			//playIa(Ia.playIa(board));
-		}
 	}
 	
 	public void selectPion(Pion p) {
@@ -109,13 +102,4 @@ public class Game {
 			board.undo(nextPlayer());
 		}
 	}
-	
-	public void playIa(Move m) {
-		move(m.getCase());
-		board.selectPion(m.getSelectedPion());
-		pionSelected();
-	}
-	
-
-
 }

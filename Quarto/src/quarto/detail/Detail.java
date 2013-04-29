@@ -51,13 +51,17 @@ public class Detail {
 	}
 		
 	public static void addDetail(boolean isVsIa, int resultGame, long time, int move) {
+		
 		if(isVsIa) {
 			numberGame[resultGame][Option.getGameLevel()] ++;
 		}
 		
-		moveInGame(move);
-		gameTime(time);
+		if(resultGame != Constante.NOWINGAME ) {
+			moveInGame(move);
+			gameTime(time);
+		}
 		
+		times[Constante.TOTAL_TIME]+= time;
 		try {
 			saveDetail();
 		} catch (IOException e) {
@@ -82,8 +86,6 @@ public class Detail {
 		if(time > times[Constante.MAX_TIME]) {
 			times[Constante.MAX_TIME] = time;
 		}
-		
-		times[Constante.TOTAL_TIME]+= time;
 	}
 	
 	private static void saveDetail() throws IOException {

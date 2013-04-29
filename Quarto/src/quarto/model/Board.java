@@ -196,11 +196,13 @@ public class Board extends Observable{
 	 */
 	
 	public int getGameStat() {
-		if(caseWin != null) {
+		if(caseWin != null) 
 			return Constante.WINGAME;
-		}
 		else {
-			return Constante.DRAWGAME;
+			if(historicMove.size() < 32) 
+				return Constante.NOWINGAME;
+			else 
+				return Constante.DRAWGAME;
 		}
 	}
 	
@@ -211,12 +213,11 @@ public class Board extends Observable{
 			return historicMove.size()/2;
 		}
 		else{
-			return historicMove.size()-1 /1;
+			return historicMove.size()-1;
 		}
 	}
 	
 	public long getGameTime() {
-		System.out.println(System.currentTimeMillis()-timeStart);
 		return System.currentTimeMillis()-timeStart;
 	}
 	/**
@@ -344,6 +345,8 @@ public class Board extends Observable{
 			}
 			p.setAvailable(true);
 		}
+		
+		caseWin = null;
 	}
 	
 	public Case getWinCase() {
