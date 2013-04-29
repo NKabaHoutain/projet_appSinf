@@ -28,6 +28,7 @@ public class EndView extends JDialog {
 		giveUp = new DialogButton(ViewConstante.BUTTON_GIVE_UP,gui);
 		resume = new DialogButton(ViewConstante.BUTTON_RETOUR_GAME,gui);
 		reset = new DialogButton(ViewConstante.BUTTON_RESTART,gui);
+		
 		Box dialog = new Box(BoxLayout.Y_AXIS);
 		
 		panelGiveUp.add(giveUp, BorderLayout.CENTER);

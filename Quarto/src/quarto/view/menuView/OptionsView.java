@@ -8,6 +8,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -96,10 +97,8 @@ public class OptionsView extends PanelParcho implements ActionListener {
 
 
 		back = new BackButton(ViewConstante.BUTTON_RETOUR, gui, ViewConstante.BACK );
-		save = new BackButton(ViewConstante.BUTTON_SAVE, this, ViewConstante.BACK );
-		changeTheme = new JButton(ViewConstante.BUTTON_CHANGE);
-		
-		changeTheme.addActionListener(this);
+		save = new BackButton(ViewConstante.BUTTON_SAVE, gui, ViewConstante.BACK );
+		changeTheme = new BackButton(ViewConstante.BUTTON_CHANGE, this,ViewConstante.BACK );
 		
 		title.setFont(titleFont);
 		panelTitle.add(Box.createVerticalStrut(105));
@@ -199,42 +198,32 @@ public class OptionsView extends PanelParcho implements ActionListener {
 		Object s = e.getSource();
 		
 		if(s instanceof JButton) {
-			if( ((JButton) s).getText().equals(ViewConstante.BUTTON_SAVE)) {
-				Option.setUndo(undo.isSelected());
-				Option.setPlaySfx(sfx.isSelected());
-				Option.setPlayMusic(music.isSelected());
-				Option.setGameLevel(getLevel());
-				
-				if(!music.isSelected()) {
-					Controller.music.stopMusic();
-				}
-				else {
-					Controller.music.restart();
-				}
-				
-				gui.startMenu();
-			}
-			else if(s instanceof ThemeItem) {
+			if(s instanceof ThemeItem) {
 				Option.setTheme(((ThemeItem) s).getTheme());
 				themeName.setText(Option.getThemeName().replace("/", ""));
 				frame.dispose();
+				changeTheme.setEnabled(true);
 			}
 			else if(((JButton)s).getText().equals(ViewConstante.BUTTON_CHANGE)){
+				changeTheme.setEnabled(false);
 				frame = new JFrame();
 				frame.add(new ThemesView(this));
 				frame.setVisible(true);
 				frame.setResizable(false);
+				frame.setLocation((int)(gui.getFrame().getLocation().getX()+100),
+						(int)(gui.getFrame().getLocation().getY()+100));
+				frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 				frame.pack();
-				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				
 			}
 			else if(((JButton)s).getText().equals(ViewConstante.BUTTON_RETOUR_OPTION)){
 				frame.dispose();
+				changeTheme.setEnabled(true);
 			}
 		}
 		else if (s instanceof JCheckBox) {
 			methLevel(((JCheckBox)s));
 		}
-		
 	}
 	private void methLevel(JCheckBox box) {
 		easy.setSelected(easy == box);
@@ -249,5 +238,19 @@ public class OptionsView extends PanelParcho implements ActionListener {
 			return Constante.LVL_MEDIUM;
 		else
 			return Constante.LVL_EASY;
+	}
+	
+	public void saveOption() {
+		Option.setUndo(undo.isSelected());
+		Option.setPlaySfx(sfx.isSelected());
+		Option.setPlayMusic(music.isSelected());
+		Option.setGameLevel(getLevel());
+		
+		if(!music.isSelected()) {
+			Controller.music.stopMusic();
+		}
+		else {
+			Controller.music.restart();
+		}
 	}
 }

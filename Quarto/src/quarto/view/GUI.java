@@ -144,9 +144,11 @@ public class GUI implements ActionListener{
 				playerDialog.dispose();
 				mainFrame.setEnabled(true);
 			}
-			else if(((JButton) s).getText().equals(ViewConstante.BUTTON_RETOUR) ||
-					((JButton) s).getText().equals(ViewConstante.BUTTON_SAVE) ) {
-				
+			else if(((JButton) s).getText().equals(ViewConstante.BUTTON_RETOUR) ) {
+				startMenu();
+			}
+			else if (((JButton) s).getText().equals(ViewConstante.BUTTON_SAVE)) {
+				((OptionsView)c).saveOption();
 				startMenu();
 			}
 			else if(((JButton) s).getText().equals(ViewConstante.BUTTON_UNDO) ) {
