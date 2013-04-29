@@ -94,10 +94,10 @@ public class OptionsView extends PanelParcho implements ActionListener {
 
 		back = new BackButton(ViewConstante.BUTTON_RETOUR, gui, ViewConstante.BACK );
 		save = new BackButton(ViewConstante.BUTTON_SAVE, gui, ViewConstante.BACK );
-		changeTheme = new JButton("Changer");
+		changeTheme = new JButton(ViewConstante.BUTTON_CHANGE);
 	
-		save.addActionListener(this);
-		changeTheme.addActionListener(this);
+	
+		changeTheme.addActionListener(gui);
 		
 		title.setFont(titleFont);
 		panelTitle.add(Box.createVerticalStrut(105));

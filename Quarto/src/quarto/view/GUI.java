@@ -27,6 +27,7 @@ import quarto.view.menuView.MenuItem;
 import quarto.view.menuView.OptionsView;
 import quarto.view.menuView.PlayersInfoView;
 import quarto.view.menuView.RulesView;
+import quarto.view.menuView.ThemesView;
 
 
 public class GUI implements ActionListener{
@@ -189,6 +190,14 @@ public class GUI implements ActionListener{
 			else if(((JButton)s).getText().equals(ViewConstante.BUTTON_HELP)){
 				JFrame frame = new JFrame();
 				frame.add(new HelpView(null));
+				frame.setVisible(true);
+				frame.setResizable(false);
+				frame.pack();
+				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			}
+			else if(((JButton)s).getText().equals(ViewConstante.BUTTON_CHANGE)){
+				JFrame frame = new JFrame();
+				frame.add(new ThemesView(this));
 				frame.setVisible(true);
 				frame.setResizable(false);
 				frame.pack();
