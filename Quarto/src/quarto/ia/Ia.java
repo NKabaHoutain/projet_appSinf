@@ -8,21 +8,32 @@ import quarto.model.Board;
 import quarto.model.Case;
 import quarto.model.Game;
 import quarto.model.Pion;
+import quarto.option.Option;
 import quarto.view.GUI;
 
 public class Ia extends Thread{
-	private static int HORIZON = 3;
-	private static Move bestMove;
+	protected int HORIZON = 3;
+	protected Move bestMove;
 	
-	private Game game;
-	private Board board;
-	private GUI gui;
+	protected Game game;
+	protected Board board;
+	protected GUI gui;
+	
+	public static Ia createIa(Game g, Board b, GUI gu) {
+		if(Option.getGameLevel()==0) 
+			return new IaEasy(g,b,gu);
+		else if (Option.getGameLevel()==1)
+			return new IaMedium(g,b,gu);
+		else
+			return new IaHard(g,b,gu);
+	}
 	
 	public Ia(Game g, Board b, GUI gu) {
 		game = g;
 		board = b;
 		gui = gu;
 	}
+	
 	public void run() {
 		game.getBoard().setIa(true);
 		game.getBoard().change(game.getBoard());
@@ -45,7 +56,8 @@ public class Ia extends Thread{
 			game.pionSelected();
 		}
 	}
-	public static Move playIa(Board board) {
+
+	public Move playIa(Board board) {
 		if(board.sizeHistoric() < 3) {
 			return randomMove(board);
 		}
@@ -65,7 +77,7 @@ public class Ia extends Thread{
 		return bestMove;
 	}
 	
-	private static int nega(Board board, int horizon, Case c) {
+	protected int nega(Board board, int horizon, Case c) {
 		if(winGame(board, c) || horizon <= 0) {
 			return heuristic(board, horizon);
 		}
@@ -93,7 +105,7 @@ public class Ia extends Thread{
 		}
 	}
 	
-	private static List<Move> allMove(Board board) {
+	private List<Move> allMove(Board board) {
 		List<Move> allMove = new ArrayList<Move>();
 		Pion select = board.getSelectedPion();
 		List<Pion> pionAvailable = board.getAvailablePions();
@@ -109,11 +121,11 @@ public class Ia extends Thread{
 		return allMove;
 	}
 	
-	private static boolean winGame(Board board, Case c) {
+	private boolean winGame(Board board, Case c) {
 			return c!=null && board.winGame(c);
 	}
 
-	private static int heuristic(Board board, int horizon) {
+	private int heuristic(Board board, int horizon) {
 		if(board.getWinCase() == null) {
 			return 0;
 		}
@@ -122,7 +134,7 @@ public class Ia extends Thread{
 		}
 	}
 	
-	private static Move randomMove(Board board) {
+	protected Move randomMove(Board board) {
 		Pion select = board.getSelectedPion();
 		List<Pion> pionAvailable = board.getAvailablePions();
 		pionAvailable.remove(select);

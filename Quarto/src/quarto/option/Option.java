@@ -8,12 +8,10 @@ import quarto.constante.Constante;
 
 public class Option {
 	private static int soundVolume = 50;
-	private static boolean playMusic = false;
+	private static boolean playMusic = true;
 	private static boolean playSfx = true;
 	private static boolean undo = true;
-	private static int timeByTurn;
-	private static boolean chrono = true;
-	private static int gameLevel;
+	private static int gameLevel=0;
 	private static int theme=0;
 	
 	
@@ -42,18 +40,6 @@ public class Option {
 	public static void setUndo(boolean undo) {
 		Option.undo = undo;
 	}
-	public static int getTimeByTurn() {
-		return timeByTurn;
-	}
-	public static void setTimeByTurn(int timeByTurn) {
-		Option.timeByTurn = timeByTurn;
-	}
-	public static boolean isChrono() {
-		return chrono;
-	}
-	public static void setChrono(boolean chrono) {
-		Option.chrono = chrono;
-	}
 	public static int getGameLevel() {
 		return gameLevel;
 	}
@@ -63,10 +49,6 @@ public class Option {
 	public static int getSoundVolume() {
 		return soundVolume;
 	}
-	/*public static void setSoundVolume(int soundVolume) {
-		Option.soundVolume = soundVolume;
-		Audio.setMasterOutputVolume((float) soundVolume/100);
-	}*/
 
 	public static String getThemeName() {
 		return Constante.PATH_THEME[theme];
