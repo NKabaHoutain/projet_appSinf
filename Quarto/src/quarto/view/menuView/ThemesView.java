@@ -1,7 +1,10 @@
 package quarto.view.menuView;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Point;
+import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
@@ -17,39 +20,43 @@ public class ThemesView extends JPanel {
 	
 	private ThemeItem[] themes;
 	private BackButton back;
-	private BackButton apply;
-	
-	public ThemesView(GUI gui){
+	public ThemesView(ActionListener opt){
 		super();
 		
 		setPreferredSize(new Dimension(400,400));
+		setBackground(Color.black);
 	
 		panelTheme = new JPanel();
 		panelButton = new JPanel();
 		
+		panelTheme.setBackground(Color.black);
+		panelTheme.setAutoscrolls(true);
+		
+		panelButton.setBackground(Color.black);
+		
 		panelTheme.setLayout(new FlowLayout());
-		panelButton.setLayout(new FlowLayout());
+		
+		back = new BackButton(ViewConstante.BUTTON_RETOUR_OPTION,opt, ViewConstante.BACK);
+		back.setForeground(Color.white);
+		back.setBorder(BorderFactory.createLineBorder(Color.white));
 		
 		setLayout(new FlowLayout());
-		back = new BackButton(ViewConstante.BUTTON_RETOUR, gui, ViewConstante.BACK);
-		apply = new BackButton(ViewConstante.BUTTON_APPLY, gui,ViewConstante.BACK);
-		
 		
 		themes = new ThemeItem[2];
 		for(int i = 0; i<2;i++){
-			themes[i]= new ThemeItem(Constante.PATH_THEME[i]+"board.jpg",Constante.getPathTheme(i));
-			themes[i].addActionListener(gui);
+			themes[i]= new ThemeItem(i,Constante.getPathTheme(i)+Constante.PLATEAU);
+			themes[i].addActionListener(opt);
 			panelTheme.add(themes[i]);
 		}
 		
+		//panelButton.setPreferredSize(new Dimension(350,50));
 		panelButton.add(back);
-		panelButton.add(apply);
-		
 		setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
 		
-		add(panelTheme);
-		add(panelButton);
 		
+		add(panelTheme);
+		add(Box.createGlue());
+		add(panelButton);
 		
 	}
 

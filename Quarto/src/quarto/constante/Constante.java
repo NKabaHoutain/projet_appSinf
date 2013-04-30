@@ -27,6 +27,8 @@ public class Constante {
 	public static final int LOSEGAME = 0;
 	public static final int DRAWGAME = 1;
 	public static final int WINGAME = 2;
+	public static final int NOWINGAME = 3;
+	
 	/*
 	 * Constante des times
 	 */ 

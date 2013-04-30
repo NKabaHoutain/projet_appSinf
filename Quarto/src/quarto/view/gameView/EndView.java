@@ -19,8 +19,7 @@ public class EndView extends JDialog {
 	DialogButton resume;
 	DialogButton reset;
 	
-	public EndView(GUI gui, Point locationFrame) {
-		
+	public EndView(GUI gui, Point locationFrame, Boolean b) {
 		
 		panelGiveUp = new JPanel();
 		panelResume = new JPanel();
@@ -29,6 +28,7 @@ public class EndView extends JDialog {
 		giveUp = new DialogButton(ViewConstante.BUTTON_GIVE_UP,gui);
 		resume = new DialogButton(ViewConstante.BUTTON_RETOUR_GAME,gui);
 		reset = new DialogButton(ViewConstante.BUTTON_RESTART,gui);
+		
 		Box dialog = new Box(BoxLayout.Y_AXIS);
 		
 		panelGiveUp.add(giveUp, BorderLayout.CENTER);
@@ -39,7 +39,8 @@ public class EndView extends JDialog {
 		panelResume.setBackground(Color.black);
 		panelReset.setBackground(Color.black);
 		
-		dialog.add(panelResume);
+		if(b)
+			dialog.add(panelResume);
 		dialog.add(panelReset);
 		dialog.add(panelGiveUp);
 		

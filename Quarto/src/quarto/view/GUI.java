@@ -72,7 +72,7 @@ public class GUI implements ActionListener{
 	}
 	
 	public void startRules() {
-		replace(new RulesView(this),"Quarto-R�gle du jeu");
+		replace(new RulesView(this),"Quarto-Regle du jeu");
 	}
 	
 	public void startOptions() {
@@ -87,8 +87,8 @@ public class GUI implements ActionListener{
 		 playerDialog= new PlayersInfoView(this, mainFrame.getLocation(),type);
 	}
 	
-	public void startEndView() {
-		endDialog = new EndView(this, mainFrame.getLocation());
+	public void startEndView(Boolean b) {
+		endDialog = new EndView(this, mainFrame.getLocation(), b);
 	}
 	
 	private void replace(Component actuel, String newName) {
@@ -99,7 +99,6 @@ public class GUI implements ActionListener{
 	}
 	
 	private void endOfFrame(){
-		
 		mainFrame.setVisible(true);
 		mainFrame.setResizable(false);
 		mainFrame.pack();
@@ -145,9 +144,11 @@ public class GUI implements ActionListener{
 				playerDialog.dispose();
 				mainFrame.setEnabled(true);
 			}
-			else if(((JButton) s).getText().equals(ViewConstante.BUTTON_RETOUR) ||
-					((JButton) s).getText().equals(ViewConstante.BUTTON_SAVE) ) {
-				
+			else if(((JButton) s).getText().equals(ViewConstante.BUTTON_RETOUR) ) {
+				startMenu();
+			}
+			else if (((JButton) s).getText().equals(ViewConstante.BUTTON_SAVE)) {
+				((OptionsView)c).saveOption();
 				startMenu();
 			}
 			else if(((JButton) s).getText().equals(ViewConstante.BUTTON_UNDO) ) {
@@ -175,7 +176,7 @@ public class GUI implements ActionListener{
 			
 			else if (((JButton)s).getText().equals(ViewConstante.BUTTON_END_OF_GAME) ) {
 				mainFrame.setEnabled(false);
-				startEndView();
+				startEndView(true);
 			}
 			else if (((JButton)s).getText().equals(ViewConstante.BUTTON_GIVE_UP) ) {
 				controller.endOfGame();
@@ -195,14 +196,7 @@ public class GUI implements ActionListener{
 				frame.pack();
 				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			}
-			else if(((JButton)s).getText().equals(ViewConstante.BUTTON_CHANGE)){
-				JFrame frame = new JFrame();
-				frame.add(new ThemesView(this));
-				frame.setVisible(true);
-				frame.setResizable(false);
-				frame.pack();
-				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-			}
+			
 			else if (((JButton)s).getText().equals(ViewConstante.BUTTON_DETAIL) ) {
 				startDetail();
 			}

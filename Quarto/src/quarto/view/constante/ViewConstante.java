@@ -1,6 +1,9 @@
 package quarto.view.constante;
 
+import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Frame;
+import java.awt.Point;
 
 public class ViewConstante {
 	
@@ -84,10 +87,11 @@ public class ViewConstante {
 	public final static String BUTTON_START = "GO!";
 	public final static String BUTTON_CANCEL = "Annuler";
 	public final static String BUTTON_SAVE = "Save";
-	public final static String BUTTON_GIVE_UP ="Give up";
+	public final static String BUTTON_GIVE_UP ="Quit";
 	public final static String BUTTON_CHANGE ="Change";
 	public static final String BUTTON_HELP = "Help";
 	public static final String BUTTON_APPLY = "Apply";
+	public static final String BUTTON_RETOUR_OPTION = "Back";
 
 	public final static String BUTTON_FULLSCREEN = "Plein �cran";
 	public final static String BUTTON_SELECT_PION = "Select";
@@ -95,5 +99,8 @@ public class ViewConstante {
 	public final static String TEXTFIELD_MESSAGE = "J1 choississez \n un pion";
 
 	
-	
+	public static Point center(Frame f, Component c) {
+		return new Point((int)(f.getLocation().getX() + f.getSize().getWidth()/2 - c.getWidth()/2),
+				(int)(f.getLocation().getY() + f.getSize().getHeight()/2 - c.getHeight()/2));
+	}
 }

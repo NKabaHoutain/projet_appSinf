@@ -8,6 +8,7 @@ import quarto.model.Board;
 import quarto.model.Case;
 import quarto.model.Game;
 import quarto.model.Pion;
+import quarto.view.GUI;
 
 public class Ia extends Thread{
 	private static int HORIZON = 3;
@@ -15,10 +16,12 @@ public class Ia extends Thread{
 	
 	private Game game;
 	private Board board;
+	private GUI gui;
 	
-	public Ia(Game g, Board b) {
+	public Ia(Game g, Board b, GUI gu) {
 		game = g;
 		board = b;
+		gui = gu;
 	}
 	public void run() {
 		game.getBoard().setIa(true);
@@ -31,57 +34,35 @@ public class Ia extends Thread{
 		}
 		Move m = playIa(board);
 		game.getBoard().setIa(false);
-		game.playIa(m);
 		
+		if(game.move(m.getCase())) {
+			game.addDetail();
+			gui.startEndView(false);
+			
+		}
+		else {
+			board.selectPion(m.getSelectedPion());
+			game.pionSelected();
+		}
 	}
 	public static Move playIa(Board board) {
 		if(board.sizeHistoric() < 3) {
 			return randomMove(board);
 		}
-		else if (board.sizeHistoric() <11) {
+		else if(board.sizeHistoric() <7) {
+			HORIZON = 2;
+			nega(board, HORIZON, null);
+		}
+		else if (board.sizeHistoric() <17) {
 			HORIZON = 3;
 			nega(board, HORIZON, null);
 		}
-		else if (board.sizeHistoric() <19) {
-			HORIZON = 4;
-			nega(board, HORIZON, null);
-		}	
 		else {
-			HORIZON = 5;
+			HORIZON = 4;
 			nega(board, HORIZON, null);
 		}
 		
 		return bestMove;
-	}
-	
-	//play(board, HORIZON, Integer.MIN_VALUE, Integer.MAX_VALUE, null);
-	
-	private static int play(Board board, int horizon, int alpha, int beta, Case c) {
-		if(winGame(board, c) || horizon <= 0) {
-			return heuristic(board, horizon);
-		}
-		else {
-			Move meilleurCoup = null;
-			int max = Integer.MIN_VALUE;
-			
-			for(Move m : allMove(board)) {
-				board.playMove(m);
-				int score = - play( board, horizon-1, -beta, -alpha, m.getCase());
-				board.undoMove(m);
-				
-				if(score>=max) {
-					max = score;
-					meilleurCoup = m;
-				}
-				if(score > alpha) alpha = score;
-				if(score >=beta) return score;
-			}
-			
-			if(horizon == HORIZON) {
-				bestMove = meilleurCoup;
-			}
-			return alpha;
-		}
 	}
 	
 	private static int nega(Board board, int horizon, Case c) {
