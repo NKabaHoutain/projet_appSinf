@@ -203,6 +203,11 @@ public class OptionsView extends PanelParcho implements ActionListener {
 		undo.setSelected(Option.isUndo());
 		sfx.setSelected(Option.isPlaySfx());
 		music.setSelected(Option.isPlayMusic());
+		
+		
+		easy.setSelected(Option.getGameLevel() == Constante.LVL_EASY);
+		medium.setSelected(Option.getGameLevel() == Constante.LVL_MEDIUM);
+		hard.setSelected(Option.getGameLevel() == Constante.LVL_HARD);
 	}
 
 	@Override

@@ -101,5 +101,10 @@ public class Game {
 		else {
 			board.undo(nextPlayer());
 		}
+		
+		if(PlayerInGame().isIa()) {
+			board.undo(PlayerInGame().getNom());
+			board.undo(nextPlayer());
+		}
 	}
 }

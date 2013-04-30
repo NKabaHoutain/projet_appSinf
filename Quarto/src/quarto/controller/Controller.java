@@ -64,7 +64,7 @@ public class Controller implements ActionListener, MouseListener{
 			game.pionSelected();
 			
 			if(game.PlayerInGame().isIa()) {
-				t = new Ia(game, game.getBoard(), gui);
+				t = Ia.createIa(game, game.getBoard(), gui);
 				game.getBoard().change(null);
 				t.start();
 			}
