@@ -7,7 +7,6 @@ import quarto.constante.Constante;
 
 
 public class Option {
-	private static int soundVolume = 50;
 	private static boolean playMusic = true;
 	private static boolean playSfx = true;
 	private static boolean undo = true;
@@ -45,9 +44,6 @@ public class Option {
 	}
 	public static void setGameLevel(int gameLevel) {
 		Option.gameLevel = gameLevel;
-	}
-	public static int getSoundVolume() {
-		return soundVolume;
 	}
 
 	public static String getThemeName() {
