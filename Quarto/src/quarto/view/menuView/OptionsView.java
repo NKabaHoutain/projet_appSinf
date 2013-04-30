@@ -78,8 +78,13 @@ public class OptionsView extends PanelParcho implements ActionListener {
 		themeText = new JLabel("Theme: ",SwingConstants.CENTER);
 		themeName = new JLabel (Option.getThemeName().replace("/", ""),SwingConstants.CENTER);
 		
+		title.setForeground(Color.black);
+		
 		undoText.setForeground(Color.white);
+		musicText.setForeground(Color.white);
 		sfxText.setForeground(Color.white);
+		themeText.setForeground(Color.white);
+		levelText.setForeground(Color.white);
 		
 		undo = new JCheckBox();
 		music = new JCheckBox();
