@@ -32,8 +32,8 @@ public class PlayerView extends JPanel{
 	}
 	
 	public void paintComponent(Graphics g) {
+		g.drawImage(img.getImage(), 0,0, getWidth(), getHeight()-20, this);
 		
-		g.drawImage(img.getImage(), 0,0, getWidth(), getHeight()-20, this);	
 	}
 	
 	public String getNom() {
