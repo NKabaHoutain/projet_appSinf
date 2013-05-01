@@ -3,6 +3,7 @@ package quarto.view.menuView;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.event.ActionListener;
 
@@ -49,7 +50,6 @@ public class ThemesView extends JPanel {
 			panelTheme.add(themes[i]);
 		}
 		
-		//panelButton.setPreferredSize(new Dimension(350,50));
 		panelButton.add(back);
 		setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
 		
