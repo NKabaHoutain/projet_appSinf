@@ -1,5 +1,6 @@
 package quarto.view.menuView;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -50,13 +51,15 @@ public class RulesView extends PanelParcho {
 		rules.setText(ViewConstante.RULES);
 		title.setFont(fontTitle);
 		
-				
+		title.setForeground(Color.black);		
 		rules.setEditable(false);
+		rules.setForeground(Color.black);
 		
 		initElement(title);
 		initElement(rules);
 		
 		panelTitle.add(title);
+		panelTitle.setPreferredSize(new Dimension(600,30));
 		panelText.add(rules);
 		if(gui!= null) {
 			panelButton.add(back);
@@ -65,7 +68,7 @@ public class RulesView extends PanelParcho {
 		add(Box.createVerticalStrut(30));
 		panelTitle.setOpaque(false);
 		add(panelTitle);
-		add(Box.createVerticalStrut(5));
+		add(Box.createVerticalStrut(2));
 		panelText.setOpaque(false);
 		add(panelText);
 		add(Box.createVerticalStrut(0));

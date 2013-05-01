@@ -85,11 +85,18 @@ public class OptionsView extends PanelParcho implements ActionListener {
 		
 		title.setForeground(Color.black);
 		
-		undoText.setForeground(Color.white);
-		musicText.setForeground(Color.white);
-		sfxText.setForeground(Color.white);
-		themeText.setForeground(Color.white);
-		levelText.setForeground(Color.white);
+		undoText.setForeground(Color.black);
+		musicText.setForeground(Color.black);
+		sfxText.setForeground(Color.black);
+		themeText.setForeground(Color.black);
+		levelText.setForeground(Color.black);
+		easyText.setForeground(Color.black);
+		mediumText.setForeground(Color.black);
+		hardText.setForeground(Color.black);
+		themeText.setForeground(Color.black);
+		themeName.setForeground(Color.black);
+		
+		
 		
 		undo = new JCheckBox();
 		music = new JCheckBox();

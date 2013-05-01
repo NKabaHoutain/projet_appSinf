@@ -1,5 +1,6 @@
 package quarto.view.menuView;
- import java.awt.Dimension;
+ import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 
@@ -36,7 +37,7 @@ public class DetailsView extends PanelParcho {
 	JLabel hard;
 	JLabel time;
 	JLabel move;
-	JLabel TotalTime;
+	JLabel totalTime;
 	BackButton back;
 	
 	Font titleFont;
@@ -69,7 +70,7 @@ public class DetailsView extends PanelParcho {
 		
 		time =  new JLabel(Detail.getStringTime());
 		move =  new JLabel(Detail.getStringMove());
-		TotalTime =  new JLabel(Detail.getStringTotalTime());
+		totalTime =  new JLabel(Detail.getStringTotalTime());
 		back = new BackButton(ViewConstante.BUTTON_RETOUR, gui, ViewConstante.BACK );
 		
 		titleFont = new Font("Serif",Font.BOLD,36);
@@ -88,6 +89,23 @@ public class DetailsView extends PanelParcho {
 		timeText.setFont(textFont);
 		moveText.setFont(textFont);
 		gameNumText.setFont(textFont);
+		
+		title.setForeground(Color.black);
+		resultText.setForeground(Color.black);
+		easyText.setForeground(Color.black);
+		mediumText.setForeground(Color.black);
+		hardText.setForeground(Color.black);
+		timeText.setForeground(Color.black);
+		moveText.setForeground(Color.black);
+		gameNumText.setForeground(Color.black);
+		
+		easy.setForeground(Color.black);
+		medium.setForeground(Color.black);
+		hard.setForeground(Color.black);
+		time.setForeground(Color.black);
+		move.setForeground(Color.black);
+		totalTime.setForeground(Color.black);
+		
 		
 		panelResult.setLayout(new FlowLayout());
 		panelResult.add(resultText);
@@ -114,7 +132,7 @@ public class DetailsView extends PanelParcho {
 		
 		panelGameNum.setLayout(new FlowLayout());
 		panelGameNum.add(gameNumText);
-		panelGameNum.add(TotalTime);
+		panelGameNum.add(totalTime);
 		
 		panelButton.add(back);
 		

@@ -34,6 +34,8 @@ public class HelpView extends PanelParcho {
 		StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
 		doc.setParagraphAttributes(0, 0, center, true);
 		
+		title.setForeground(Color.black);
+		text.setForeground(Color.black);
 		text.setText(ViewConstante.HELP);
 		text.setEditable(false);
 		text.setOpaque(false);
