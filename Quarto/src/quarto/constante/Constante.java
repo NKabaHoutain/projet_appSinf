@@ -62,6 +62,7 @@ public class Constante {
 	public final static String PATH_PIONS = "Pions/";
 	public final static String PATH_MENU = "Menu/";
 	public final static String PATH_TEXTURE = "Textures/";
+	public final static String PATH_SFX ="SFX/";
 	
 	public final static String PATH_DETAIL = "Details.txt";
 	
@@ -91,6 +92,9 @@ public class Constante {
 	
 	public static String getPathMusic() {
 		return PATH_RESSOURCE + PATH_MUSIC ;
+	}
+	public static String getPathSFX() {
+		return PATH_RESSOURCE + PATH_SFX;
 	}
 	public static String getPathPion() {
 		return PATH_RESSOURCE + PATH_IMAGES + PATH_PIONS;

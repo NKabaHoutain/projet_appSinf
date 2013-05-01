@@ -4,7 +4,6 @@ import quarto.constante.Constante;
 import quarto.detail.Detail;
 import quarto.ia.Ia;
 import quarto.ia.Move;
-
 public class Game {
 	
 	private Board board;
@@ -83,6 +82,7 @@ public class Game {
 	 */
 	public boolean move(Case c) {
 		board.move(c, PlayerInGame().getNom());
+		
 		return board.getGameStat() != Constante.NOWINGAME ;
 	}
 
