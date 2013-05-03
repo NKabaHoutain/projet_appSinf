@@ -4,20 +4,20 @@ DrawGame=0
 WinGame=1
 
 Niveau2
-LoseGame=0
+LoseGame=1
 DrawGame=0
 WinGame=0
 
 Niveau3
-LoseGame=0
+LoseGame=1
 DrawGame=0
 WinGame=0
 
 Move
-maxMove=8
-minMove=7
+maxMove=11
+minMove=5
 
 Time
-totalTime=96435
+totalTime=243408
 minTime=0
-maxTime=24082
+maxTime=40242

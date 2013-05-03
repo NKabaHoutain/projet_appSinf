@@ -20,14 +20,10 @@ import quarto.option.Option;
  */
 public class Detail {
 	
-	/**
-	 * Constante propre au detail.
-	 */
-	public static final String NIVEAU = "Niveau";
-	public static final String TIME = "Time";
-	public static final String MOVE = "Move";
-	
-
+	// Constante propre au detail
+	private static final String NIVEAU = "Niveau";
+	private static final String TIME = "Time";
+	private static final String MOVE = "Move";
 	private static int[][] numberGame= new int[3][3];
 	private static long[] times = new long[3];
 	private static int[] moves = new int[2];

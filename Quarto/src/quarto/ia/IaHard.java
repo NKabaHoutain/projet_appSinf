@@ -4,11 +4,20 @@ import quarto.model.Board;
 import quarto.model.Game;
 import quarto.view.GUI;
 
+/**
+ * Level HARD de l'IA
+ */
 public class IaHard extends Ia{
+	/**
+	 * Constructeur
+	 */
 	public IaHard(Game g, Board b, GUI gu) {
 		super(g, b, gu);
 	}
 	
+	/**
+	 * Joue un coup
+	 */
 	public Move playIa(Board board) {
 		if(board.sizeHistoric() < 3) {
 			return randomMove(board);

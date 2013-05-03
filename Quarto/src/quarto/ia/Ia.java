@@ -11,23 +11,37 @@ import quarto.model.Pion;
 import quarto.option.Option;
 import quarto.view.GUI;
 
-public class Ia extends Thread{
+/**
+ * Classe abstract qui englobe les differents level de l'IA
+ */
+public abstract class Ia extends Thread{
 	protected int HORIZON = 3;
 	protected Move bestMove;
-	
 	protected Game game;
 	protected Board board;
 	protected GUI gui;
 	
+	/**
+	 * Methode abstract a implementer
+	 * @param board
+	 * @return
+	 */
+	abstract public Move playIa(Board board);
+	
+	/**
+	 * @return Une Ia du level correspondant au option
+	 */
 	public static Ia createIa(Game g, Board b, GUI gu) {
-		if(Option.getGameLevel()==0) 
-			return new IaEasy(g,b,gu);
-		else if (Option.getGameLevel()==1)
-			return new IaMedium(g,b,gu);
-		else
-			return new IaHard(g,b,gu);
+		switch(Option.getGameLevel()) {
+		case(0) : return new IaEasy(g,b,gu);
+		case(1) : return new IaMedium(g,b,gu);
+		default : return new IaHard(g,b,gu);
+		}
 	}
 	
+	/**
+	 * Constructeur
+	 */
 	public Ia(Game g, Board b, GUI gu) {
 		game = g;
 		board = b;
@@ -35,17 +49,22 @@ public class Ia extends Thread{
 	}
 	
 	public void run() {
+		// Bloque la board
 		game.getBoard().setIa(true);
 		game.getBoard().change(game.getBoard());
+		
+		//Attend 1sec pour éviter un bug de l'interface
 		try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		// Lance l'IA
 		Move m = playIa(board);
 		game.getBoard().setIa(false);
 		
+		// Soit l'IA a gagné, soit il selectionne le prochain pion
 		if(game.move(m.getCase())) {
 			game.addDetail();
 			gui.startEndView(false);
@@ -57,26 +76,13 @@ public class Ia extends Thread{
 		}
 	}
 
-	public Move playIa(Board board) {
-		if(board.sizeHistoric() < 3) {
-			return randomMove(board);
-		}
-		else if(board.sizeHistoric() <7) {
-			HORIZON = 2;
-			nega(board, HORIZON, null);
-		}
-		else if (board.sizeHistoric() <17) {
-			HORIZON = 3;
-			nega(board, HORIZON, null);
-		}
-		else {
-			HORIZON = 4;
-			nega(board, HORIZON, null);
-		}
-		
-		return bestMove;
-	}
-	
+	/**
+	 * Joue un coup de negaMax avec la board et l'horizon reçu
+	 * @param board
+	 * @param horizon
+	 * @param c
+	 * @return
+	 */
 	protected int nega(Board board, int horizon, Case c) {
 		if(winGame(board, c) || horizon <= 0) {
 			return heuristic(board, horizon);
@@ -86,7 +92,6 @@ public class Ia extends Thread{
 			int max = Integer.MIN_VALUE;
 			
 			for(Move m : allMove(board)) {
-				
 				board.playMove(m);
 				int score = - nega( board, horizon-1,  m.getCase());
 				board.undoMove(m);
@@ -97,14 +102,17 @@ public class Ia extends Thread{
 				}
 			}
 			
-			if(horizon == HORIZON) {
+			if(horizon == HORIZON) 
 				bestMove = meilleurCoup;
-			}
 			
 			return max;
 		}
 	}
 	
+	/**
+	 * @param board
+	 * @return La liste des mouvements possibles pour la board
+	 */
 	private List<Move> allMove(Board board) {
 		List<Move> allMove = new ArrayList<Move>();
 		Pion select = board.getSelectedPion();
@@ -121,10 +129,20 @@ public class Ia extends Thread{
 		return allMove;
 	}
 	
+	/**
+	 * @param board
+	 * @param c
+	 * @return true si le jeu est gagné
+	 */
 	private boolean winGame(Board board, Case c) {
 			return c!=null && board.winGame(c);
 	}
 
+	/**
+	 * @param board
+	 * @param horizon
+	 * @return La valeur de la board
+	 */
 	private int heuristic(Board board, int horizon) {
 		if(board.getWinCase() == null) {
 			return 0;
@@ -134,6 +152,10 @@ public class Ia extends Thread{
 		}
 	}
 	
+	/**
+	 * @param board
+	 * @return Un mouvement aleatoire
+	 */
 	protected Move randomMove(Board board) {
 		Pion select = board.getSelectedPion();
 		List<Pion> pionAvailable = board.getAvailablePions();
@@ -148,6 +170,5 @@ public class Ia extends Thread{
 		pionAvailable.add(select);
 		
 		return new Move(caseAvailable.get(randomCase), select, pionAvailable.get(randomPion));
-		
 	}
 }
