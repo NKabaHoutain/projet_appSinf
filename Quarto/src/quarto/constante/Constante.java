@@ -2,6 +2,9 @@ package quarto.constante;
 
 import java.io.File;
 
+/*
+ * Contient les constantes relative au jeu Quarto
+ */
 public class Constante {
 
 	/*
@@ -16,7 +19,6 @@ public class Constante {
 	
 	public static final boolean VSIA = true;
 	public static final boolean VSPLAYER = false;
-	
 
 	/*
 	 * Constante des details
@@ -47,14 +49,9 @@ public class Constante {
 	public static final int MAX_MOVE = 0;
 	public static final int MIN_MOVE = 1;
 
-
-	
 	/*
 	 * Constante des path
 	 */
-	public final static int PARQUET = 0;
-	public final static int PLANCHE = 1;
-	
 	public final static String PATH_RESSOURCE = "./Ressources/";
 	public final static String PATH_MUSIC = "Musics/";
 	public final static String PATH_IMAGES = "Images/";
@@ -63,7 +60,6 @@ public class Constante {
 	public final static String PATH_MENU = "Menu/";
 	public final static String PATH_TEXTURE = "Textures/";
 	public final static String PATH_SFX ="SFX/";
-	
 	public final static String PATH_DETAIL = "Details.txt";
 	
 	public final static String LOGO = "logo_quarto.png";
@@ -85,16 +81,19 @@ public class Constante {
 	public final static String RULES = "rules.png";
 	public final static String HAND = "hand.png";
 	
+	public final static int PARQUET = 0;
+	public final static int PLANCHE = 1;
 	public final static String[] PATH_THEME = {	"Parquet/" ,
 												"Planche/"		};
 	
-	
-	
+	/*
+	 * Méthode pour recuperer les path
+	 */
 	public static String getPathMusic() {
-		return PATH_RESSOURCE + PATH_MUSIC ;
+		return PATH_RESSOURCE + PATH_MUSIC;
 	}
 	public static String getPathSFX() {
-		return PATH_RESSOURCE + PATH_SFX;
+		return PATH_RESSOURCE + PATH_SFX ;
 	}
 	public static String getPathPion() {
 		return PATH_RESSOURCE + PATH_IMAGES + PATH_PIONS;

@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
-import quarto.sound.SoundEffects;
 import javax.swing.JFrame;
 
 import quarto.detail.Detail;
@@ -39,7 +38,6 @@ public class Controller implements ActionListener, MouseListener{
 		gui = new GUI(this);
 		music = new Music();
 		music.start();
-		SoundEffects.init();
 	}
 	
 	/* METHODE DE L'INTERFACE
@@ -61,6 +59,10 @@ public class Controller implements ActionListener, MouseListener{
 		game.undo();
 	}
 	
+	/**
+	 * Selectionne un pion pour le joueur suivant
+	 * Si celui ci est l'IA, elle joue.
+	 */
 	public void pionSelected() {
 		if(game.getBoard().getSelectedPion() != null) {
 			game.pionSelected();
@@ -73,10 +75,18 @@ public class Controller implements ActionListener, MouseListener{
 		}
 	}
 	
+	/**
+	 * Termine la partie
+	 */
 	public void endOfGame() {
 		gui.startMenu();
+		Detail.addTotalTime(game.getBoard().getGameTime());
 	}
 	
+	/**
+	 * 
+	 * @return true si le joueur joue contre une IA
+	 */
 	public boolean isIa() {
 		return game.isVsIa();
 	}
@@ -87,14 +97,16 @@ public class Controller implements ActionListener, MouseListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object s = e.getSource();
+		
+			// Effectue un mouvement
 			if(s instanceof CaseItem) {
-				SoundEffects.MOVE.play();
 				if(game.move(((CaseItem) s).getCase())) {
 					game.addDetail();
 					gui.startEndView(false);
 				}
 			}
 			
+			// Selectionne momentanment un pion
 			if ( s instanceof PionItem) {
 				game.selectPion(((PionItem) s).getPion());
 			}
@@ -130,6 +142,4 @@ public class Controller implements ActionListener, MouseListener{
 		// TODO Auto-generated method stub
 		
 	}
-
-	
 }
