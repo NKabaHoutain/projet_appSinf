@@ -66,7 +66,7 @@ public class ViewConstante {
 	"\n -faire un double clique \n(Une fois le pion selectionne, le fond devient rouge)\n\n"+
 			"Afin de poser le pion, le joueur doit juste cliquer\n sur la case sur laquelle il souhaite poser le pion\n"+
 	"\n\nUtilite des boutons\n"+
-	    "-------------------\n"+
+	    "-------------------"+
 			"\n Livre : acceder aux regles de Quarto!\n"+
 			"Fleche: Annuler la derniere action (undo)\n"+
 			"X: Fin de partie ou recommencer la partie";
