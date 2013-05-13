@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
+import java.nio.file.Path;
+
 import javax.swing.JFrame;
 
 import quarto.detail.Detail;
@@ -23,7 +25,7 @@ public class Controller implements ActionListener, MouseListener{
 	private GUI gui;
 	private Game game;
 	public static Music music;
-	
+
 	private Ia t;
 	
 	/* CONSTRUCTEUR

@@ -7,6 +7,7 @@ import java.util.Random;
 
 
 import quarto.constante.Constante;
+import quarto.controller.Controller;
 import quarto.option.Option;
 
 public class Music extends Thread{

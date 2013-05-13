@@ -8,7 +8,9 @@ import java.util.Stack;
 import quarto.constante.Constante;
 import quarto.ia.Move;
 
-
+/**
+ * Cette classe s'occupe de gerer les actions effectués sur la board
+ */
 public class Board extends Observable{
 	
 	private List<Pion> pions;
@@ -19,19 +21,10 @@ public class Board extends Observable{
 	private int constante;
 	
 	private long timeStart;
-	
 	private boolean playIa;
 	
-	public void setIa(boolean b) {
-		playIa = b;
-	}
-	
-	public boolean playIa() {
-		return playIa;
-	}
-	
 	/* INITIALISATION
-	 ****************
+	 **********************************************
 	 */
 	/**
 	 * Constructeur
@@ -43,7 +36,6 @@ public class Board extends Observable{
 		canSelectedPion = true;
 		
 		timeStart = System.currentTimeMillis();
-		
 	}
 	/**
 	 * Crée les pions de la board
@@ -51,14 +43,10 @@ public class Board extends Observable{
 	private void createPions() {
 		pions =  new ArrayList<Pion>();
 		
-		for (int i=0; i<2; i++)
-		{
-			for (int j=0; j<2; j++)
-			{
-				for (int k=0; k<2; k++)
-				{
-					for(int l=0; l<2; l++)
-					{
+		for (int i=0; i<2; i++) {
+			for (int j=0; j<2; j++) {
+				for (int k=0; k<2; k++) {
+					for(int l=0; l<2; l++) {
 						pions.add(new Pion(i<1, j<1, k<1, l<1));
 					}
 				}
@@ -78,12 +66,13 @@ public class Board extends Observable{
 	}
 	
 	/* OPERATION D'UNE PARTIE
-	 ************************ 
+	 **********************************************
 	 */
 	/**
 	 * Bouge le pion selectionné sur la case 
 	 * Deselectionne le pion
 	 * Retire le pion de la liste
+	 * Met à jour l'interface
 	 * @param c
 	 */
 	public void move(Case c, String player) {
@@ -104,7 +93,7 @@ public class Board extends Observable{
 	}
 	
 	/**
-	 * 
+	 * Confirme le pion selectionné du joueur
 	 * @param player
 	 */
 	public void pionSelected(String player) {
@@ -323,6 +312,14 @@ public class Board extends Observable{
 	/* POUR L'IA
 	 *********** 
 	 */
+	
+	public void setIa(boolean b) {
+		playIa = b;
+	}
+	
+	public boolean playIa() {
+		return playIa;
+	}
 	
 	public void playMove(Move m) {
 		cases[m.getX()][m.getY()].addPion(m.getPionPose());
